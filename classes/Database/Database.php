@@ -9,10 +9,12 @@ class Database
 {
     public $pdo;
 
-    public function __construct($dsn, $user, $password)
+    public function __construct()
     {
-        $this->pdo = new PDO($dsn, $user, $password);
-        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $dsn = "mysql:host=" . MYSQL_HOST . ";dbname=" . MYSQL_DB;
+        $options = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8');
+
+        $this->pdo = new PDO($dsn, MYSQL_USER, MYSQL_PASS, $options);
     }
 
 }
