@@ -9,6 +9,10 @@ class Database
 {
     public $pdo;
 
+    /**
+     * Konstruktori muodostaa yhteyden konfiguraatiotiedostossa määritettyyn MySQL-tietokantaan.
+     * Syntyvä olio viedään tämän luokan $pdo-muuttujaan, johon muualla sovelluksessa voidaan viitata.
+     */
     public function __construct()
     {
         $dsn = "mysql:host=" . MYSQL_HOST . ";dbname=" . MYSQL_DBNAME;

@@ -1,5 +1,8 @@
 <?php
 
+# System
+define("DEVELOPMENT", 1);
+
 # Database
 define("MYSQL_HOST", "");
 define("MYSQL_DBNAME", "");
