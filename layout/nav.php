@@ -18,7 +18,10 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="#">Kirjaudu</a>
+                    <a href="index.php?page=login">Kirjaudu</a>
+                </li>
+                <li>
+                    <a href="index.php?page=register">Rekisteröidy</a>
                 </li>
             </ul>
         </div>

@@ -4,10 +4,6 @@
  * ryhmätyöprojektina tehty TuIjA-sovellus (tutkimusinfrastruktuuri ja -aineisto).
  */
 
-// Kehitysversiossa näytetään PHP:n virheilmoitukset
-// Tarkistetaan, onko kehitystila käytössä
-ini_set('display_errors', DEVELOPMENT);
-
 // Tarkistetaan löytyykö konfiguraatiotiedosto
 // Jos ei löydy, näytetään virheilmoitus, ja varsinaisen sovelluksen suoritus lopetetaan
 if (file_exists("core/config.php")) {
@@ -16,6 +12,10 @@ if (file_exists("core/config.php")) {
     include("config_missing.php");
     die();
 }
+
+// Kehitysversiossa näytetään PHP:n virheilmoitukset
+// Tarkistetaan, onko kehitystila käytössä
+ini_set('display_errors', DEVELOPMENT);
 
 // Tällä funktiolla käytettävät luokat haetaan automaattisesti
 // käyttäen hyväksi namespaceen perustuvaa kansiorakennetta

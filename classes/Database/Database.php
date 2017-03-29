@@ -5,6 +5,10 @@ namespace Database;
 
 use PDO;
 
+/**
+ * Class Database
+ * @package Database
+ */
 class Database
 {
     public $pdo;
