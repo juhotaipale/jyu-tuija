@@ -4,6 +4,15 @@
  * ryhmätyöprojektina tehty TuIjA-sovellus (tutkimusinfrastruktuuri ja -aineisto).
  */
 
+session_start();
+
+// Asetetaan aikavyöhyke
+date_default_timezone_set('Europe/Helsinki');
+
+// Määritetään kieli gettext-liitännäistä varten
+putenv('LC_ALL=fi_FI');
+setlocale(LC_ALL, 'fi_FI');
+
 // Tarkistetaan löytyykö konfiguraatiotiedosto
 // Jos ei löydy, näytetään virheilmoitus, ja varsinaisen sovelluksen suoritus lopetetaan
 if (file_exists("core/config.php")) {
@@ -32,11 +41,17 @@ spl_autoload_register('class_autoloader');
 // Alustetaan tietokantayhteys luomalla uusi Database-olio
 $conn = new \Database\Database();
 
+$register = new \User\Register();
+
+$msg = new \Core\Message();
+
 // Ylätunniste ja valikkopalkki
 include "layout/header.php";
 include "layout/nav.php";
 
 echo "<div class='container'>";
+
+$msg->display();
 
 // Näytetään haluttu sivu
 // Jos sivua ei löydy määritellystä hakemistosta, näytetään virhesivu

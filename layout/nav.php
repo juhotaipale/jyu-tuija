@@ -13,7 +13,7 @@
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="#" class="active">Etusivu</a>
+                    <a href="index.php?page=home" class="active">Etusivu</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
