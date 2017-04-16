@@ -27,34 +27,33 @@ class Register
         // $this->log = new Logger("register");
         // $this->log->pushHandler(new StreamHandler("../../logs/tuija.log"));
 
-        if (isset($_POST['submit'])) {
+        if (isset($_POST['reg-submit'])) {
             $this->register();
         }
     }
 
     public function register()
     {
+        $firstname = filter_var($_POST['firstname']);
+        $lastname = filter_var($_POST['lastname']);
         $email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
+        echo $email;
 
-        $mail = new PHPMailer(true);
+        $mail = new PHPMailer((DEVELOPMENT ? true : false));
         include BASE_PATH . "/classes/PHPMailer/PHPMailerConfig.php";
 
-        //Set who the message is to be sent from
-        $mail->setFrom("tuija@research.jyu.fi", 'First Last');
-//Set who the message is to be sent to
-        $mail->addAddress('juho.taipale@vitabalans.fi', 'John Doe');
-//Set the subject line
-        $mail->Subject = 'PHPMailer SMTP without auth test';
-//Read an HTML message body from an external file, convert referenced images to embedded,
-//convert HTML into a basic plain-text alternative body
-        $mail->msgHTML("Terve");
-//Replace the plain text body with one created manually
+        $mail->setFrom(EMAIL_FROM, _("Jyväskylän yliopisto"));
+        $mail->addAddress($email);
+
+        $mail->Subject = _("Rekisteröityminen TuIjA-portaaliin");
+        $mail->msgHTML(sprintf("Hei %s %s,<br /><br />Rekisteröidyit Jyväskylän yliopiston tarjoamaan TuIjA-portaaliin. Salasana lähetetään sinulle automaattisesti sähköpostitse, kun tunnuksesi on vahvistettu.",
+            $firstname, $lastname));
         $mail->AltBody = 'This is a plain-text message body';
 //send the message, check for errors
         if (!$mail->send()) {
-            echo "Mailer Error: " . $mail->ErrorInfo;
+            $this->msg->add("Mailer Error: " . $mail->ErrorInfo, "danger");
         } else {
-            $this->msg->add("Onnistui");
+            $this->msg->add("Onnistui: " . $email);
         }
 
         // $this->log->info("New user registration", array("email" => $email));

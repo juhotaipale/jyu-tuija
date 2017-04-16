@@ -22,7 +22,7 @@
             <div class="form-group">
                 <label class="control-label col-sm-3" for="reg-firstname"><?php echo _("Etunimi"); ?></label>
                 <div class="col-sm-9">
-                    <input class="form-control" type="text" id="reg-firstname" name="lastname" required/>
+                    <input class="form-control" type="text" id="reg-firstname" name="firstname" required/>
                 </div>
             </div>
             <div class="form-group">
@@ -53,7 +53,7 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-9 col-sm-offset-3">
-                    <button form="reg-form" class="btn btn-default" id="reg-submit" type="submit" name="submit">
+                    <button form="reg-form" class="btn btn-default" id="reg-submit" type="submit" name="reg-submit">
                         <?php echo _("Rekisteröidy"); ?>
                     </button>
                 </div>
