@@ -37,7 +37,8 @@ class Register
         $firstname = filter_var($_POST['firstname']);
         $lastname = filter_var($_POST['lastname']);
         $email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
-        echo $email;
+
+        // Rekisteröityminen
 
         $mail = new PHPMailer((DEVELOPMENT ? true : false));
         include BASE_PATH . "/classes/PHPMailer/PHPMailerConfig.php";
@@ -53,11 +54,10 @@ class Register
         if (!$mail->send()) {
             $this->msg->add("Mailer Error: " . $mail->ErrorInfo, "danger");
         } else {
-            $this->msg->add("Onnistui: " . $email);
+            $this->msg->add(_("<strong>Rekisteröityminen onnistui!</strong> Kun rekisteröitymisesi on hyväksytty, salasana lähetetään automaattisesti antamaasi sähköpostiosoitteeseen."),
+                'success', "index.php?page=home");
         }
 
         // $this->log->info("New user registration", array("email" => $email));
-        $this->msg->add(_("<strong>Rekisteröityminen onnistui!</strong> Kun rekisteröitymisesi on hyväksytty, salasana lähetetään automaattisesti antamaasi sähköpostiosoitteeseen."),
-            'success', "index.php?page=home");
     }
 }
