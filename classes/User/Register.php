@@ -15,14 +15,16 @@ use Monolog\Handler\StreamHandler;
  */
 class Register
 {
+    private $conn;
     private $msg;
     private $log;
 
     /**
      * Register constructor.
      */
-    public function __construct()
+    public function __construct($conn)
     {
+        $this->conn = $conn;
         $this->msg = new Message();
         // $this->log = new Logger("register");
         // $this->log->pushHandler(new StreamHandler("../../logs/tuija.log"));
@@ -37,8 +39,15 @@ class Register
         $firstname = filter_var($_POST['firstname']);
         $lastname = filter_var($_POST['lastname']);
         $email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
+        $role = filter_var($_POST['role']);
 
         // Rekisteröityminen
+        $sql = $this->conn->pdo->prepare("INSERT INTO users (firstname, lastname, email, role) VALUES (:firstname, :lastname, :email, :role)");
+        $sql->bindValue(':firstname', $firstname);
+        $sql->bindValue(':lastname', $lastname);
+        $sql->bindValue(':email', $email);
+        $sql->bindValue(':role', $role);
+        $sql->execute();
 
         $mail = new PHPMailer((DEVELOPMENT ? true : false));
         include BASE_PATH . "/classes/PHPMailer/PHPMailerConfig.php";

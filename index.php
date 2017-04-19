@@ -41,7 +41,7 @@ spl_autoload_register('class_autoloader');
 // Alustetaan tietokantayhteys luomalla uusi Database-olio
 $conn = new \Database\Database();
 
-$register = new \User\Register();
+$register = new \User\Register($conn);
 
 $msg = new \Core\Message();
 
