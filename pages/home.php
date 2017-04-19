@@ -5,8 +5,12 @@
         <p><?php echo _("<strong>TuIjA</strong> on <a href='https://jyu.fi/' target='_blank'>Jyväskylän yliopiston</a> ylläpitämä tutkimusinfrastruktuuri 
             ja -aineistoportaali. Portaalin tarkoituksena on tarjota kattavaa avointa tietoa yliopiston käytössä olevasta 
             tutkimusinfrastruktuurista ja -aineistosta sekä osaamisesta pääasiallisesti organisaation sisäiseen käyttöön, mutta myös organisaation ulkopuolisille yhteistyökumppaneille."); ?></p>
-        <p><?php echo _("Rekisteröimällä itsellesi käyttäjätunnuksen TuIjA-portaaliin pääset mm.<ul><li>varaamaan vapaana olevia tutkimusvälineitä ja -laitteita käyttöösi,</li><li>selaamaan avointa tutkimusaineistoa sekä</li><li>tarjoamaan omaa osaamistasi muiden ammattilaisten käyttöön.</li></ul>"); ?></p>
-        <p><?php echo _("Aloita portaalin tehokas käyttö <a href='index.php?page=register'>rekisteröitymällä</a> tai <a href='index.php?page=login'>kirjautumalla sisään</a>."); ?></p>
+        <?php
+        if (!$login->loggedIn()) {
+            echo "<p>" . _("Rekisteröimällä itsellesi käyttäjätunnuksen TuIjA-portaaliin pääset mm.<ul><li>varaamaan vapaana olevia tutkimusvälineitä ja -laitteita käyttöösi,</li><li>selaamaan avointa tutkimusaineistoa sekä</li><li>tarjoamaan omaa osaamistasi muiden ammattilaisten käyttöön.</li></ul>") . "</p>";
+            echo "<p>" . _("Aloita portaalin tehokas käyttö <a href='index.php?page=register'>rekisteröitymällä</a> tai <a href='index.php?page=login'>kirjautumalla sisään</a>.") . "</p>";
+        }
+        ?>
     </div>
 
     <div class="col-md-6">

@@ -4,6 +4,7 @@
  * ryhmätyöprojektina tehty TuIjA-sovellus (tutkimusinfrastruktuuri ja -aineisto).
  */
 
+ini_set('default_socket_timeout', 5);
 session_start();
 
 // Asetetaan aikavyöhyke
@@ -42,6 +43,11 @@ spl_autoload_register('class_autoloader');
 $conn = new \Database\Database();
 
 $register = new \User\Register($conn);
+$login = new \User\Login($conn);
+
+if ($login->loggedIn()) {
+    $user = new \User\User($conn, $_SESSION['user_id']);
+}
 
 $msg = new \Core\Message();
 

@@ -41,7 +41,17 @@ class Register
         $email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
         $role = filter_var($_POST['role']);
 
-        // Rekisteröityminen
+        // Tarkastetaan, onko sähköpostiosoite jo tietokannassa
+        $check = $this->conn->pdo->prepare("SELECT email FROM users WHERE email = :email");
+        $check->bindValue(':email', $email);
+        $check->execute();
+
+        if ($check->rowCount() > 0) {
+            $this->msg->add(_("<strong>Virhe!</strong> Sähköpostiosoite on jo rekisteröity."), "error");
+            return;
+        }
+
+        // Kirjoitetaan rekisteröityminen tietokantaan
         $sql = $this->conn->pdo->prepare("INSERT INTO users (firstname, lastname, email, role) VALUES (:firstname, :lastname, :email, :role)");
         $sql->bindValue(':firstname', $firstname);
         $sql->bindValue(':lastname', $lastname);
@@ -59,7 +69,7 @@ class Register
         $mail->msgHTML(sprintf("Hei %s %s,<br /><br />Rekisteröidyit Jyväskylän yliopiston tarjoamaan TuIjA-portaaliin. Salasana lähetetään sinulle automaattisesti sähköpostitse, kun tunnuksesi on vahvistettu.",
             $firstname, $lastname));
         $mail->AltBody = 'This is a plain-text message body';
-//send the message, check for errors
+
         if (!$mail->send()) {
             $this->msg->add("Mailer Error: " . $mail->ErrorInfo, "danger");
         } else {

@@ -1,3 +1,10 @@
+<?php
+$firstname = (isset($_POST['firstname']) ? $_POST['firstname'] : "");
+$lastname = (isset($_POST['lastname']) ? $_POST['lastname'] : "");
+$email = (isset($_POST['email']) ? $_POST['email'] : "");
+$role = (isset($_POST['role']) ? $_POST['role'] : "");
+?>
+
 <div class="row">
     <div class="col-md-12">
         <h1>Rekisteröidy</h1>
@@ -22,19 +29,22 @@
             <div class="form-group">
                 <label class="control-label col-sm-3" for="reg-firstname"><?php echo _("Etunimi"); ?></label>
                 <div class="col-sm-9">
-                    <input class="form-control" type="text" id="reg-firstname" name="firstname" required/>
+                    <input class="form-control" type="text" id="reg-firstname" name="firstname"
+                           value="<?php echo $firstname; ?>" required/>
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-3" for="reg-lastname"><?php echo _("Sukunimi"); ?></label>
                 <div class="col-sm-9">
-                    <input class="form-control" type="text" id="reg-lastname" name="lastname" required/>
+                    <input class="form-control" type="text" id="reg-lastname" name="lastname"
+                           value="<?php echo $lastname; ?>" required/>
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-3" for="reg-email"><?php echo _("Sähköposti"); ?></label>
                 <div class="col-sm-9">
-                    <input class="form-control" type="email" id="reg-email" name="email" required/>
+                    <input class="form-control" type="email" id="reg-email" name="email" value="<?php echo $email; ?>"
+                           required/>
                 </div>
             </div>
             <div class="form-group">
@@ -45,7 +55,7 @@
                         <?php
                         $sql = $conn->pdo->query("SELECT * FROM role WHERE allow_registration = 1 ORDER BY name");
                         while ($row = $sql->fetch()) {
-                            echo "<option value='" . $row['id'] . "'>" . $row['name'] . "</option>";
+                            echo "<option value='" . $row['id'] . "'" . ($role == $row['id'] ? ' selected' : '') . ">" . $row['name'] . "</option>";
                         }
                         ?>
                     </select>
