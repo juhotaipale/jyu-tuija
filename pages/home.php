@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-12">
         <h1><?php echo _("Tervetuloa!"); ?></h1>
         <p class="lead"><?php echo _("Tervetuloa käyttämään TuIjA-portaalia."); ?></p>
         <p><?php echo _("<strong>TuIjA</strong> on <a href='https://jyu.fi/' target='_blank'>Jyväskylän yliopiston</a> ylläpitämä tutkimusinfrastruktuuri 
@@ -12,10 +12,12 @@
         }
         ?>
     </div>
+</div>
 
-    <div class="col-md-6">
-        <h1><?php echo _("Tiedeuutiset"); ?></h1>
-        <p class="lead"><?php echo _("Tällä palstalla voit selata Jyväskylän yliopiston Tiedonjyvä-verkkojulkaisun tiedeuutisia."); ?></p>
+<div class="row">
+    <div class="col-md-8">
+        <h2><?php echo _("Tiedeuutiset"); ?></h2>
+        <p class="lead"><?php echo _("Tällä palstalla voit selata Jyväskylän yliopiston Tiedonjyvä-verkkojulkaisun uusimpia tiedeuutisia."); ?></p>
 
         <?php
         $url = "https://www.jyu.fi/tiedonjyva/uutiset/uutiset/etusivu/rss";
@@ -27,6 +29,22 @@
                     strtotime($item['dc:date']['value'])) . "</small></h5>
                 <p style='font-size: 90%;'>" . $item['description']['value'] . "</p>
                 <p style='font-size: 90%;'><a href='" . $item['link']['value'] . "' target='_blank'>Lue lisää &raquo;</a></p>";
+        }
+        ?>
+    </div>
+    <div class="col-md-4">
+        <h2><?php echo _("Tiedotteet"); ?></h2>
+        <p class="lead"><?php echo _("Jyväskylän yliopiston verkkosivujen tiedottesyöte."); ?></p>
+
+        <?php
+        $url = "https://www.jyu.fi/paasivu/vasemmat-palstat/tabit-vasen/ajankohtaista/RSS";
+        $rss = new \API\RSS();
+        $rss->load($url);
+
+        foreach ($rss->items as $item) {
+            echo "<h5>" . $item['title']['value'] . "<br /><small>" . date('d.m.Y H:i',
+                    strtotime($item['dc:date']['value'])) . "</small></h5>
+               <p style='font-size: 90%;'><a href='" . $item['link']['value'] . "' target='_blank'>Lue lisää &raquo;</a></p>";
         }
         ?>
     </div>
