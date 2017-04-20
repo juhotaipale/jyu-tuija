@@ -8,18 +8,36 @@ class User
 {
     private $conn;
     private $id;
-    private $data;
+    private $data = null;
 
     function __construct($conn, $id)
     {
         $this->conn = $conn;
         $this->id = $id;
 
-        $sql = $this->conn->pdo->prepare("SELECT * FROM users WHERE id = :id");
+        $sql = $this->conn->pdo->prepare("SELECT u.*, r.name AS role_name, r.is_admin FROM users u JOIN role r ON (u.role = r.id) WHERE u.id = :id");
         $sql->bindValue(':id', $this->id);
         $sql->execute();
 
-        $this->data = $sql->fetch();
+        if ($sql->rowCount() > 0) {
+            $this->data = $sql->fetch();
+        }
+    }
+
+    public function exists()
+    {
+        if ($this->data == null) {
+            return true;
+        }
+        return false;
+    }
+
+    public function isAdmin()
+    {
+        if ($this->data['is_admin']) {
+            return true;
+        }
+        return false;
     }
 
     public function get($column)
