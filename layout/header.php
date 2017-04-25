@@ -27,6 +27,32 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <!-- Javascript -->
+    <script src="https://use.fontawesome.com/ca90501e13.js"></script>
+
+    <link rel="stylesheet" type="text/css"
+          href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css"/>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <script>
+        window.addEventListener("load", function () {
+            window.cookieconsent.initialise({
+                "palette": {
+                    "popup": {
+                        "background": "#000"
+                    },
+                    "button": {
+                        "background": "#f1d600"
+                    }
+                },
+                "showLink": false,
+                "theme": "edgeless",
+                "content": {
+                    "message": "<?php echo _("Tämä sivu käyttää evästeitä parhaan käyttökokemuksen saavuttamiseksi. Jatkamalla sivuston käyttöä hyväksyt evästeiden käytön."); ?>",
+                    "dismiss": "<?php echo _("Selvä"); ?>"
+                }
+            })
+        });
+    </script>
 </head>
 
 <body>

@@ -13,8 +13,8 @@
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav">
                 <li><a href="index.php?page=infra"><?php echo _("Infrastruktuuri"); ?></a></li>
-                <li><a href="#"><?php echo _("Aineisto"); ?></a></li>
-                <li><a href="#"><?php echo _("Osaaminen"); ?></a></li>
+                <li><a href="index.php?page=material"><?php echo _("Aineisto"); ?></a></li>
+                <li><a href="index.php?page=knowledge"><?php echo _("Osaaminen"); ?></a></li>
 
                 <?php
                 if ($login->loggedIn() && $user->isAdmin()) {
@@ -43,6 +43,19 @@
                     echo "<li><a href='index.php?page=register'>" . _("Rekisteröidy") . "</a></li>";
                 }
                 ?>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false"><?php echo _("Kieli"); ?> <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <?php
+                        $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+                        $url .= (strpos($url, "?") ? "&lang=" : "?lang=");
+                        ?>
+                        <li><a href="<?php echo $url . "en"; ?>">English</a></li>
+                        <li><a href="<?php echo $url . "fi"; ?>">Suomi</a></li>
+                        <li><a href="<?php echo $url . "sv"; ?>">Svenska</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>

@@ -7,7 +7,8 @@
 </head>
 <body>
 <p>
-    <b>Virhe: </b> Konfiguraatiotiedosto puuttuu. Tee oma core/config.php käyttäen mallina tiedostoa <i>core/config.sample.php
+    <b>Error:</b> Custom configuration file is missing. Build your own core/config.php by using core/config.sample.php
+    as a template.
 </p>
 </body>
 </html>

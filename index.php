@@ -10,9 +10,30 @@ session_start();
 // Asetetaan aikavyöhyke
 date_default_timezone_set('Europe/Helsinki');
 
-// Määritetään kieli gettext-liitännäistä varten
-putenv('LC_ALL=fi_FI');
-setlocale(LC_ALL, 'fi_FI');
+// Kielen muuttaminen
+if (isset($_GET['lang'])) {
+    $lang = filter_var($_GET['lang']);
+
+    switch ($lang) {
+        case 'fi':
+        case 'en':
+        case 'sv':
+            setcookie('lang', $lang);
+            $_COOKIE['lang'] = $lang;
+            break;
+    }
+}
+
+// I18N support information here
+$lang = (isset($_COOKIE['lang']) ? $_COOKIE['lang'] : 'fi');
+putenv("LANG=" . $lang);
+setlocale(LC_ALL, $lang);
+
+// Set the text domain as "messages"
+$domain = "messages";
+bindtextdomain($domain, "locale");
+bind_textdomain_codeset($domain, 'UTF-8');
+textdomain($domain);
 
 // Tarkistetaan löytyykö konfiguraatiotiedosto
 // Jos ei löydy, näytetään virheilmoitus, ja varsinaisen sovelluksen suoritus lopetetaan

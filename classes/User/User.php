@@ -47,11 +47,29 @@ class User
                 $value = $this->data['lastname'] . ", " . $this->data['firstname'];
                 break;
 
+            case "approved_by":
+                $approvedBy = new User($this->conn, $this->data['approved_by']);
+                $value = $approvedBy->get('name');
+                break;
+
             default:
                 $value = (key_exists($column, $this->data) ? $this->data[$column] : "undefined");
                 break;
         }
 
         return $value;
+    }
+
+    public function changePassword()
+    {
+        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        $pass = substr(str_shuffle($chars), 0, 8);
+
+        $sql = $this->conn->pdo->prepare("UPDATE users SET password_hash = :hash WHERE id = :id");
+        $sql->bindValue(':id', $this->id);
+        $sql->bindValue(':hash', password_hash($pass, PASSWORD_DEFAULT));
+        $sql->execute();
+
+        return $pass;
     }
 }

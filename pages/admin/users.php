@@ -19,22 +19,26 @@ if (!$login->loggedIn() or !$user->isAdmin()) {
                     <th><?php echo _("Sähköposti"); ?></th>
                     <th><?php echo _("Asema"); ?></th>
                     <th><?php echo _("Rekisteröitynyt"); ?></th>
-                    <th><?php echo _("Hyväksy käyttäjäksi"); ?></th>
+                    <th><?php echo _("Toiminnot"); ?></th>
                 </tr>
                 </thead>
                 <tbody>
                 <?php
                 $sql = $conn->pdo->query("SELECT id FROM users WHERE approved_on IS NULL ORDER BY lastname");
-                while ($row = $sql->fetch()) {
-                    $selectedUser = new \User\User($conn, $row['id']);
+                if ($sql->rowCount() > 0) {
+                    while ($row = $sql->fetch()) {
+                        $selectedUser = new \User\User($conn, $row['id']);
 
-                    echo "<tr>
+                        echo "<tr>
                             <td>" . $selectedUser->get('name') . "</td>
                             <td><a href='mailto:" . $selectedUser->get('email') . "'>" . $selectedUser->get('email') . "</a></td>
                             <td>" . $selectedUser->get('role_name') . "</td>
                             <td>" . date('d.m.Y H:i', strtotime($selectedUser->get('created_on'))) . "</td>
-                            <td style='text-align: center;'>OK</td>
+                            <td><a href='index.php?page=admin/users&regApprove=" . $row['id'] . "' class='btn btn-xs btn-success'><i class='fa fa-check'></i> " . _("Hyväksy") . "</a>&ensp;<a href='index.php?page=admin/users&regDeny=" . $row['id'] . "' class='btn btn-xs btn-danger'><i class='fa fa-times'></i> " . _("Hylkää") . "</a></td>
                         </tr>";
+                    }
+                } else {
+                    echo "<tr><td colspan='5'>" . _("Ei käyttäjiä.") . "</td></tr>";
                 }
                 ?>
                 </tbody>
@@ -58,19 +62,23 @@ if (!$login->loggedIn() or !$user->isAdmin()) {
                 <tbody>
                 <?php
                 $sql = $conn->pdo->query("SELECT id FROM users WHERE approved_on IS NOT NULL ORDER BY lastname");
-                while ($row = $sql->fetch()) {
-                    $selectedUser = new \User\User($conn, $row['id']);
+                if ($sql->rowCount() > 0) {
+                    while ($row = $sql->fetch()) {
+                        $selectedUser = new \User\User($conn, $row['id']);
 
-                    echo "<tr>
+                        echo "<tr>
                             <td>" . $selectedUser->get('name') . "</td>
                             <td><a href='mailto:" . $selectedUser->get('email') . "'>" . $selectedUser->get('email') . "</a></td>
                             <td>" . $selectedUser->get('role_name') . "</td>
                             <td>" . date('d.m.Y H:i', strtotime($selectedUser->get('last_login'))) . "</td>
                             <td>" . date('d.m.Y H:i', strtotime($selectedUser->get('created_on'))) . "</td>
                             <td>" . date('d.m.Y H:i',
-                            strtotime($selectedUser->get('approved_on'))) . " (" . $selectedUser->get('approved_by') . ")</td>
+                                strtotime($selectedUser->get('approved_on'))) . " (" . $selectedUser->get('approved_by') . ")</td>
                             <td><a href='index.php?page=profile&id=" . $selectedUser->get('id') . "'>" . _("Avaa") . "</a></td>
                         </tr>";
+                    }
+                } else {
+                    echo "<tr><td colspan='7'>" . _("Ei käyttäjiä.") . "</td>";
                 }
                 ?>
                 </tbody>

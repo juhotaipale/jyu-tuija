@@ -1,13 +1,6 @@
 <?php
-//$mail->isSMTP();
-
-//Enable SMTP debugging
-// 0 = off (for production use)
-// 1 = client messages
-// 2 = client and server messages
-$mail->SMTPDebug = 4;
-$mail->Debugoutput = 'html';
-
+$mail->isSMTP();
+$mail->CharSet = EMAIL_CHARSET;
 $mail->Host = EMAIL_HOST;
 $mail->Port = EMAIL_PORT;
 $mail->SMTPAuth = EMAIL_AUTH;

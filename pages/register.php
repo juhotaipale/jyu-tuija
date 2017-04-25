@@ -7,21 +7,21 @@ $role = (isset($_POST['role']) ? $_POST['role'] : "");
 
 <div class="row">
     <div class="col-md-12">
-        <h1>Rekisteröidy</h1>
+        <h1><?php echo _("Rekisteröidy"); ?></h1>
     </div>
 </div>
 
 <div class="row">
     <div class="col-md-6 col-sm-12">
-        <p>Sinulla on oikeus rekisteriöityä palveluun, mikäli olet</p>
+        <?php echo _("<p>Sinulla on oikeus rekisteriöityä palveluun, mikäli olet</p>
         <ul>
             <li>opettaja,</li>
             <li>gradun tai väitöskirjan tekijä,</li>
             <li>tutkija,</li>
             <li>vieraileva tutkija tai</li>
             <li>ulkopuolinen tutkimuskumppani.</li>
-        </ul>
-        <p>Mikäli täytät vierellä olevat kentät, voit syöttää rekisteröitymistietosi vierellä oleviin kenttiin.</p>
+        </ul>"); ?>
+        <p><?php echo _("Mikäli täytät yllä olevat ehdot, voit syöttää rekisteröitymistietosi vierellä oleviin kenttiin. Rekisteröitymisen jälkeen tunnuksesi siirtyy hyväksyttäväksi."); ?></p>
     </div>
 
     <div class="col-md-6 col-sm-12">

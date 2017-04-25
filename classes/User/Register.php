@@ -3,6 +3,7 @@
 
 namespace User;
 
+use User\User;
 use PHPMailer\PHPMailer;
 use Core\Message;
 use Monolog\Logger;
@@ -31,6 +32,14 @@ class Register
 
         if (isset($_POST['reg-submit'])) {
             $this->register();
+        }
+
+        if (isset($_GET['regApprove'])) {
+            $this->approve($_GET['regApprove']);
+        }
+
+        if (isset($_GET['regDeny'])) {
+            $this->deny($_GET['regDeny']);
         }
     }
 
@@ -66,17 +75,69 @@ class Register
         $mail->addAddress($email);
 
         $mail->Subject = _("Rekisteröityminen TuIjA-portaaliin");
-        $mail->msgHTML(sprintf("Hei %s %s,<br /><br />Rekisteröidyit Jyväskylän yliopiston tarjoamaan TuIjA-portaaliin. Salasana lähetetään sinulle automaattisesti sähköpostitse, kun tunnuksesi on vahvistettu.",
+        $mail->msgHTML(sprintf(_("Hei %s %s,<br /><br />Rekisteröidyit Jyväskylän yliopiston tarjoamaan TuIjA-portaaliin. Salasana lähetetään sinulle automaattisesti sähköpostitse, kun tunnuksesi on vahvistettu."),
             $firstname, $lastname));
-        $mail->AltBody = 'This is a plain-text message body';
 
         if (!$mail->send()) {
-            $this->msg->add("Mailer Error: " . $mail->ErrorInfo, "danger");
+            $this->msg->add("Mailer Error: " . $mail->ErrorInfo, "error");
         } else {
             $this->msg->add(_("<strong>Rekisteröityminen onnistui!</strong> Kun rekisteröitymisesi on hyväksytty, salasana lähetetään automaattisesti antamaasi sähköpostiosoitteeseen."),
                 'success', "index.php?page=home");
         }
 
         // $this->log->info("New user registration", array("email" => $email));
+    }
+
+    public function approve($id)
+    {
+        $user = new \User\User($this->conn, $id);
+
+        $sql = $this->conn->pdo->prepare("UPDATE users SET approved_on = NOW(), approved_by = :approvedBy WHERE id = :id");
+        $sql->bindValue(':id', $id);
+        $sql->bindValue(':approvedBy', $_SESSION['user_id']);
+        $sql->execute();
+
+        $mail = new PHPMailer((DEVELOPMENT ? true : false));
+        include BASE_PATH . "/classes/PHPMailer/PHPMailerConfig.php";
+
+        $mail->setFrom(EMAIL_FROM, _("Jyväskylän yliopisto"));
+        $mail->addAddress($user->get('email'));
+
+        $mail->Subject = _("Rekisteröitymisesi on hyväksytty");
+        $mail->msgHTML(sprintf(_("Hei %s %s,<br /><br />Rekisteröitymisesi Jyväskylän yliopiston TuIjA-portaaliin on hyväksytty.<br />Salasanasi palveluun on: %s"),
+            $user->get('firstname'), $user->get('lastname'), $user->changePassword()));
+
+        if (!$mail->send()) {
+            $this->msg->add("Mailer Error: " . $mail->ErrorInfo, "error");
+        } else {
+            $this->msg->add(sprintf(_("<strong>Käyttäjä %s %s hyväksytty!</strong> Salasana on lähetetty käyttäjän ilmoittamaan sähköpostiosoitteeseen."),
+                $user->get('firstname'), $user->get('lastname')), 'success');
+        }
+    }
+
+    public function deny($id)
+    {
+        $user = new \User\User($this->conn, $id);
+
+        $sql = $this->conn->pdo->prepare("DELETE FROM users WHERE id = :id");
+        $sql->bindValue(':id', $id);
+        $sql->execute();
+
+        $mail = new PHPMailer((DEVELOPMENT ? true : false));
+        include BASE_PATH . "/classes/PHPMailer/PHPMailerConfig.php";
+
+        $mail->setFrom(EMAIL_FROM, _("Jyväskylän yliopisto"));
+        $mail->addAddress($user->get('email'));
+
+        $mail->Subject = _("Rekisteröitymisesi on hylätty");
+        $mail->msgHTML(sprintf(_("Hei %s %s,<br /><br />Rekisteröitymisesi Jyväskylän yliopiston TuIjA-portaaliin on hylätty."),
+            $user->get('firstname'), $user->get('lastname')));
+
+        if (!$mail->send()) {
+            $this->msg->add("Mailer Error: " . $mail->ErrorInfo, "error");
+        } else {
+            $this->msg->add(sprintf(_("<strong>Käyttäjän %s %s hyväksyntä peruttu.</strong>"),
+                $user->get('firstname'), $user->get('lastname')), 'success');
+        }
     }
 }
