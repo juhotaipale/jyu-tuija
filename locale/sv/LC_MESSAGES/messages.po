@@ -1,0 +1,257 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2017-04-25 11:39+0300\n"
+"PO-Revision-Date: 2017-04-25 15:36+0300\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.1\n"
+"X-Poedit-Basepath: ../../..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: \n"
+"Language: sv\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: classes/User/Login.php:45
+msgid ""
+"<strong>Tunnuksesi odottaa hyväksyntää.</strong> Salasana lähetetään "
+"automaattisesti sähköpostiisi, kun tunnuksesi on hyväksytty."
+msgstr ""
+
+#: classes/User/Login.php:59
+msgid "Olet kirjautunut sisään."
+msgstr "Du är inloggad."
+
+#: classes/User/Login.php:62
+msgid "<strong>Virhe!</strong> Tarkista sähköpostiosoite ja salasana."
+msgstr ""
+
+#: classes/User/Login.php:78
+msgid "Uloskirjautuminen onnistui."
+msgstr ""
+
+#: classes/User/Register.php:50
+msgid "<strong>Virhe!</strong> Sähköpostiosoite on jo rekisteröity."
+msgstr ""
+
+#: classes/User/Register.php:65
+msgid "Jyväskylän yliopisto"
+msgstr ""
+
+#: classes/User/Register.php:68
+msgid "Rekisteröityminen TuIjA-portaaliin"
+msgstr ""
+
+#: classes/User/Register.php:76
+msgid ""
+"<strong>Rekisteröityminen onnistui!</strong> Kun rekisteröitymisesi on "
+"hyväksytty, salasana lähetetään automaattisesti antamaasi "
+"sähköpostiosoitteeseen."
+msgstr ""
+
+#: layout/nav.php:15
+msgid "Infrastruktuuri"
+msgstr "Infrastruktur"
+
+#: layout/nav.php:16
+msgid "Aineisto"
+msgstr "Material"
+
+#: layout/nav.php:17
+msgid "Osaaminen"
+msgstr "Kunskap"
+
+#: layout/nav.php:22
+msgid "Ylläpitotyökalut"
+msgstr ""
+
+#: layout/nav.php:24 pages/admin/users.php:9
+msgid "Käyttäjät"
+msgstr "Användare"
+
+#: layout/nav.php:36 pages/profile.php:12
+msgid "Omat tiedot"
+msgstr "Mitt konto"
+
+#: layout/nav.php:38
+msgid "Kirjaudu ulos"
+msgstr "Logga ut"
+
+#: layout/nav.php:42 pages/login.php:7 pages/login.php:26
+msgid "Kirjaudu sisään"
+msgstr "Logga in"
+
+#: layout/nav.php:43 pages/register.php:10 pages/register.php:67
+msgid "Rekisteröidy"
+msgstr "Registrera"
+
+#: layout/nav.php:47
+msgid "Kieli"
+msgstr "Språk"
+
+#: pages/admin/users.php:10
+msgid ""
+"Tässä näkymässä voit selata portaalin käyttäjiä tai hyväksyä uusia käyttäjiä."
+msgstr ""
+
+#: pages/admin/users.php:12
+msgid "Uudet käyttäjät"
+msgstr "Nya användare"
+
+#: pages/admin/users.php:13
+msgid ""
+"Tarkista rekisteröityneen käyttäjän tiedot ja hyväksy tai hylkää "
+"rekisteröityminen. Hyväksymisen jälkeen automaattisesti generoitu salasana "
+"lähetetään automaattisesti käyttäjän sähköpostiin. Myös hylätystä "
+"rekisteröitymisestä välitetään käyttäjälle tieto."
+msgstr ""
+
+#: pages/admin/users.php:18 pages/admin/users.php:49
+msgid "Nimi"
+msgstr "Namn"
+
+#: pages/admin/users.php:19 pages/admin/users.php:50 pages/login.php:16
+#: pages/profile.php:29 pages/register.php:44
+msgid "Sähköposti"
+msgstr "E-post"
+
+#: pages/admin/users.php:20 pages/admin/users.php:51 pages/register.php:51
+msgid "Asema"
+msgstr "Roll"
+
+#: pages/admin/users.php:21 pages/admin/users.php:53
+msgid "Rekisteröitynyt"
+msgstr ""
+
+#: pages/admin/users.php:22
+msgid "Hyväksy käyttäjäksi"
+msgstr ""
+
+#: pages/admin/users.php:44
+msgid "Kaikki käyttäjät"
+msgstr "Alla användare"
+
+#: pages/admin/users.php:52
+msgid "Viim. kirjautuminen"
+msgstr "Senaste inloggning"
+
+#: pages/admin/users.php:54
+msgid "Hyväksytty"
+msgstr "Godkänd"
+
+#: pages/admin/users.php:72
+msgid "Avaa"
+msgstr "Öppna"
+
+#: pages/error/403.php:4
+msgid "Ei käyttöoikeutta."
+msgstr "Ingen åtkomst."
+
+#: pages/error/403.php:5 pages/error/404.php:5
+msgid "Palaa takaisin edelliselle sivulle."
+msgstr "Gå tillbaka till föregående sida."
+
+#: pages/error/404.php:4
+msgid "Sivua ei löydy."
+msgstr "Sidan hittas inte."
+
+#: pages/home.php:3
+msgid "Tervetuloa!"
+msgstr "Välkommen!"
+
+#: pages/home.php:4
+msgid "Tervetuloa käyttämään TuIjA-portaalia."
+msgstr "Välkommen till TuIjA-portal."
+
+#: pages/home.php:5
+msgid ""
+"<strong>TuIjA</strong> on <a href='https://jyu.fi/' "
+"target='_blank'>Jyväskylän yliopiston</a> ylläpitämä "
+"tutkimusinfrastruktuuri \n"
+"            ja -aineistoportaali. Portaalin tarkoituksena on tarjota "
+"kattavaa avointa tietoa yliopiston käytössä olevasta \n"
+"            tutkimusinfrastruktuurista ja -aineistosta sekä osaamisesta "
+"pääasiallisesti organisaation sisäiseen käyttöön, mutta myös organisaation "
+"ulkopuolisille yhteistyökumppaneille."
+msgstr ""
+
+#: pages/home.php:10
+msgid ""
+"Rekisteröimällä itsellesi käyttäjätunnuksen TuIjA-portaaliin pääset mm."
+"<ul><li>varaamaan vapaana olevia tutkimusvälineitä ja -laitteita käyttöösi,</"
+"li><li>selaamaan avointa tutkimusaineistoa sekä</li><li>tarjoamaan omaa "
+"osaamistasi muiden ammattilaisten käyttöön.</li></ul>"
+msgstr ""
+
+#: pages/home.php:11
+msgid ""
+"Aloita portaalin tehokas käyttö <a href='index.php?"
+"page=register'>rekisteröitymällä</a> tai <a href='index.php?"
+"page=login'>kirjautumalla sisään</a>."
+msgstr ""
+
+#: pages/home.php:19
+msgid "Tiedeuutiset"
+msgstr ""
+
+#: pages/home.php:20
+msgid ""
+"Tällä palstalla voit selata Jyväskylän yliopiston Tiedonjyvä-verkkojulkaisun "
+"uusimpia tiedeuutisia."
+msgstr ""
+
+#: pages/home.php:36
+msgid "Tiedotteet"
+msgstr ""
+
+#: pages/home.php:37
+msgid "Jyväskylän yliopiston verkkosivujen tiedottesyöte."
+msgstr ""
+
+#: pages/login.php:8
+msgid ""
+"Kirjaudu sisään palveluun syöttämällä sähköpostiosoitteesi sekä salasanasi."
+msgstr ""
+
+#: pages/login.php:21
+msgid "Salasana"
+msgstr "Lösenord"
+
+#: pages/login.php:32
+msgid "Kirjaudu HAKA-tunnistautumisen avulla"
+msgstr ""
+
+#: pages/profile.php:15
+msgid ""
+"Tällä sivulla voit tarkastella ja muuttaa omia portaaliin tallennettuja "
+"tietojasi."
+msgstr ""
+
+#: pages/profile.php:21 pages/register.php:30
+msgid "Etunimi"
+msgstr "Förnamn"
+
+#: pages/profile.php:25 pages/register.php:37
+msgid "Sukunimi"
+msgstr "Efternamn"
+
+#: pages/register.php:16
+msgid ""
+"<p>Sinulla on oikeus rekisteriöityä palveluun, mikäli olet</p>\n"
+"        <ul>\n"
+"            <li>opettaja,</li>\n"
+"            <li>gradun tai väitöskirjan tekijä,</li>\n"
+"            <li>tutkija,</li>\n"
+"            <li>vieraileva tutkija tai</li>\n"
+"            <li>ulkopuolinen tutkimuskumppani.</li>\n"
+"        </ul>"
+msgstr ""
+
+#: pages/register.php:24
+msgid ""
+"Mikäli täytät yllä olevat ehdot, voit syöttää rekisteröitymistietosi "
+"vierellä oleviin kenttiin. Rekisteröitymisen jälkeen tunnuksesi siirtyy "
+"hyväksyttäväksi."
+msgstr ""
