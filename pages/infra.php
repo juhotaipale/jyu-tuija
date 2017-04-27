@@ -1,41 +1,60 @@
 <?php
 $search = (isset($_GET['search']) ? $_GET['search'] : false);
+
+$pagenumber = isset($_GET['p']) ? $_GET['p'] : 1;
+$pagesize = 20;
+$start = ($pagenumber - 1) * $pagesize;
+
+$sql = "SELECT SQL_CALC_FOUND_ROWS * FROM devices";
+if ($search) {
+    $sql .= " WHERE `name` LIKE :search OR `desc` LIKE :search";
+}
+$sql .= " ORDER BY name LIMIT $start, $pagesize";
+
+$query = $conn->pdo->prepare($sql);
+if ($search) {
+    $query->bindValue(':search', '%' . $search . '%');
+}
+
+$query->execute();
+$countsql = $conn->pdo->query("SELECT FOUND_ROWS()");
+$totalrecords = $countsql->fetchColumn();
 ?>
 
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-12">
         <h1><?php echo _("Infrastruktuuri"); ?></h1>
-        <p class="lead">Tällä sivulla voit hakea ja selata Jyväskylän yliopiston ohjelmisto- ja laitekantaa.</p>
+        <p class="lead"><?php echo _("Tällä sivulla voit hakea ja selata Jyväskylän yliopiston laite- ja ohjelmistokantaa."); ?></p>
+    </div>
+    <div class="col-md-12">
+        <form id="searchForm" class="form-inline" method="get">
+            <input type="hidden" name="page" value="infra"/>
+            <div class="input-group">
+                <input class="form-control" name="search" value="<?php echo $search; ?>" type="text"/>
+                <div class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><?php echo _("Hae"); ?></button>
+                </div>
+            </div>
+            &emsp;<?php echo sprintf(_("%s hakutulosta."), $totalrecords); ?>
+        </form>
     </div>
 </div>
 
-<div class="row">
+<div class="row" style="padding-top: 15px;">
     <div class="col-md-12">
         <div class="table-responsive">
-            <table class="table table-striped">
+            <table class="table table-striped table-condensed">
                 <thead>
                 <tr>
-                    <th><?php echo _("Laite / ohjelmisto"); ?></th>
-                    <th><?php echo _("Kuvaus"); ?></th>
-                    <th><?php echo _("Sijainti"); ?></th>
-                    <th><?php echo _("Yhteyshenkilö"); ?></th>
+                    <th style="width: 30%;"><?php echo _("Laite / ohjelmisto"); ?></th>
+                    <th style="width: 40%;"><?php echo _("Kuvaus"); ?></th>
+                    <th style="width: 15%;"><?php echo _("Sijainti"); ?></th>
+                    <th style="width: 15%;"><?php echo _("Yhteyshenkilö"); ?></th>
                 </tr>
                 </thead>
                 <tbody>
                 <?php
-                $sql = "SELECT * FROM devices";
-                if ($search) {
-                    $sql .= " WHERE name LIKE :search OR desc LIKE :search";
-                }
-
-                $query = $conn->pdo->prepare("SELECT * FROM devices");
-                if ($search) {
-                    $query->bindValue(':search', $search);
-                }
-
-                $query->execute();
-
-                if ($query->rowCount() > 0) {
+                if ($totalrecords > 0) {
                     while ($row = $query->fetch()) {
                         $id = $row['id'];
                         $item = new \Infrastructure\Infra($conn, $row['id']);
@@ -56,5 +75,17 @@ $search = (isset($_GET['search']) ? $_GET['search'] : false);
                 </tbody>
             </table>
         </div>
+
+        <?php
+        $pg = new \UI\BootPagination();
+        $pg->pagenumber = $pagenumber;
+        $pg->pagesize = $pagesize;
+        $pg->totalrecords = $totalrecords;
+        $pg->showfirst = true;
+        $pg->showlast = true;
+        $pg->defaultUrl = "index.php?page=infra";
+        $pg->paginationUrl = "index.php?page=infra&search=$search&p=[p]";
+        echo $pg->process();
+        ?>
     </div>
 </div>

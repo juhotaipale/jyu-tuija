@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2017-04-27 20:38+0300\n"
-"PO-Revision-Date: 2017-04-27 20:38+0300\n"
+"POT-Creation-Date: 2017-04-28 00:16+0300\n"
+"PO-Revision-Date: 2017-04-28 00:20+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -13,6 +13,21 @@ msgstr ""
 "X-Poedit-Basepath: ../../..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: .\n"
+
+#: classes/UI/BootPagination.php:60 classes/UI/BootPagination.php:72
+#: classes/UI/BootPagination.php:130 classes/UI/BootPagination.php:146
+#: classes/UI/BootPagination.php:166
+#, php-format
+msgid "näytetään %s&ndash;%s tulosta %s tuloksesta"
+msgstr "showing %s&ndash;%s results from %s total"
+
+#: classes/UI/BootPagination.php:85
+msgid "Edellinen"
+msgstr "Previous"
+
+#: classes/UI/BootPagination.php:156
+msgid "Seuraava"
+msgstr "Next"
 
 #: classes/User/Login.php:45
 msgid ""
@@ -109,7 +124,7 @@ msgstr ""
 msgid "<strong>Käyttäjän %s %s hyväksyntä peruttu.</strong>"
 msgstr "<strong>The user %s %s's approval withdrawn.</strong>"
 
-#: layout/header.php:50
+#: layout/header.php:52
 msgid ""
 "Tämä sivu käyttää evästeitä parhaan käyttökokemuksen saavuttamiseksi. "
 "Jatkamalla sivuston käyttöä hyväksyt evästeiden käytön."
@@ -117,11 +132,11 @@ msgstr ""
 "This page uses cookies in order to ensure the best user experience. By "
 "continuing to use the site, you agree to the use of cookies."
 
-#: layout/header.php:51
+#: layout/header.php:53
 msgid "Selvä"
 msgstr "OK"
 
-#: layout/nav.php:15 pages/infra.php:7
+#: layout/nav.php:15 pages/infra.php:26
 msgid "Infrastruktuuri"
 msgstr "Infrastructure"
 
@@ -311,23 +326,44 @@ msgstr "News"
 msgid "Jyväskylän yliopiston verkkosivujen tiedottesyöte."
 msgstr "News feed from the website of University of Jyväskylä."
 
-#: pages/infra.php:18
+#: pages/infra.php:27
+msgid ""
+"Tällä sivulla voit hakea ja selata Jyväskylän yliopiston laite- ja "
+"ohjelmistokantaa."
+msgstr ""
+"On this page you can search for and browse through hardware and software "
+"that is available in the University of Jyväskylä."
+
+#: pages/infra.php:33
+msgid "Hae laitteita..."
+msgstr "Search devices and softwares..."
+
+#: pages/infra.php:35
+msgid "Hae"
+msgstr "Search"
+
+#: pages/infra.php:38
+#, php-format
+msgid "%s hakutulosta."
+msgstr "%s search results."
+
+#: pages/infra.php:49
 msgid "Laite / ohjelmisto"
 msgstr "Device / software"
 
-#: pages/infra.php:19
+#: pages/infra.php:50
 msgid "Kuvaus"
 msgstr "Description"
 
-#: pages/infra.php:20
+#: pages/infra.php:51
 msgid "Sijainti"
 msgstr "Location"
 
-#: pages/infra.php:21
+#: pages/infra.php:52
 msgid "Yhteyshenkilö"
 msgstr "Contact person"
 
-#: pages/infra.php:53
+#: pages/infra.php:72
 msgid "Ei tuloksia."
 msgstr "No results."
 

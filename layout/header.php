@@ -28,6 +28,8 @@
     <![endif]-->
 
     <!-- Javascript -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="https://use.fontawesome.com/ca90501e13.js"></script>
 
     <link rel="stylesheet" type="text/css"
