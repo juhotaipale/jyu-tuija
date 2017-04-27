@@ -41,7 +41,7 @@ class User
     {
         switch ($column) {
             case "name":
-                $value = $this->data['lastname'] . ", " . $this->data['firstname'];
+                $value = $this->data['firstname'] . " " . $this->data['lastname'];
                 break;
 
             case "approved_by":

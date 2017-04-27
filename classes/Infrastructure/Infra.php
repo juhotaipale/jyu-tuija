@@ -39,13 +39,20 @@ class Infra
 
         switch ($column) {
             case 'contact':
-                $contact = new \User\User($this->conn, $this->data['contact']);
+            case 'created_by':
+            case 'edited_by':
+                $contact = new \User\User($this->conn, $this->data[$column]);
                 $value = $contact->get('name');
                 break;
 
             case 'location':
                 $location = new \Infrastructure\Location($this->conn, $this->data['location']);
                 $value = $location->get('name');
+                break;
+
+            case 'edited_on':
+            case 'created_on':
+                $value = ($this->data[$column] == null ? '&ndash;' : $this->data[$column]);
                 break;
 
             default:

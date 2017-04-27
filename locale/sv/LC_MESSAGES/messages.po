@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2017-04-28 00:16+0300\n"
-"PO-Revision-Date: 2017-04-28 00:16+0300\n"
+"POT-Creation-Date: 2017-04-28 01:08+0300\n"
+"PO-Revision-Date: 2017-04-28 01:08+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv\n"
@@ -14,26 +14,28 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: classes/UI/BootPagination.php:60 classes/UI/BootPagination.php:72
-#: classes/UI/BootPagination.php:130 classes/UI/BootPagination.php:146
-#: classes/UI/BootPagination.php:166
+#: classes/UI/BootPagination.php:57 classes/UI/BootPagination.php:70
+#: classes/UI/BootPagination.php:137 classes/UI/BootPagination.php:157
+#: classes/UI/BootPagination.php:180
 #, php-format
 msgid "näytetään %s&ndash;%s tulosta %s tuloksesta"
-msgstr ""
+msgstr "visar %s&ndash;%s sökresultat av %s resultat"
 
-#: classes/UI/BootPagination.php:85
+#: classes/UI/BootPagination.php:87
 msgid "Edellinen"
-msgstr ""
+msgstr "Föregående"
 
-#: classes/UI/BootPagination.php:156
+#: classes/UI/BootPagination.php:170
 msgid "Seuraava"
-msgstr ""
+msgstr "Följande"
 
 #: classes/User/Login.php:45
 msgid ""
 "<strong>Tunnuksesi odottaa hyväksyntää.</strong> Salasana lähetetään "
 "automaattisesti sähköpostiisi, kun tunnuksesi on hyväksytty."
 msgstr ""
+"<strong>Ditt konto är väntar på godkännande.</strong> Lösenordet kommer att "
+"skickas automatiskt till din e-postadress när ditt konto har godkänts."
 
 #: classes/User/Login.php:59
 msgid "Olet kirjautunut sisään."
@@ -42,14 +44,16 @@ msgstr "Du är inloggad."
 #: classes/User/Login.php:62 classes/User/Login.php:65
 msgid "<strong>Virhe!</strong> Tarkista sähköpostiosoite ja salasana."
 msgstr ""
+"<strong>Ett fel uppstod!</strong> Vänligen kontrollera din e-postadress och "
+"lösenord."
 
 #: classes/User/Login.php:80
 msgid "Uloskirjautuminen onnistui."
-msgstr ""
+msgstr "Utcheckningen var framgångsrik."
 
 #: classes/User/Register.php:59
 msgid "<strong>Virhe!</strong> Sähköpostiosoite on jo rekisteröity."
-msgstr ""
+msgstr "<strong>Ett fel uppstod!</strong> E-postadressen är redan registrerad."
 
 #: classes/User/Register.php:74 classes/User/Register.php:103
 #: classes/User/Register.php:129
@@ -67,6 +71,9 @@ msgid ""
 "portaaliin. Salasana lähetetään sinulle automaattisesti sähköpostitse, kun "
 "tunnuksesi on vahvistettu."
 msgstr ""
+"Hei %s %s,<br /><br />Du har registrerat dig till University of Jyväskyläs "
+"TuIjA portal. Lösenord kommer att skickas till dig automatiskt via e-post "
+"när ditt konto har bekräftats."
 
 #: classes/User/Register.php:84 mail.php:34
 msgid ""
@@ -77,7 +84,7 @@ msgstr ""
 
 #: classes/User/Register.php:106
 msgid "Rekisteröitymisesi on hyväksytty"
-msgstr ""
+msgstr "Din registrering har blivit godkänd"
 
 #: classes/User/Register.php:107
 #, php-format
@@ -92,10 +99,12 @@ msgid ""
 "<strong>Käyttäjä %s %s hyväksytty!</strong> Salasana on lähetetty käyttäjän "
 "ilmoittamaan sähköpostiosoitteeseen."
 msgstr ""
+"<strong>Användaren %s %s accepterade!</strong> Lösenordet skickas till "
+"användarens e-postadress."
 
 #: classes/User/Register.php:132
 msgid "Rekisteröitymisesi on hylätty"
-msgstr ""
+msgstr "Din registrering avslås"
 
 #: classes/User/Register.php:133
 #, php-format
@@ -107,7 +116,7 @@ msgstr ""
 #: classes/User/Register.php:139
 #, php-format
 msgid "<strong>Käyttäjän %s %s hyväksyntä peruttu.</strong>"
-msgstr ""
+msgstr "<strong>Användaren %s %ss godkännandet återkallas.</strong>"
 
 #: layout/header.php:52
 msgid ""
@@ -122,7 +131,7 @@ msgstr ""
 msgid "Selvä"
 msgstr "Klart"
 
-#: layout/nav.php:15 pages/infra.php:26
+#: layout/nav.php:15 pages/infra.php:45
 msgid "Infrastruktuuri"
 msgstr "Infrastruktur"
 
@@ -166,6 +175,7 @@ msgstr "Språk"
 msgid ""
 "Tässä näkymässä voit selata portaalin käyttäjiä tai hyväksyä uusia käyttäjiä."
 msgstr ""
+"I den här vyn kan du bläddra i portalanvändare eller acceptera nya användare."
 
 #: pages/admin/users.php:12
 msgid "Uudet käyttäjät"
@@ -178,6 +188,10 @@ msgid ""
 "lähetetään automaattisesti käyttäjän sähköpostiin. Myös hylätystä "
 "rekisteröitymisestä välitetään käyttäjälle tieto."
 msgstr ""
+"Kontrollera informationen om registrerade användare och sedan godkänna eller "
+"avvisa registreringen. Efter antagandet av det automatiskt genererade "
+"lösenordet skickas automatiskt till användarens e-post. Avvisade "
+"undertecknandet upp ska också skickas till användaren."
 
 #: pages/admin/users.php:18 pages/admin/users.php:53
 msgid "Nimi"
@@ -259,6 +273,12 @@ msgid ""
 "pääasiallisesti organisaation sisäiseen käyttöön, mutta myös organisaation "
 "ulkopuolisille yhteistyökumppaneille."
 msgstr ""
+"<strong>TuIjA</strong> upprätthålls av <a href='https://jyu.fi/' "
+"target='_blank'>Jyväskylä universitet,</a> forskning infrastruktur och data "
+"portal. Syftet med portalen är att tillhandahålla ett omfattande, "
+"transparent information om universitetet och forskningsinfrastrukturen för "
+"att vara på plats och kunskapen främst för internt bruk i organisationen, "
+"men också med partners utanför organisationen."
 
 #: pages/home.php:10
 msgid ""
@@ -267,6 +287,10 @@ msgid ""
 "li><li>selaamaan avointa tutkimusaineistoa sekä</li><li>tarjoamaan omaa "
 "osaamistasi muiden ammattilaisten käyttöön.</li></ul>"
 msgstr ""
+"Genom att registrera ditt användar-ID till TuIjA portalen<ul><li>för att "
+"boka en fri forskning använder verktyg och utrustning,</li><li>bläddra bland "
+"öppna materialet, samt</li><li>att ge din egen kunskap med andra "
+"yrkesgrupper.</li></ul>"
 
 #: pages/home.php:11
 msgid ""
@@ -274,6 +298,9 @@ msgid ""
 "page=register'>rekisteröitymällä</a> tai <a href='index.php?"
 "page=login'>kirjautumalla sisään</a>."
 msgstr ""
+"Börja med en effektiv användning av portalen <a href='index.php?"
+"page=register'>genom att registrera dig</a> eller <a href='index.php?"
+"page=login'>logga in</a>."
 
 #: pages/home.php:19
 msgid "Tiedeuutiset"
@@ -293,49 +320,56 @@ msgstr ""
 msgid "Jyväskylän yliopiston verkkosivujen tiedottesyöte."
 msgstr ""
 
-#: pages/infra.php:27
+#: pages/infra.php:11
+#, php-format
+msgid "Perustettu %s (%s), viimeksi muokattu %s (%s)"
+msgstr "Grundades i %s (%s), den senast ändrad på %s (%s)"
+
+#: pages/infra.php:17
+msgid "<strong>Virhe!</strong> Laitetta tai ohjelmistoa ei löydy."
+msgstr "<strong>Ett fel uppstod!</strong> Enheten eller programvaran finns."
+
+#: pages/infra.php:46
 msgid ""
 "Tällä sivulla voit hakea ja selata Jyväskylän yliopiston laite- ja "
 "ohjelmistokantaa."
 msgstr ""
+"På denna sida kan du söka efter och bläddra igenom hård- och mjukvara om "
+"Jyväskylä universitet."
 
-#: pages/infra.php:33
-msgid "Hae laitteita..."
-msgstr ""
-
-#: pages/infra.php:35
+#: pages/infra.php:54
 msgid "Hae"
-msgstr ""
+msgstr "Sök"
 
-#: pages/infra.php:38
+#: pages/infra.php:57
 #, php-format
 msgid "%s hakutulosta."
-msgstr ""
+msgstr "%s sökresultat."
 
-#: pages/infra.php:49
+#: pages/infra.php:68
 msgid "Laite / ohjelmisto"
 msgstr "Enheten / mjukvara"
 
-#: pages/infra.php:50
+#: pages/infra.php:69
 msgid "Kuvaus"
 msgstr "Beskrivning"
 
-#: pages/infra.php:51
+#: pages/infra.php:70
 msgid "Sijainti"
 msgstr "Plats"
 
-#: pages/infra.php:52
+#: pages/infra.php:71
 msgid "Yhteyshenkilö"
 msgstr "Kontaktperson"
 
-#: pages/infra.php:72
+#: pages/infra.php:91
 msgid "Ei tuloksia."
 msgstr "Inga resultat."
 
 #: pages/login.php:8
 msgid ""
 "Kirjaudu sisään palveluun syöttämällä sähköpostiosoitteesi sekä salasanasi."
-msgstr ""
+msgstr "Logga in tjänsten genom att ange din e-postadress och ditt lösenord."
 
 #: pages/login.php:21
 msgid "Salasana"
@@ -343,13 +377,14 @@ msgstr "Lösenord"
 
 #: pages/login.php:33
 msgid "Kirjaudu HAKA-tunnistautumisen avulla"
-msgstr ""
+msgstr "Logga in med HAKA-autentisering"
 
 #: pages/profile.php:15
 msgid ""
 "Tällä sivulla voit tarkastella ja muuttaa omia portaaliin tallennettuja "
 "tietojasi."
 msgstr ""
+"På den här sidan kan du se och ändra din egen information lagrad på portalen."
 
 #: pages/profile.php:21 pages/register.php:30
 msgid "Etunimi"
@@ -370,6 +405,14 @@ msgid ""
 "            <li>ulkopuolinen tutkimuskumppani.</li>\n"
 "        </ul>"
 msgstr ""
+"<p>Du har rätt att registera tjänsten, om du är</p>\n"
+"        <ul>\n"
+"            <li>läraren,</li>\n"
+"            <li>författaren till den uppsats eller avhandling,</li>\n"
+"            <li>forskaren</li>\n"
+"            <li>besökande forskare eller</li>\n"
+"            <li>en extern forskningspartner.</li>\n"
+"        </ul>"
 
 #: pages/register.php:24
 msgid ""
@@ -377,3 +420,6 @@ msgid ""
 "vierellä oleviin kenttiin. Rekisteröitymisen jälkeen tunnuksesi siirtyy "
 "hyväksyttäväksi."
 msgstr ""
+"Om du uppfyller ovanstående villkor, kan du skriva in din "
+"registreringsinformation bredvid fälten. Efter att registrera ditt konto "
+"överförs för godkännande."
