@@ -5,6 +5,7 @@
  */
 
 ini_set('default_socket_timeout', 5);
+ini_set('display_errors', 1);
 session_start();
 
 // Asetetaan aikavyöhyke
