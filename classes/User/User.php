@@ -26,10 +26,7 @@ class User
 
     public function exists()
     {
-        if ($this->data == null) {
-            return true;
-        }
-        return false;
+        return $this->data != null;
     }
 
     public function isAdmin()

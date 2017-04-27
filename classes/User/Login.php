@@ -61,6 +61,8 @@ class Login
             } else { // Salasana ei täsmää
                 $this->msg->add(_("<strong>Virhe!</strong> Tarkista sähköpostiosoite ja salasana."), "error");
             }
+        } else {
+            $this->msg->add(_("<strong>Virhe!</strong> Tarkista sähköpostiosoite ja salasana."), "error");
         }
     }
 
