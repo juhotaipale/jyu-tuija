@@ -1,17 +1,17 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2017-04-25 11:39+0300\n"
-"PO-Revision-Date: 2017-04-25 15:36+0300\n"
+"POT-Creation-Date: 2017-04-27 20:38+0300\n"
+"PO-Revision-Date: 2017-04-27 20:39+0300\n"
+"Last-Translator: \n"
 "Language-Team: \n"
+"Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.1\n"
 "X-Poedit-Basepath: ../../..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Last-Translator: \n"
-"Language: sv\n"
 "X-Poedit-SearchPath-0: .\n"
 
 #: classes/User/Login.php:45
@@ -24,48 +24,104 @@ msgstr ""
 msgid "Olet kirjautunut sisään."
 msgstr "Du är inloggad."
 
-#: classes/User/Login.php:62
+#: classes/User/Login.php:62 classes/User/Login.php:65
 msgid "<strong>Virhe!</strong> Tarkista sähköpostiosoite ja salasana."
 msgstr ""
 
-#: classes/User/Login.php:78
+#: classes/User/Login.php:80
 msgid "Uloskirjautuminen onnistui."
 msgstr ""
 
-#: classes/User/Register.php:50
+#: classes/User/Register.php:59
 msgid "<strong>Virhe!</strong> Sähköpostiosoite on jo rekisteröity."
 msgstr ""
 
-#: classes/User/Register.php:65
+#: classes/User/Register.php:74 classes/User/Register.php:103
+#: classes/User/Register.php:129
 msgid "Jyväskylän yliopisto"
-msgstr ""
+msgstr "Jyväskylä universitet"
 
-#: classes/User/Register.php:68
+#: classes/User/Register.php:77 mail.php:27
 msgid "Rekisteröityminen TuIjA-portaaliin"
 msgstr ""
 
-#: classes/User/Register.php:76
+#: classes/User/Register.php:78 mail.php:28
+#, php-format
+msgid ""
+"Hei %s %s,<br /><br />Rekisteröidyit Jyväskylän yliopiston tarjoamaan TuIjA-"
+"portaaliin. Salasana lähetetään sinulle automaattisesti sähköpostitse, kun "
+"tunnuksesi on vahvistettu."
+msgstr ""
+
+#: classes/User/Register.php:84 mail.php:34
 msgid ""
 "<strong>Rekisteröityminen onnistui!</strong> Kun rekisteröitymisesi on "
 "hyväksytty, salasana lähetetään automaattisesti antamaasi "
 "sähköpostiosoitteeseen."
 msgstr ""
 
-#: layout/nav.php:15
+#: classes/User/Register.php:106
+msgid "Rekisteröitymisesi on hyväksytty"
+msgstr ""
+
+#: classes/User/Register.php:107
+#, php-format
+msgid ""
+"Hei %s %s,<br /><br />Rekisteröitymisesi Jyväskylän yliopiston TuIjA-"
+"portaaliin on hyväksytty.<br />Salasanasi palveluun on: %s"
+msgstr ""
+
+#: classes/User/Register.php:113
+#, php-format
+msgid ""
+"<strong>Käyttäjä %s %s hyväksytty!</strong> Salasana on lähetetty käyttäjän "
+"ilmoittamaan sähköpostiosoitteeseen."
+msgstr ""
+
+#: classes/User/Register.php:132
+msgid "Rekisteröitymisesi on hylätty"
+msgstr ""
+
+#: classes/User/Register.php:133
+#, php-format
+msgid ""
+"Hei %s %s,<br /><br />Rekisteröitymisesi Jyväskylän yliopiston TuIjA-"
+"portaaliin on hylätty."
+msgstr ""
+
+#: classes/User/Register.php:139
+#, php-format
+msgid "<strong>Käyttäjän %s %s hyväksyntä peruttu.</strong>"
+msgstr ""
+
+#: layout/header.php:50
+msgid ""
+"Tämä sivu käyttää evästeitä parhaan käyttökokemuksen saavuttamiseksi. "
+"Jatkamalla sivuston käyttöä hyväksyt evästeiden käytön."
+msgstr ""
+"Denna sida använder cookies för att uppnå den bästa användarupplevelsen. Din "
+"fortsatta användning av webbplatsen, samtycker du till vår användning av "
+"cookies."
+
+#: layout/header.php:51
+msgid "Selvä"
+msgstr "Klart"
+
+#: layout/nav.php:15 pages/infra.php:7
 msgid "Infrastruktuuri"
 msgstr "Infrastruktur"
 
-#: layout/nav.php:16
+#: layout/nav.php:16 pages/material.php:3
 msgid "Aineisto"
 msgstr "Material"
 
-#: layout/nav.php:17
+#: layout/nav.php:17 pages/knowledge.php:3
 msgid "Osaaminen"
 msgstr "Kunskap"
 
 #: layout/nav.php:22
 msgid "Ylläpitotyökalut"
-msgstr ""
+msgstr "Adminverktyg"
 
 #: layout/nav.php:24 pages/admin/users.php:9
 msgid "Käyttäjät"
@@ -79,7 +135,7 @@ msgstr "Mitt konto"
 msgid "Kirjaudu ulos"
 msgstr "Logga ut"
 
-#: layout/nav.php:42 pages/login.php:7 pages/login.php:26
+#: layout/nav.php:42 pages/login.php:7 pages/login.php:27
 msgid "Kirjaudu sisään"
 msgstr "Logga in"
 
@@ -87,7 +143,7 @@ msgstr "Logga in"
 msgid "Rekisteröidy"
 msgstr "Registrera"
 
-#: layout/nav.php:47
+#: layout/nav.php:48
 msgid "Kieli"
 msgstr "Språk"
 
@@ -108,40 +164,52 @@ msgid ""
 "rekisteröitymisestä välitetään käyttäjälle tieto."
 msgstr ""
 
-#: pages/admin/users.php:18 pages/admin/users.php:49
+#: pages/admin/users.php:18 pages/admin/users.php:53
 msgid "Nimi"
 msgstr "Namn"
 
-#: pages/admin/users.php:19 pages/admin/users.php:50 pages/login.php:16
+#: pages/admin/users.php:19 pages/admin/users.php:54 pages/login.php:16
 #: pages/profile.php:29 pages/register.php:44
 msgid "Sähköposti"
 msgstr "E-post"
 
-#: pages/admin/users.php:20 pages/admin/users.php:51 pages/register.php:51
+#: pages/admin/users.php:20 pages/admin/users.php:55 pages/register.php:51
 msgid "Asema"
 msgstr "Roll"
 
-#: pages/admin/users.php:21 pages/admin/users.php:53
+#: pages/admin/users.php:21 pages/admin/users.php:57
 msgid "Rekisteröitynyt"
-msgstr ""
+msgstr "Registerad"
 
 #: pages/admin/users.php:22
-msgid "Hyväksy käyttäjäksi"
-msgstr ""
+msgid "Toiminnot"
+msgstr "Verksamhet"
 
-#: pages/admin/users.php:44
+#: pages/admin/users.php:37
+msgid "Hyväksy"
+msgstr "Godkänn"
+
+#: pages/admin/users.php:37
+msgid "Hylkää"
+msgstr "Avvisa"
+
+#: pages/admin/users.php:41 pages/admin/users.php:81
+msgid "Ei käyttäjiä."
+msgstr "Inga användare hittades."
+
+#: pages/admin/users.php:48
 msgid "Kaikki käyttäjät"
 msgstr "Alla användare"
 
-#: pages/admin/users.php:52
+#: pages/admin/users.php:56
 msgid "Viim. kirjautuminen"
 msgstr "Senaste inloggning"
 
-#: pages/admin/users.php:54
+#: pages/admin/users.php:58
 msgid "Hyväksytty"
 msgstr "Godkänd"
 
-#: pages/admin/users.php:72
+#: pages/admin/users.php:77
 msgid "Avaa"
 msgstr "Öppna"
 
@@ -210,6 +278,26 @@ msgstr ""
 msgid "Jyväskylän yliopiston verkkosivujen tiedottesyöte."
 msgstr ""
 
+#: pages/infra.php:18
+msgid "Laite / ohjelmisto"
+msgstr "Enheten / mjukvara"
+
+#: pages/infra.php:19
+msgid "Kuvaus"
+msgstr "Beskrivning"
+
+#: pages/infra.php:20
+msgid "Sijainti"
+msgstr "Plats"
+
+#: pages/infra.php:21
+msgid "Yhteyshenkilö"
+msgstr "Kontaktperson"
+
+#: pages/infra.php:53
+msgid "Ei tuloksia."
+msgstr "Inga resultat."
+
 #: pages/login.php:8
 msgid ""
 "Kirjaudu sisään palveluun syöttämällä sähköpostiosoitteesi sekä salasanasi."
@@ -219,7 +307,7 @@ msgstr ""
 msgid "Salasana"
 msgstr "Lösenord"
 
-#: pages/login.php:32
+#: pages/login.php:33
 msgid "Kirjaudu HAKA-tunnistautumisen avulla"
 msgstr ""
 

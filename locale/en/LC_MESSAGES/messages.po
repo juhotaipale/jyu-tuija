@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2017-04-25 17:14+0300\n"
-"PO-Revision-Date: 2017-04-25 17:14+0300\n"
+"POT-Creation-Date: 2017-04-27 20:38+0300\n"
+"PO-Revision-Date: 2017-04-27 20:38+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -26,27 +26,28 @@ msgstr ""
 msgid "Olet kirjautunut sisään."
 msgstr "You are logged in."
 
-#: classes/User/Login.php:62
+#: classes/User/Login.php:62 classes/User/Login.php:65
 msgid "<strong>Virhe!</strong> Tarkista sähköpostiosoite ja salasana."
 msgstr "<strong>Error!</strong> Check the email address and password."
 
-#: classes/User/Login.php:78
+#: classes/User/Login.php:80
 msgid "Uloskirjautuminen onnistui."
 msgstr "Log out successful."
 
-#: classes/User/Register.php:50
+#: classes/User/Register.php:59
 msgid "<strong>Virhe!</strong> Sähköpostiosoite on jo rekisteröity."
 msgstr "<strong>Error!</strong> E-mail address is already registered."
 
-#: classes/User/Register.php:65 classes/User/User.php:67
+#: classes/User/Register.php:74 classes/User/Register.php:103
+#: classes/User/Register.php:129
 msgid "Jyväskylän yliopisto"
 msgstr "University of Jyväskylä"
 
-#: classes/User/Register.php:68 classes/User/User.php:70 mail.php:24
+#: classes/User/Register.php:77 mail.php:27
 msgid "Rekisteröityminen TuIjA-portaaliin"
 msgstr "Registration to TuIjA portal"
 
-#: classes/User/Register.php:69 mail.php:25
+#: classes/User/Register.php:78 mail.php:28
 #, php-format
 msgid ""
 "Hei %s %s,<br /><br />Rekisteröidyit Jyväskylän yliopiston tarjoamaan TuIjA-"
@@ -57,7 +58,7 @@ msgstr ""
 "University of Jyväskylä. The password will be sent to you automatically by "
 "email when your account has been approved."
 
-#: classes/User/Register.php:75 mail.php:31
+#: classes/User/Register.php:84 mail.php:34
 msgid ""
 "<strong>Rekisteröityminen onnistui!</strong> Kun rekisteröitymisesi on "
 "hyväksytty, salasana lähetetään automaattisesti antamaasi "
@@ -67,7 +68,11 @@ msgstr ""
 "been approved, your password will be automatically sent to your email "
 "address."
 
-#: classes/User/User.php:71
+#: classes/User/Register.php:106
+msgid "Rekisteröitymisesi on hyväksytty"
+msgstr "Your registration has been approved"
+
+#: classes/User/Register.php:107
 #, php-format
 msgid ""
 "Hei %s %s,<br /><br />Rekisteröitymisesi Jyväskylän yliopiston TuIjA-"
@@ -77,7 +82,34 @@ msgstr ""
 "University of Jyväskylä has been approved.<br />Use this password to login: "
 "%s"
 
-#: layout/header.php:49
+#: classes/User/Register.php:113
+#, php-format
+msgid ""
+"<strong>Käyttäjä %s %s hyväksytty!</strong> Salasana on lähetetty käyttäjän "
+"ilmoittamaan sähköpostiosoitteeseen."
+msgstr ""
+"<strong>The user %s %s accepted!</strong> The password is sent to the user's "
+"e-mail address."
+
+#: classes/User/Register.php:132
+msgid "Rekisteröitymisesi on hylätty"
+msgstr "Your registration is rejected"
+
+#: classes/User/Register.php:133
+#, php-format
+msgid ""
+"Hei %s %s,<br /><br />Rekisteröitymisesi Jyväskylän yliopiston TuIjA-"
+"portaaliin on hylätty."
+msgstr ""
+"Hi %s %s,<br /><br />Your registration to the TuIjA portal maintained by "
+"University of Jyväskylä has been rejected."
+
+#: classes/User/Register.php:139
+#, php-format
+msgid "<strong>Käyttäjän %s %s hyväksyntä peruttu.</strong>"
+msgstr "<strong>The user %s %s's approval withdrawn.</strong>"
+
+#: layout/header.php:50
 msgid ""
 "Tämä sivu käyttää evästeitä parhaan käyttökokemuksen saavuttamiseksi. "
 "Jatkamalla sivuston käyttöä hyväksyt evästeiden käytön."
@@ -85,19 +117,19 @@ msgstr ""
 "This page uses cookies in order to ensure the best user experience. By "
 "continuing to use the site, you agree to the use of cookies."
 
-#: layout/header.php:50
+#: layout/header.php:51
 msgid "Selvä"
 msgstr "OK"
 
-#: layout/nav.php:15
+#: layout/nav.php:15 pages/infra.php:7
 msgid "Infrastruktuuri"
 msgstr "Infrastructure"
 
-#: layout/nav.php:16
+#: layout/nav.php:16 pages/material.php:3
 msgid "Aineisto"
 msgstr "Material"
 
-#: layout/nav.php:17
+#: layout/nav.php:17 pages/knowledge.php:3
 msgid "Osaaminen"
 msgstr "Knowledge"
 
@@ -117,7 +149,7 @@ msgstr "My account"
 msgid "Kirjaudu ulos"
 msgstr "Sign out"
 
-#: layout/nav.php:42 pages/login.php:7 pages/login.php:26
+#: layout/nav.php:42 pages/login.php:7 pages/login.php:27
 msgid "Kirjaudu sisään"
 msgstr "Login"
 
@@ -125,7 +157,7 @@ msgstr "Login"
 msgid "Rekisteröidy"
 msgstr "Register"
 
-#: layout/nav.php:47
+#: layout/nav.php:48
 msgid "Kieli"
 msgstr "Language"
 
@@ -150,20 +182,20 @@ msgstr ""
 "user's e-mail. Also, the information about rejected registration is "
 "transmitted to the user."
 
-#: pages/admin/users.php:18 pages/admin/users.php:49
+#: pages/admin/users.php:18 pages/admin/users.php:53
 msgid "Nimi"
 msgstr "Name"
 
-#: pages/admin/users.php:19 pages/admin/users.php:50 pages/login.php:16
+#: pages/admin/users.php:19 pages/admin/users.php:54 pages/login.php:16
 #: pages/profile.php:29 pages/register.php:44
 msgid "Sähköposti"
 msgstr "Email"
 
-#: pages/admin/users.php:20 pages/admin/users.php:51 pages/register.php:51
+#: pages/admin/users.php:20 pages/admin/users.php:55 pages/register.php:51
 msgid "Asema"
 msgstr "Position"
 
-#: pages/admin/users.php:21 pages/admin/users.php:53
+#: pages/admin/users.php:21 pages/admin/users.php:57
 msgid "Rekisteröitynyt"
 msgstr "Registrated on"
 
@@ -171,27 +203,31 @@ msgstr "Registrated on"
 msgid "Toiminnot"
 msgstr "Actions"
 
-#: pages/admin/users.php:36
+#: pages/admin/users.php:37
 msgid "Hyväksy"
 msgstr "Approve"
 
-#: pages/admin/users.php:36
+#: pages/admin/users.php:37
 msgid "Hylkää"
 msgstr "Deny"
 
-#: pages/admin/users.php:44
+#: pages/admin/users.php:41 pages/admin/users.php:81
+msgid "Ei käyttäjiä."
+msgstr "No users."
+
+#: pages/admin/users.php:48
 msgid "Kaikki käyttäjät"
 msgstr "All users"
 
-#: pages/admin/users.php:52
+#: pages/admin/users.php:56
 msgid "Viim. kirjautuminen"
 msgstr "Last login on"
 
-#: pages/admin/users.php:54
+#: pages/admin/users.php:58
 msgid "Hyväksytty"
 msgstr "Approved on"
 
-#: pages/admin/users.php:72
+#: pages/admin/users.php:77
 msgid "Avaa"
 msgstr "Open"
 
@@ -275,6 +311,26 @@ msgstr "News"
 msgid "Jyväskylän yliopiston verkkosivujen tiedottesyöte."
 msgstr "News feed from the website of University of Jyväskylä."
 
+#: pages/infra.php:18
+msgid "Laite / ohjelmisto"
+msgstr "Device / software"
+
+#: pages/infra.php:19
+msgid "Kuvaus"
+msgstr "Description"
+
+#: pages/infra.php:20
+msgid "Sijainti"
+msgstr "Location"
+
+#: pages/infra.php:21
+msgid "Yhteyshenkilö"
+msgstr "Contact person"
+
+#: pages/infra.php:53
+msgid "Ei tuloksia."
+msgstr "No results."
+
 #: pages/login.php:8
 msgid ""
 "Kirjaudu sisään palveluun syöttämällä sähköpostiosoitteesi sekä salasanasi."
@@ -284,7 +340,7 @@ msgstr "Login by entering your email and password."
 msgid "Salasana"
 msgstr "Password"
 
-#: pages/login.php:32
+#: pages/login.php:33
 msgid "Kirjaudu HAKA-tunnistautumisen avulla"
 msgstr "Login by using the HAKA authentication"
 

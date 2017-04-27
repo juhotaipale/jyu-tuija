@@ -48,7 +48,7 @@
                        aria-expanded="false"><?php echo _("Kieli"); ?> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <?php
-                        $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+                        $url = $_SERVER['REQUEST_URI'];
                         $url .= (strpos($url, "?") ? "&lang=" : "?lang=");
                         ?>
                         <li><a href="<?php echo $url . "en"; ?>">English</a></li>
