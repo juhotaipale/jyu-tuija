@@ -1,7 +1,7 @@
 <?php
 if (isset($_GET['id'])) {
     $id = filter_var($_GET['id']);
-    $item = new \Infrastructure\Infra($conn, $id);
+    $item = new \Infrastructure\Device($conn, $id);
 
     if ($item->exists()) { ?>
 
@@ -9,7 +9,8 @@ if (isset($_GET['id'])) {
             <div class="col-md-12">
                 <h1><?php echo $item->get('name'); ?></h1>
                 <p class="small"><?php echo sprintf(_("Perustettu %s (%s), viimeksi muokattu %s (%s)"),
-                        $item->get('created_on'), $item->get('created_by'), $item->get('edited_on'),
+                        convertTimestamp($item->get('created_on')), $item->get('created_by'),
+                        convertTimestamp($item->get('edited_on')),
                         $item->get('edited_by')); ?></p>
                 <p class="lead"><?php echo $item->get('desc'); ?></p>
             </div>
@@ -78,7 +79,7 @@ if (isset($_GET['id'])) {
                     if ($totalrecords > 0) {
                         while ($row = $query->fetch()) {
                             $id = $row['id'];
-                            $item = new \Infrastructure\Infra($conn, $row['id']);
+                            $item = new \Infrastructure\Device($conn, $row['id']);
 
                             echo "<tr id='" . $id . "'>
                                     <td><a href='index.php?page=infra&id=" . $id . "'>" . $item->get('name') . "</a></td>

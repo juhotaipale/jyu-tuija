@@ -3,14 +3,13 @@
 
 namespace Infrastructure;
 
-use User\User;
-use Infrastructure\Location;
+use Database\DatabaseItem;
 
-class Infra
+class Device implements DatabaseItem
 {
     private $conn;
     private $id;
-    private $data = null;
+    private $data = array();
 
     public function __construct($conn, $id = null)
     {
@@ -28,7 +27,7 @@ class Infra
 
     public function exists()
     {
-        return $this->data != null;
+        return !empty($this->data);
     }
 
     public function get($column, $clear = false)
@@ -56,7 +55,7 @@ class Infra
                 break;
 
             default:
-                $value = (key_exists($column, $this->data) ? $this->data[$column] : "undefined");
+                $value = (!empty($this->data) && key_exists($column, $this->data) ? $this->data[$column] : "undefined");
                 break;
         }
 

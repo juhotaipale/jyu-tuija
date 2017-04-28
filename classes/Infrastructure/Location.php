@@ -4,7 +4,9 @@
 namespace Infrastructure;
 
 
-class Location
+use Database\DatabaseItem;
+
+class Location implements DatabaseItem
 {
     private $conn;
     private $id;
@@ -29,7 +31,7 @@ class Location
         return $this->data != null;
     }
 
-    public function get($column)
+    public function get($column, $clear = false)
     {
         return $this->data[$column];
     }

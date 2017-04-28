@@ -4,7 +4,9 @@
 namespace User;
 
 
-class User
+use Database\DatabaseItem;
+
+class User implements DatabaseItem
 {
     private $conn;
     private $id;
@@ -37,8 +39,12 @@ class User
         return false;
     }
 
-    public function get($column)
+    public function get($column, $clear = false)
     {
+        if ($clear) {
+            return $this->data[$column];
+        }
+
         switch ($column) {
             case "name":
                 $value = $this->data['firstname'] . " " . $this->data['lastname'];

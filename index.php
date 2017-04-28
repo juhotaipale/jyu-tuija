@@ -36,6 +36,8 @@ bindtextdomain($domain, "locale");
 bind_textdomain_codeset($domain, 'UTF-8');
 textdomain($domain);
 
+require_once "core/functions.php";
+
 // Tarkistetaan löytyykö konfiguraatiotiedosto
 // Jos ei löydy, näytetään virheilmoitus, ja varsinaisen sovelluksen suoritus lopetetaan
 if (file_exists("core/config.php")) {
