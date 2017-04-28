@@ -1,7 +1,7 @@
 <?php
 if (isset($_GET['id'])) {
     $id = filter_var($_GET['id']);
-    $item = new \Infrastructure\Device($conn, $id);
+    $item = new \Infrastructure\Infra($conn, $id);
 
     if ($item->exists()) { ?>
 
@@ -79,7 +79,7 @@ if (isset($_GET['id'])) {
                     if ($totalrecords > 0) {
                         while ($row = $query->fetch()) {
                             $id = $row['id'];
-                            $item = new \Infrastructure\Device($conn, $row['id']);
+                            $item = new \Infrastructure\Infra($conn, $row['id']);
 
                             echo "<tr id='" . $id . "'>
                                     <td><a href='index.php?page=infra&id=" . $id . "'>" . $item->get('name') . "</a></td>

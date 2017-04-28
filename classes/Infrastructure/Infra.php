@@ -5,7 +5,7 @@ namespace Infrastructure;
 
 use Database\DatabaseItem;
 
-class Device implements DatabaseItem
+class Infra implements DatabaseItem
 {
     private $conn;
     private $id;
