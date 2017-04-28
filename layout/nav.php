@@ -15,6 +15,7 @@
                 <li><a href="index.php?page=infra"><?php echo _("Infrastruktuuri"); ?></a></li>
                 <li><a href="index.php?page=material"><?php echo _("Aineisto"); ?></a></li>
                 <li><a href="index.php?page=knowledge"><?php echo _("Osaaminen"); ?></a></li>
+                <li><a href="index.php?page=research"><?php echo _("Tutkimukset"); ?></a></li>
 
                 <?php
                 if ($login->loggedIn() && $user->isAdmin()) {
@@ -56,6 +57,7 @@
                         <li><a href="<?php echo $url . "sv"; ?>">Svenska</a></li>
                     </ul>
                 </li>
+                <li><a href="downloads/manual.pdf" target="_blank"><i class="fa fa-question"></i></a></li>
             </ul>
         </div>
     </div>
