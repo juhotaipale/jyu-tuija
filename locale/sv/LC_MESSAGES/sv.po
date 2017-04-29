@@ -1,0 +1,510 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2017-04-29 14:50+0300\n"
+"PO-Revision-Date: 2017-04-29 14:50+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: sv_SE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.1\n"
+"X-Poedit-Basepath: ../../..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: classes/UI/BootPagination.php:57 classes/UI/BootPagination.php:70
+#: classes/UI/BootPagination.php:137 classes/UI/BootPagination.php:157
+#: classes/UI/BootPagination.php:180
+#, php-format
+msgid "näytetään %s&ndash;%s tulosta %s tuloksesta"
+msgstr "visar %s&ndash;%s sökresultat av %s resultat"
+
+#: classes/UI/BootPagination.php:87
+msgid "Edellinen"
+msgstr "Föregående"
+
+#: classes/UI/BootPagination.php:170
+msgid "Seuraava"
+msgstr "Följande"
+
+#: classes/User/Login.php:45
+msgid ""
+"<strong>Tunnuksesi odottaa hyväksyntää.</strong> Salasana lähetetään "
+"automaattisesti sähköpostiisi, kun tunnuksesi on hyväksytty."
+msgstr ""
+"<strong>Ditt konto är väntar på godkännande.</strong> Lösenordet kommer att "
+"skickas automatiskt till din e-postadress när ditt konto har godkänts."
+
+#: classes/User/Login.php:59
+msgid "Olet kirjautunut sisään."
+msgstr "Du är inloggad."
+
+#: classes/User/Login.php:62 classes/User/Login.php:65
+msgid "<strong>Virhe!</strong> Tarkista sähköpostiosoite ja salasana."
+msgstr ""
+"<strong>Ett fel uppstod!</strong> Vänligen kontrollera din e-postadress och "
+"lösenord."
+
+#: classes/User/Login.php:80
+msgid "Uloskirjautuminen onnistui."
+msgstr "Utcheckningen var framgångsrik."
+
+#: classes/User/Register.php:59
+msgid "<strong>Virhe!</strong> Sähköpostiosoite on jo rekisteröity."
+msgstr "<strong>Ett fel uppstod!</strong> E-postadressen är redan registrerad."
+
+#: classes/User/Register.php:74 classes/User/Register.php:103
+#: classes/User/Register.php:129
+msgid "Jyväskylän yliopisto"
+msgstr "Jyväskylä universitet"
+
+#: classes/User/Register.php:77
+msgid "Rekisteröityminen TuIjA-portaaliin"
+msgstr ""
+
+#: classes/User/Register.php:78
+#, php-format
+msgid ""
+"Hei %s %s,<br /><br />Rekisteröidyit Jyväskylän yliopiston tarjoamaan TuIjA-"
+"portaaliin. Salasana lähetetään sinulle automaattisesti sähköpostitse, kun "
+"tunnuksesi on vahvistettu."
+msgstr ""
+"Hej %s %s,<br /><br />Du har registrerat dig till Jyväskylä universitets "
+"TuIjA portal. Lösenord kommer att skickas till dig automatiskt via e-post "
+"när ditt konto har bekräftats."
+
+#: classes/User/Register.php:84
+msgid ""
+"<strong>Rekisteröityminen onnistui!</strong> Kun rekisteröitymisesi on "
+"hyväksytty, salasana lähetetään automaattisesti antamaasi "
+"sähköpostiosoitteeseen."
+msgstr ""
+"<strong>Registreringen lyckades!</strong> När din registrering har godkänts, "
+"kommer ditt lösenord att skickas automatiskt till din e-postadress."
+
+#: classes/User/Register.php:106
+msgid "Rekisteröitymisesi on hyväksytty"
+msgstr "Din registrering har godkänts"
+
+#: classes/User/Register.php:107
+#, php-format
+msgid ""
+"Hei %s %s,<br /><br />Rekisteröitymisesi Jyväskylän yliopiston TuIjA-"
+"portaaliin on hyväksytty.<br />Salasanasi palveluun on: %s"
+msgstr ""
+"Hej %s %s, <br /><br />Din registrering i Jyväskylä universitets TuIjA-"
+"portal har godkänts.<br />Din lösenord är: %s"
+
+#: classes/User/Register.php:113
+#, php-format
+msgid ""
+"<strong>Käyttäjä %s %s hyväksytty!</strong> Salasana on lähetetty käyttäjän "
+"ilmoittamaan sähköpostiosoitteeseen."
+msgstr ""
+"<strong>Användaren %s %s accepterade!</strong> Lösenordet skickas till "
+"användarens e-postadress."
+
+#: classes/User/Register.php:132
+msgid "Rekisteröitymisesi on hylätty"
+msgstr "Din registrering har avvisats"
+
+#: classes/User/Register.php:133
+#, php-format
+msgid ""
+"Hei %s %s,<br /><br />Rekisteröitymisesi Jyväskylän yliopiston TuIjA-"
+"portaaliin on hylätty."
+msgstr ""
+"Hej %s %s,<br /><br />Din registrering i Jyväskylä universitets TuIjA-portal "
+"har avvisats."
+
+#: classes/User/Register.php:139
+#, php-format
+msgid "<strong>Käyttäjän %s %s hyväksyntä peruttu.</strong>"
+msgstr "<strong>Användaren %s %ss godkännandet återkallas.</strong>"
+
+#: classes/User/User.php:108
+msgid "Virhe!"
+msgstr ""
+
+#: classes/User/User.php:112
+msgid "Muutokset tallennettu."
+msgstr ""
+
+#: layout/header.php:52
+msgid ""
+"Tämä sivu käyttää evästeitä parhaan käyttökokemuksen saavuttamiseksi. "
+"Jatkamalla sivuston käyttöä hyväksyt evästeiden käytön."
+msgstr ""
+"Denna webbplats använder cookies för att uppnå den bästa "
+"användarupplevelsen. Genom att fortsätta använda webbplatsen samtycker du "
+"till vår användning av cookies."
+
+#: layout/header.php:53
+msgid "Selvä"
+msgstr "Klart"
+
+#: layout/nav.php:15 pages/infra.php:48
+msgid "Infrastruktuuri"
+msgstr "Infrastruktur"
+
+#: layout/nav.php:16 pages/material.php:3
+msgid "Aineisto"
+msgstr "Material"
+
+#: layout/nav.php:17 pages/knowledge.php:26 pages/knowledge.php:51
+#: pages/profile.php:138
+msgid "Osaaminen"
+msgstr "Kunskap"
+
+#: layout/nav.php:18 pages/profile.php:177
+msgid "Tutkimukset"
+msgstr "Studier"
+
+#: layout/nav.php:23
+msgid "Ylläpitotyökalut"
+msgstr "Adminverktyg"
+
+#: layout/nav.php:25 pages/admin/users.php:9
+msgid "Käyttäjät"
+msgstr "Användare"
+
+#: layout/nav.php:37
+msgid "Omat tiedot"
+msgstr "Mitt konto"
+
+#: layout/nav.php:39
+msgid "Kirjaudu ulos"
+msgstr "Logga ut"
+
+#: layout/nav.php:43 pages/login.php:7 pages/login.php:27
+msgid "Kirjaudu sisään"
+msgstr "Logga in"
+
+#: layout/nav.php:44 pages/register.php:10 pages/register.php:67
+msgid "Rekisteröidy"
+msgstr "Registrera"
+
+#: layout/nav.php:49
+msgid "Kieli"
+msgstr "Språk"
+
+#: pages/admin/users.php:10
+msgid ""
+"Tässä näkymässä voit selata portaalin käyttäjiä tai hyväksyä uusia käyttäjiä."
+msgstr ""
+"I den här vyn kan du bläddra i portalanvändare eller acceptera nya användare."
+
+#: pages/admin/users.php:12
+msgid "Uudet käyttäjät"
+msgstr "Nya användare"
+
+#: pages/admin/users.php:13
+msgid ""
+"Tarkista rekisteröityneen käyttäjän tiedot ja hyväksy tai hylkää "
+"rekisteröityminen. Hyväksymisen jälkeen automaattisesti generoitu salasana "
+"lähetetään automaattisesti käyttäjän sähköpostiin. Myös hylätystä "
+"rekisteröitymisestä välitetään käyttäjälle tieto."
+msgstr ""
+"Kontrollera informationen om registrerade användare och sedan godkänna eller "
+"avvisa registreringen. Efter antagandet av det automatiskt genererade "
+"lösenordet skickas automatiskt till användarens e-post. Avvisade "
+"undertecknandet upp ska också skickas till användaren."
+
+#: pages/admin/users.php:18 pages/admin/users.php:93 pages/knowledge.php:49
+msgid "Nimi"
+msgstr "Namn"
+
+#: pages/admin/users.php:19 pages/admin/users.php:94 pages/knowledge.php:50
+#: pages/login.php:16 pages/profile.php:91 pages/register.php:44
+msgid "Sähköposti"
+msgstr "E-post"
+
+#: pages/admin/users.php:20 pages/admin/users.php:95 pages/register.php:51
+msgid "Asema"
+msgstr "Roll"
+
+#: pages/admin/users.php:21 pages/admin/users.php:97
+msgid "Rekisteröitynyt"
+msgstr "Registerad"
+
+#: pages/admin/users.php:22
+msgid "Toiminnot"
+msgstr "Verksamhet"
+
+#: pages/admin/users.php:37
+msgid "Hyväksy"
+msgstr "Godkänn"
+
+#: pages/admin/users.php:37
+msgid "Hylkää"
+msgstr "Avvisa"
+
+#: pages/admin/users.php:41 pages/admin/users.php:121
+msgid "Ei käyttäjiä."
+msgstr "Inga användare hittades."
+
+#: pages/admin/users.php:73
+msgid "Kaikki käyttäjät"
+msgstr "Alla användare"
+
+#: pages/admin/users.php:79 pages/infra.php:57 pages/knowledge.php:35
+msgid "Hae"
+msgstr "Sök"
+
+#: pages/admin/users.php:82 pages/infra.php:60 pages/knowledge.php:38
+#, php-format
+msgid "%s hakutulosta."
+msgstr "%s sökresultat."
+
+#: pages/admin/users.php:96
+msgid "Viim. kirjautuminen"
+msgstr "Senaste inloggning"
+
+#: pages/admin/users.php:98
+msgid "Hyväksytty"
+msgstr "Godkänd"
+
+#: pages/admin/users.php:117
+msgid "Avaa"
+msgstr "Öppna"
+
+#: pages/error/403.php:4
+msgid "Ei käyttöoikeutta."
+msgstr "Ingen åtkomst."
+
+#: pages/error/403.php:5 pages/error/404.php:5
+msgid "Palaa takaisin edelliselle sivulle."
+msgstr "Gå tillbaka till föregående sida."
+
+#: pages/error/404.php:4
+msgid "Sivua ei löydy."
+msgstr "Sidan hittas inte."
+
+#: pages/home.php:3
+msgid "Tervetuloa!"
+msgstr "Välkommen!"
+
+#: pages/home.php:4
+msgid "Tervetuloa käyttämään TuIjA-portaalia."
+msgstr "Välkommen till TuIjA-portal."
+
+#: pages/home.php:5
+msgid ""
+"<strong>TuIjA</strong> on <a href='https://jyu.fi/' "
+"target='_blank'>Jyväskylän yliopiston</a> ylläpitämä "
+"tutkimusinfrastruktuuri \n"
+"            ja -aineistoportaali. Portaalin tarkoituksena on tarjota "
+"kattavaa avointa tietoa yliopiston käytössä olevasta \n"
+"            tutkimusinfrastruktuurista ja -aineistosta sekä osaamisesta "
+"pääasiallisesti organisaation sisäiseen käyttöön, mutta myös organisaation "
+"ulkopuolisille yhteistyökumppaneille."
+msgstr ""
+
+#: pages/home.php:10
+msgid ""
+"Rekisteröimällä itsellesi käyttäjätunnuksen TuIjA-portaaliin pääset mm."
+"<ul><li>varaamaan vapaana olevia tutkimusvälineitä ja -laitteita käyttöösi,</"
+"li><li>selaamaan avointa tutkimusaineistoa sekä</li><li>tarjoamaan omaa "
+"osaamistasi muiden ammattilaisten käyttöön.</li></ul>"
+msgstr ""
+
+#: pages/home.php:11
+msgid ""
+"Aloita portaalin tehokas käyttö <a href='index.php?"
+"page=register'>rekisteröitymällä</a> tai <a href='index.php?"
+"page=login'>kirjautumalla sisään</a>."
+msgstr ""
+"Börja med en effektiv användning av portalen <a href='index.php?"
+"page=register'>genom att registrera dig</a> eller <a href='index.php?"
+"page=login'>logga in</a>."
+
+#: pages/home.php:19
+msgid "Tiedeuutiset"
+msgstr ""
+
+#: pages/home.php:20
+msgid ""
+"Tällä palstalla voit selata Jyväskylän yliopiston Tiedonjyvä-verkkojulkaisun "
+"uusimpia tiedeuutisia."
+msgstr ""
+"I den här kolumnen kan du bläddra den senaste vetenskapen nyheterna från "
+"University of Jyväskylä Tiedonjyvä-online-publicering."
+
+#: pages/home.php:36
+msgid "Tiedotteet"
+msgstr ""
+
+#: pages/home.php:37
+msgid "Jyväskylän yliopiston verkkosivujen tiedottesyöte."
+msgstr ""
+
+#: pages/infra.php:11
+#, php-format
+msgid "Luotu %s (%s), viimeksi muokattu %s (%s)"
+msgstr "Skapades %s (%s), den senaste uppdateringen %s (%s)"
+
+#: pages/infra.php:20 pages/location.php:19
+msgid "<strong>Virhe!</strong> Laitetta tai ohjelmistoa ei löydy."
+msgstr "<strong>Ett fel uppstod!</strong> Enheten eller mjukvara inte hittas."
+
+#: pages/infra.php:49
+msgid ""
+"Tällä sivulla voit hakea ja selata Jyväskylän yliopiston laite- ja "
+"ohjelmistokantaa."
+msgstr ""
+"På denna sida kan du söka efter och bläddra igenom hård- och mjukvara om "
+"Jyväskylä universitet."
+
+#: pages/infra.php:71
+msgid "Laite / ohjelmisto"
+msgstr "Enheten / mjukvara"
+
+#: pages/infra.php:72
+msgid "Kuvaus"
+msgstr "Beskrivning"
+
+#: pages/infra.php:73
+msgid "Sijainti"
+msgstr "Plats"
+
+#: pages/infra.php:74
+msgid "Yhteyshenkilö"
+msgstr "Kontaktperson"
+
+#: pages/infra.php:94 pages/knowledge.php:68
+msgid "Ei tuloksia."
+msgstr "Inga resultat."
+
+#: pages/knowledge.php:27
+#, fuzzy
+#| msgid ""
+#| "Tällä sivulla voit tarkastella ja muuttaa omia portaaliin tallennettuja "
+#| "tietojasi."
+msgid ""
+"Tällä sivulla voit hakea ja selata TuIjA-portaaliin ilmoitettua osaamista."
+msgstr ""
+"På den här sidan kan du se och ändra din egen information lagrad på portalen."
+
+#: pages/location.php:11
+#, php-format
+msgid "Perustettu %s (%s), viimeksi muokattu %s (%s)"
+msgstr "Grundades i %s (%s), den senast ändrad på %s (%s)"
+
+#: pages/login.php:8
+msgid ""
+"Kirjaudu sisään palveluun syöttämällä sähköpostiosoitteesi sekä salasanasi."
+msgstr "Logga in tjänsten genom att ange din e-postadress och ditt lösenord."
+
+#: pages/login.php:21
+msgid "Salasana"
+msgstr "Lösenord"
+
+#: pages/login.php:33
+msgid "Kirjaudu HAKA-tunnistautumisen avulla"
+msgstr "Logga in med HAKA-autentisering"
+
+#: pages/profile.php:10
+#, fuzzy
+#| msgid "Käyttäjät"
+msgid "Käyttäjää ei löydy."
+msgstr "Användare"
+
+#: pages/profile.php:30
+#, php-format
+msgid "Rekisteröitynyt %s, viimeksi muokattu %s (%s)"
+msgstr "Registrerade  %s, den senaste uppdateringen %s (%s)"
+
+#: pages/profile.php:36
+msgid ""
+"Tällä sivulla voit tarkastella ja muuttaa omia portaaliin tallennettuja "
+"tietojasi."
+msgstr ""
+"På den här sidan kan du se och ändra din egen information lagrad på portalen."
+
+#: pages/profile.php:38 pages/profile.php:49
+msgid "Tallenna"
+msgstr ""
+
+#: pages/profile.php:39 pages/profile.php:50
+msgid "Peruuta"
+msgstr ""
+
+#: pages/profile.php:41 pages/profile.php:52
+msgid "Muokkaa"
+msgstr ""
+
+#: pages/profile.php:63 pages/register.php:37
+msgid "Sukunimi"
+msgstr "Efternamn"
+
+#: pages/profile.php:77 pages/register.php:30
+msgid "Etunimi"
+msgstr "Förnamn"
+
+#: pages/profile.php:104
+msgid "Puhelinnumero"
+msgstr ""
+
+#: pages/profile.php:117
+msgid "Työhuone"
+msgstr ""
+
+#: pages/profile.php:143
+msgid "Lyhyt kuvaus osaamisesta"
+msgstr ""
+
+#: pages/profile.php:144
+msgid "Lyhyen kuvauksen suurin sallittu pituus on 150 merkkiä."
+msgstr ""
+
+#: pages/profile.php:145
+msgid "Kuvaus osaamisesta"
+msgstr ""
+
+#: pages/profile.php:146
+msgid "Voit käyttää tekstikentässä HTML-koodia."
+msgstr ""
+
+#: pages/profile.php:149
+msgid "Ei tekstisisältöä."
+msgstr ""
+
+#: pages/profile.php:162
+msgid "Vastuulla olevat laitteet ja ohjelmistot"
+msgstr ""
+
+#: pages/profile.php:172
+msgid "<p>Ei vastuulla olevia laitteita tai ohjelmistoja.</p>"
+msgstr ""
+
+#: pages/register.php:16
+msgid ""
+"<p>Sinulla on oikeus rekisteriöityä palveluun, mikäli olet</p>\n"
+"        <ul>\n"
+"            <li>opettaja,</li>\n"
+"            <li>gradun tai väitöskirjan tekijä,</li>\n"
+"            <li>tutkija,</li>\n"
+"            <li>vieraileva tutkija tai</li>\n"
+"            <li>ulkopuolinen tutkimuskumppani.</li>\n"
+"        </ul>"
+msgstr ""
+"<p>Du har rätt att registera tjänsten, om du är</p>\n"
+"        <ul>\n"
+"            <li>läraren,</li>\n"
+"            <li>författaren till den uppsats eller avhandling,</li>\n"
+"            <li>forskaren</li>\n"
+"            <li>besökande forskare eller</li>\n"
+"            <li>en extern forskningspartner.</li>\n"
+"        </ul>"
+
+#: pages/register.php:24
+msgid ""
+"Mikäli täytät yllä olevat ehdot, voit syöttää rekisteröitymistietosi "
+"vierellä oleviin kenttiin. Rekisteröitymisen jälkeen tunnuksesi siirtyy "
+"hyväksyttäväksi."
+msgstr ""
+"Om du uppfyller ovanstående villkor, kan du skriva in din "
+"registreringsinformation bredvid fälten. Efter att registrera ditt konto "
+"överförs för godkännande."
