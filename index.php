@@ -18,7 +18,7 @@ if (isset($_GET['lang'])) {
         case 'fi':
         case 'en':
         case 'sv':
-            switch ($lang) {
+            /*switch ($lang) {
                 case 'fi':
                     $lang = 'fi_FI';
                     break;
@@ -28,7 +28,7 @@ if (isset($_GET['lang'])) {
                 case 'sv':
                     $lang = 'sv_SE';
                     break;
-            }
+            }*/
 
             setcookie('lang', $lang);
             $_COOKIE['lang'] = $lang;
@@ -42,12 +42,7 @@ define('BASE_PATH', realpath(dirname(__FILE__)));
 // I18N support information here
 $lang = (isset($_COOKIE['lang']) ? $_COOKIE['lang'] : 'fi_FI');
 putenv("LANG=" . $lang);
-$result = setlocale(LC_ALL, $lang);
-if (!$result) {
-    echo "setlocale failed";
-} else {
-    echo $result;
-}
+setlocale(LC_ALL, $lang);
 
 // Set the text domain as "messages"
 $domain = "messages";
