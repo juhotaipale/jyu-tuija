@@ -8,7 +8,7 @@ if (isset($_GET['id'])) {
         <div class="row">
             <div class="col-md-12">
                 <h1><?php echo $item->get('name'); ?></h1>
-                <p class="small"><?php echo sprintf(_("Perustettu %s (%s), viimeksi muokattu %s (%s)"),
+                <p class="small"><?php echo sprintf(_("Luotu %s (%s), viimeksi muokattu %s (%s)"),
                         convertTimestamp($item->get('created_on')), $item->get('created_by'),
                         convertTimestamp($item->get('edited_on')),
                         $item->get('edited_by')); ?></p>

@@ -5,7 +5,6 @@
  */
 
 ini_set('default_socket_timeout', 5);
-ini_set('display_errors', 1);
 session_start();
 
 // Asetetaan aikavyöhyke
@@ -19,16 +18,36 @@ if (isset($_GET['lang'])) {
         case 'fi':
         case 'en':
         case 'sv':
+            switch ($lang) {
+                case 'fi':
+                    $lang = 'fi_FI';
+                    break;
+                case 'en':
+                    $lang = 'en_US';
+                    break;
+                case 'sv':
+                    $lang = 'sv_SE';
+                    break;
+            }
+
             setcookie('lang', $lang);
             $_COOKIE['lang'] = $lang;
             break;
     }
 }
 
+// Päähakemisto
+define('BASE_PATH', realpath(dirname(__FILE__)));
+
 // I18N support information here
-$lang = (isset($_COOKIE['lang']) ? $_COOKIE['lang'] : 'fi');
+$lang = (isset($_COOKIE['lang']) ? $_COOKIE['lang'] : 'fi_FI');
 putenv("LANG=" . $lang);
-setlocale(LC_ALL, $lang);
+$result = setlocale(LC_ALL, $lang);
+if (!$result) {
+    echo "setlocale failed";
+} else {
+    echo $result;
+}
 
 // Set the text domain as "messages"
 $domain = "messages";
@@ -53,7 +72,6 @@ ini_set('display_errors', DEVELOPMENT);
 
 // Tällä funktiolla käytettävät luokat haetaan automaattisesti
 // käyttäen hyväksi namespaceen perustuvaa kansiorakennetta
-define('BASE_PATH', realpath(dirname(__FILE__)));
 function class_autoloader($class)
 {
     $filename = BASE_PATH . '/classes/' . str_replace('\\', '/', $class) . '.php';

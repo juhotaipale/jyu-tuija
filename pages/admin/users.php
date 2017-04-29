@@ -44,8 +44,48 @@ if (!$login->loggedIn() or !$user->isAdmin()) {
                 </tbody>
             </table>
         </div>
+    </div>
+</div>
 
+<?php
+$search = (isset($_GET['search']) ? $_GET['search'] : false);
+
+$pagenumber = isset($_GET['p']) ? $_GET['p'] : 1;
+$pagesize = 20;
+$start = ($pagenumber - 1) * $pagesize;
+
+$sql = "SELECT SQL_CALC_FOUND_ROWS id FROM users WHERE approved_on IS NOT NULL";
+$sql .= ($search ? " AND (firstname LIKE :search OR lastname LIKE :search OR email LIKE :search)" : "");
+$sql .= " ORDER BY lastname LIMIT $start, $pagesize";
+
+$query = $conn->pdo->prepare($sql);
+if ($search) {
+    $query->bindValue(':search', '%' . $search . '%');
+}
+$query->execute();
+
+$countsql = $conn->pdo->query("SELECT FOUND_ROWS()");
+$totalrecords = $countsql->fetchColumn();
+?>
+
+<div class="row">
+    <div class="col-md-12">
         <h2><?php echo _("Kaikki käyttäjät"); ?></h2>
+        <form id="searchForm" class="form-inline" method="get">
+            <input type="hidden" name="page" value="admin/users"/>
+            <div class="input-group">
+                <input class="form-control" name="search" value="<?php echo $search; ?>" type="text"/>
+                <div class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><?php echo _("Hae"); ?></button>
+                </div>
+            </div>
+            &emsp;<?php echo sprintf(_("%s hakutulosta."), $totalrecords); ?>
+        </form>
+    </div>
+</div>
+
+<div class="row" style="padding-top: 15px;">
+    <div class="col-md-12">
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
@@ -61,13 +101,13 @@ if (!$login->loggedIn() or !$user->isAdmin()) {
                 </thead>
                 <tbody>
                 <?php
-                $sql = $conn->pdo->query("SELECT id FROM users WHERE approved_on IS NOT NULL ORDER BY lastname");
-                if ($sql->rowCount() > 0) {
-                    while ($row = $sql->fetch()) {
+
+                if ($query->rowCount() > 0) {
+                    while ($row = $query->fetch()) {
                         $selectedUser = new \User\User($conn, $row['id']);
 
                         echo "<tr>
-                            <td>" . $selectedUser->get('name') . "</td>
+                            <td><a href='index.php?page=profile&id=" . $selectedUser->get('id') . "'>" . $selectedUser->get('name') . "</a></td>
                             <td><a href='mailto:" . $selectedUser->get('email') . "'>" . $selectedUser->get('email') . "</a></td>
                             <td>" . $selectedUser->get('role_name') . "</td>
                             <td>" . date('d.m.Y H:i', strtotime($selectedUser->get('last_login'))) . "</td>
@@ -84,5 +124,17 @@ if (!$login->loggedIn() or !$user->isAdmin()) {
                 </tbody>
             </table>
         </div>
+
+        <?php
+        $pg = new \UI\BootPagination();
+        $pg->pagenumber = $pagenumber;
+        $pg->pagesize = $pagesize;
+        $pg->totalrecords = $totalrecords;
+        $pg->showfirst = true;
+        $pg->showlast = true;
+        $pg->defaultUrl = "index.php?page=admin/users";
+        $pg->paginationUrl = "index.php?page=admin/users&search=$search&p=[p]";
+        echo $pg->process();
+        ?>
     </div>
 </div>

@@ -47,7 +47,7 @@ class User implements DatabaseItem
 
         switch ($column) {
             case "name":
-                $value = $this->data['firstname'] . " " . $this->data['lastname'];
+                $value = $this->data['lastname'] . " " . $this->data['firstname'];
                 break;
 
             case "approved_by":
@@ -56,7 +56,7 @@ class User implements DatabaseItem
                 break;
 
             default:
-                $value = (key_exists($column, $this->data) ? $this->data[$column] : "undefined");
+                $value = (!empty($this->data) && key_exists($column, $this->data) ? $this->data[$column] : "&ndash;");
                 break;
         }
 
