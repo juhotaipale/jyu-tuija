@@ -1,6 +1,6 @@
 <?php
 if (!$login->loggedIn()) {
-    header("Location: index.php?page=error/403");
+    header("Location: index.php?page=error/401");
 }
 
 $id = (isset($_GET['id']) ? filter_var($_GET['id']) : $_SESSION['user_id']);
