@@ -92,7 +92,7 @@ class Register
     {
         $user = new \User\User($this->conn, $id);
 
-        $sql = $this->conn->pdo->prepare("UPDATE users SET approved_on = NOW(), approved_by = :approvedBy WHERE id = :id");
+        $sql = $this->conn->pdo->prepare("UPDATE users SET edited_on = NOW(), edited_by = :approvedBy, approved_on = NOW(), approved_by = :approvedBy WHERE id = :id");
         $sql->bindValue(':id', $id);
         $sql->bindValue(':approvedBy', $_SESSION['user_id']);
         $sql->execute();
