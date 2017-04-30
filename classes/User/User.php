@@ -43,6 +43,17 @@ class User implements DatabaseItem
         return false;
     }
 
+    public function hasRank($rank)
+    {
+        $sql = $this->conn->pdo->prepare("SELECT * FROM role WHERE id = :id");
+        $sql->bindValue(':id', $this->data['role']);
+        $sql->execute();
+
+        $result = $sql->fetch();
+
+        return (key_exists($rank, $result) ? $result[$rank] : false);
+    }
+
     public function get($column, $clear = false)
     {
         switch ($column) {
@@ -89,7 +100,7 @@ class User implements DatabaseItem
         } else {
             if (password_verify($oldpass, $this->data['password_hash'])) {
                 if ($pass == $pass2) {
-                    if (strlen($pass) < 8) {
+                    if (strlen($pass) >= 8) {
                         $sql = $this->conn->pdo->prepare("UPDATE users SET password_hash = :hash WHERE id = :id");
                         $sql->bindValue(':id', $this->id);
                         $sql->bindValue(':hash', password_hash($pass, PASSWORD_DEFAULT));
@@ -97,7 +108,8 @@ class User implements DatabaseItem
 
                         return $this->msg->add(_("Salasana vaihdettu."), "success");
                     } else {
-                        $this->msg->add("<strong>Virhe!</strong> Salasanan on oltava vähintään 8 merkkiä pitkä.");
+                        $this->msg->add(_("<strong>Virhe!</strong> Salasanan on oltava vähintään 8 merkkiä pitkä."),
+                            "error");
                     }
                 } else {
                     $this->msg->add(_("<strong>Virhe!</strong> Uudet salasanat eivät täsmää."), "error");
@@ -126,11 +138,17 @@ class User implements DatabaseItem
             $sql->bindValue(':knowledgeShort', filter_var($_POST['knowledge_shortdesc']));
             $sql->bindValue(':editor', $editor->get('id', true));
             $sql->execute();
+
+            if ($_POST['oldpass'] != '') {
+                $this->changePassword(filter_var($_POST['newpass']), filter_var($_POST['newpass2']),
+                    filter_var($_POST['oldpass']));
+            }
         } catch (\Exception $e) {
+            $this->conn->pdo->rollBack();
             $this->msg->add("<strong>" . _("Virhe!") . "</strong> " . $e, "error");
             return;
         }
 
-        $this->msg->add(_("Muutokset tallennettu."), "success", "index.php?page=profile&id=" . $this->id);
+        $this->msg->add(_("Muutokset tallennettu."), "success", "index.php?page=profile&id=" . $this->id . "&edit");
     }
 }

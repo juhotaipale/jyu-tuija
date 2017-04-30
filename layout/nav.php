@@ -57,7 +57,7 @@
                         <li><a href="<?php echo $url . "sv"; ?>">Svenska</a></li>
                     </ul>
                 </li>
-                <li><a href="downloads/manual.pdf" target="_blank"><i class="fa fa-question"></i></a></li>
+                <li><a href="downloads/manual.pdf" target="_blank"><?php echo _("Ohje"); ?></a></li>
             </ul>
         </div>
     </div>

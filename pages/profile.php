@@ -33,7 +33,7 @@ if (!$selectedUser->exists()) {
                 echo "<p class='lead'>" . _("Tällä sivulla voit tarkastella ja muuttaa omia portaaliin tallennettuja tietojasi.") . "<span class='pull-right'>";
                 if ($edit) {
                     echo "<button name='save' type='submit' class='btn btn-success'>" . _("Tallenna") . "</button>&ensp;";
-                    echo "<a href='index.php?page=profile&id=" . $selectedUser->get('id') . "' class='btn btn-danger'>" . _("Peruuta") . "</a>";
+                    echo "<a href='index.php?page=profile&id=" . $selectedUser->get('id') . "' class='btn btn-default'>" . _("Palaa takaisin") . "</a>";
                 } else {
                     echo "<a href='index.php?page=profile&id=" . $selectedUser->get('id') . "&edit' class='btn btn-default'>" . _("Muokkaa") . "</a>";
                 }
@@ -44,7 +44,7 @@ if (!$selectedUser->exists()) {
                     echo "<p class='lead'>";
                     if ($edit) {
                         echo "<button name='save' type='submit' class='btn btn-success'>" . _("Tallenna") . "</button>&ensp;";
-                        echo "<a href='index.php?page=profile&id=" . $selectedUser->get('id') . "' class='btn btn-danger'>" . _("Peruuta") . "</a>";
+                        echo "<a href='index.php?page=profile&id=" . $selectedUser->get('id') . "' class='btn btn-default'>" . _("Palaa takaisin") . "</a>";
                     } else {
                         echo "<a href='index.php?page=profile&id=" . $selectedUser->get('id') . "&edit' class='btn btn-default'>" . _("Muokkaa") . "</a>";
                     }
@@ -181,6 +181,32 @@ if (!$selectedUser->exists()) {
         }
         ?>
     </div>
+
+    <?php if ($selectedUser->get('id') == $user->get('id') && $edit) { ?>
+        <div class="row">
+            <div class="col-md-12">
+                <h3><?php echo _("Vaihda salasana"); ?></h3>
+                <div class="table-responsive">
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <th style="width: 30%; vertical-align: middle;"><?php echo _("Vanha salasana"); ?></th>
+                            <td><input class="form-control" name="oldpass" type="password"/></td>
+                        </tr>
+                        <tr>
+                            <th style="vertical-align: middle;"><?php echo _("Uusi salasana"); ?></th>
+                            <td><input class="form-control" name="newpass" type="password"/></td>
+                        </tr>
+                        <tr>
+                            <th style="vertical-align: middle;"><?php echo _("Uusi salasana"); ?></th>
+                            <td><input class="form-control" name="newpass2" type="password"/></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    <?php } ?>
 
     <?php
     if ($edit) echo "</form>";

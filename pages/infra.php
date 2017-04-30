@@ -1,4 +1,9 @@
 <?php
+if (isset($_GET['new']) && (isset($user) && $user->hasRank('allow_add_infra'))) {
+    $new = new \Infrastructure\Infra($conn);
+    $new->create();
+}
+
 if (isset($_GET['id'])) {
     $id = filter_var($_GET['id']);
     $item = new \Infrastructure\Infra($conn, $id);
@@ -9,7 +14,7 @@ if (isset($_GET['id'])) {
         if (isset($_POST['save'])) {
             $item->edit();
         }
-        if (isset($_GET['delete']) && $user->isAdmin()) {
+        if (isset($_GET['delete']) && ($user->isAdmin() or $user->get('id') == $item->get('contact'))) {
             $item->delete();
         }
 
@@ -32,13 +37,11 @@ if (isset($_GET['id'])) {
         <div class="row">
             <div class="col-md-12">
                 <?php
-                if ($user->isAdmin() or $user->get('id') == $item->get('contact', true)) {
+                if (isset($user) && ($user->isAdmin() or $user->get('id') == $item->get('contact', true))) {
                     echo "<p class='lead'>";
                     if ($edit) {
                         echo "<button name='save' type='submit' class='btn btn-success'>" . _("Tallenna") . "</button>&ensp;";
-                        if ($user->isAdmin()) {
-                            echo "<a onclick=\"return confirm('" . _("Haluatko varmasti poistaa?") . "')\" class='btn btn-danger' href='index.php?page=infra&id=" . $item->get('id') . "&delete'>" . _("Poista") . "</a>&ensp;";
-                        }
+                        echo "<a onclick=\"return confirm('" . _("Haluatko varmasti poistaa?") . "')\" class='btn btn-danger' href='index.php?page=infra&id=" . $item->get('id') . "&delete'>" . _("Poista") . "</a>&ensp;";
                         echo "<a href='index.php?page=infra&id=" . $item->get('id') . "' class='btn btn-default'>" . _("Peruuta") . "</a>";
                     } else {
                         echo "<a href='index.php?page=infra&id=" . $item->get('id') . "&edit' class='btn btn-default'>" . _("Muokkaa") . "</a>";
@@ -226,6 +229,11 @@ if (isset($_GET['id'])) {
                     </div>
                 </div>
                 &emsp;<?php echo sprintf(_("%s hakutulosta."), $totalrecords); ?>
+                <?php
+                if (isset($user) && $user->hasRank('allow_add_infra')) {
+                    echo "<span class=\"pull-right\"><a href=\"index.php?page=infra&new\" class=\"btn btn-default\">" . _("Lisää uusi") . "</a></span>";
+                }
+                ?>
             </form>
         </div>
     </div>

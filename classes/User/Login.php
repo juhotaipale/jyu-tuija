@@ -3,6 +3,7 @@
 
 namespace User;
 
+use PHPMailer\PHPMailer;
 use User\User;
 use Core\Message;
 
@@ -25,6 +26,11 @@ class Login
             $password = filter_var($_POST['password']);
 
             $this->login($email, $password);
+        }
+
+        if (isset($_POST['forgot-submit'])) {
+            $email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
+            $this->forgot($email);
         }
 
         if (isset($_GET['logout'])) {
@@ -63,6 +69,45 @@ class Login
             }
         } else {
             $this->msg->add(_("<strong>Virhe!</strong> Tarkista sähköpostiosoite ja salasana."), "error");
+        }
+    }
+
+    private function forgot($email)
+    {
+        $sql = $this->conn->pdo->prepare("SELECT id, approved_on FROM users WHERE email = :email");
+        $sql->bindValue(':email', $email);
+        $sql->execute();
+
+        $result = $sql->fetch();
+
+        if ($sql->rowCount() == 1) {
+            if ($result['approved_on'] == null) { // Tunnusta ei ole hyväksytty
+                $this->msg->add(_("<strong>Tunnuksesi odottaa hyväksyntää.</strong> Salasana lähetetään automaattisesti sähköpostiisi, kun tunnuksesi on hyväksytty."),
+                    "info", "index.php?page=login");
+                return;
+            }
+
+            $id = $result['id'];
+
+            $user = new \User\User($this->conn, $id);
+
+            $mail = new PHPMailer((DEVELOPMENT ? true : false));
+            include BASE_PATH . "/classes/PHPMailer/PHPMailerConfig.php";
+
+            $mail->setFrom(EMAIL_FROM, _("Jyväskylän yliopisto"));
+            $mail->addAddress($user->get('email'));
+
+            $mail->Subject = _("Salasanasi on vaihdettu");
+            $mail->msgHTML(sprintf(_("Uusi salasanasi on: %s"), $user->changePassword()));
+
+            if (!$mail->send()) {
+                $this->msg->add("Mailer Error: " . $mail->ErrorInfo, "error");
+            } else {
+                $this->msg->add(sprintf(_("<strong>Uusi salasana lähetetty!</strong> Salasana on lähetetty ilmoittamaasi sähköpostiosoitteeseen."),
+                    $user->get('firstname'), $user->get('lastname')), 'success', "index.php?page=login");
+            }
+        } else {
+            $this->msg->add(_("<strong>Virhe!</strong> Tarkista sähköpostiosoite."), "error");
         }
     }
 

@@ -74,6 +74,23 @@ class Infra implements DatabaseItem
         return $value;
     }
 
+    public function create()
+    {
+        $editor = new User($this->conn);
+
+        try {
+            $sql = $this->conn->pdo->prepare("INSERT INTO devices (`name`, contact, created_on, created_by, edited_on, edited_by) VALUES ('undefined', :editor, NOW(), :editor, NOW(), :editor)");
+            $sql->bindValue(':editor', $editor->get('id'));
+            $sql->execute();
+
+            $lastid = $this->conn->pdo->lastInsertId();
+            header("Location: index.php?page=infra&id=" . $lastid . "&edit");
+        } catch (\Exception $e) {
+            $this->msg->add("<strong>" . _("Virhe!") . "</strong> " . $e, "error");
+            return;
+        }
+    }
+
     public function edit()
     {
         $editor = new User($this->conn);
