@@ -76,15 +76,36 @@ class User implements DatabaseItem
         return $value;
     }
 
-    public function changePassword()
+    public function changePassword($pass = null, $pass2 = null, $oldpass = null)
     {
-        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        $pass = substr(str_shuffle($chars), 0, 8);
+        if (is_null($pass)) {
+            $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            $pass = substr(str_shuffle($chars), 0, 8);
 
-        $sql = $this->conn->pdo->prepare("UPDATE users SET password_hash = :hash WHERE id = :id");
-        $sql->bindValue(':id', $this->id);
-        $sql->bindValue(':hash', password_hash($pass, PASSWORD_DEFAULT));
-        $sql->execute();
+            $sql = $this->conn->pdo->prepare("UPDATE users SET password_hash = :hash WHERE id = :id");
+            $sql->bindValue(':id', $this->id);
+            $sql->bindValue(':hash', password_hash($pass, PASSWORD_DEFAULT));
+            $sql->execute();
+        } else {
+            if (password_verify($oldpass, $this->data['password_hash'])) {
+                if ($pass == $pass2) {
+                    if (strlen($pass) < 8) {
+                        $sql = $this->conn->pdo->prepare("UPDATE users SET password_hash = :hash WHERE id = :id");
+                        $sql->bindValue(':id', $this->id);
+                        $sql->bindValue(':hash', password_hash($pass, PASSWORD_DEFAULT));
+                        $sql->execute();
+
+                        return $this->msg->add(_("Salasana vaihdettu."), "success");
+                    } else {
+                        $this->msg->add("<strong>Virhe!</strong> Salasanan on oltava vähintään 8 merkkiä pitkä.");
+                    }
+                } else {
+                    $this->msg->add(_("<strong>Virhe!</strong> Uudet salasanat eivät täsmää."), "error");
+                }
+            } else {
+                $this->msg->add(_("<strong>Virhe!</strong> Tarkista vanha salasana."), "error");
+            }
+        }
 
         return $pass;
     }

@@ -15,9 +15,6 @@ if (!$selectedUser->exists()) {
     if (isset($_POST['save'])) {
         $selectedUser->edit();
     }
-    ?>
-
-    <?php
     if ($edit) {
         echo "<form action='index.php?page=profile&id=" . $id . "&edit' method='post'>";
     }
@@ -178,14 +175,14 @@ if (!$selectedUser->exists()) {
             </div>
             <div class="col-md-6">
                 <h3><?php echo _("Tutkimukset"); ?></h3>
-                <p>Ei tutkimuksia.</p>
+                <p><?php echo _("Ei tutkimuksia."); ?></p>
             </div>
             <?php
         }
         ?>
     </div>
 
-    <?php if ($edit) {
-        echo "</form>";
-    }
+    <?php
+    if ($edit) echo "</form>";
+
 } ?>
