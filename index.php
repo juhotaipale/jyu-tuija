@@ -42,7 +42,7 @@ define('BASE_PATH', realpath(dirname(__FILE__)));
 // I18N support information here
 $lang = (isset($_COOKIE['lang']) ? $_COOKIE['lang'] : 'fi_FI');
 putenv("LANG=" . $lang);
-echo setlocale(LC_ALL, $lang);
+setlocale(LC_ALL, $lang);
 
 // Set the text domain as "messages"
 $domain = "messages";
