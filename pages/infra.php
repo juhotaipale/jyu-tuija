@@ -186,8 +186,190 @@ if (isset($_GET['id'])) {
         <?php
         if ($edit) {
             echo "</form>";
-        }
-    } else {
+        } ?>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h3><?php echo _("Varauskalenteri"); ?></h3>
+                <p><?php echo _("Varauskalenterissa voit tarkastella laitteen varaustilannetta sekä varata laitteen omaan käyttöösi."); ?></p>
+
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th style="width: 15%;"><?php echo _("Alkaen"); ?></th>
+                            <th style="width: 15%;"><?php echo _("Päättyen"); ?></th>
+                            <th style="width: 25%;"><?php echo _("Varaaja"); ?></th>
+                            <th style="width: 45%;"><?php echo _("Kommentti"); ?></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                        $bookings = $item->get('bookings');
+                        if (count($bookings) > 0) {
+                            foreach ($bookings as $booking) {
+                                $result = new \Infrastructure\Booking($conn, $booking['id']);
+
+                                echo "<tr>
+                                    <td>" . $result->get('start_date') . "</td>
+                                    <td>" . $result->get('end_date') . "</td>
+                                    <td><a href='index.php?page=profile&id=" . $result->get('user',
+                                        true) . "'>" . $result->get('user') . "</a></td>
+                                    <td>" . $result->get('comment') . "</td>
+                                </tr>";
+                            }
+                        } else {
+                            echo "<tr><td colspan='4'>" . _("Ei varauksia.") . "</td></tr>";
+                        }
+                        ?>
+                        </tbody>
+                    </table>
+                </div>
+                <p>
+                    <button type="button" class="btn btn-default" data-toggle="modal"
+                            data-target="#newBookingModal"><?php echo _("Uusi varaus"); ?></button>
+                </p>
+            </div>
+        </div>
+
+        <form id="bookingForm" method="post" action="index.php?page=infra&id=<?php echo $item->get('id'); ?>&book">
+            <div class="modal fade" id="newBookingModal" tabindex="-1" role="dialog"
+                 aria-labelledby="newBookingModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="newBookingModalLabel"><?php echo _("Uusi varaus"); ?></h4>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table table-borderless">
+                                <tr>
+                                    <th style="vertical-align: middle;"><?php echo _("Laite / ohjelmisto"); ?></th>
+                                    <td><?php echo $item->get('name'); ?></td>
+                                </tr>
+                                <tr>
+                                    <th style="vertical-align: middle;"><?php echo _("Varauksen tekijä"); ?></th>
+                                    <td>
+                                        <?php
+                                        if ($user->isAdmin()) {
+                                            echo "<select name='book-user' class='form-control' required>";
+                                            $sql = $conn->pdo->query("SELECT id FROM users WHERE approved_on IS NOT NULL ORDER BY lastname");
+                                            while ($row = $sql->fetch()) {
+                                                $selectedUser = new \User\User($conn, $row['id']);
+                                                echo "<option value='" . $selectedUser->get('id') . "'" . ($selectedUser->get('id') == $user->get('id') ? ' selected' : '') . ">" . $selectedUser->get('name') . "</option>";
+                                            }
+                                            echo "</select>";
+                                        } else {
+                                            echo "<input type='hidden' name='book-user' value='" . $user->get('id') . "' />";
+                                            echo $user->get('name');
+                                        }
+                                        ?>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th style="vertical-align: middle;"><?php echo _("Alkaen"); ?></th>
+                                    <td>
+                                        <div class="form-group">
+                                            <div class='input-group date' id='datetimepicker1'>
+                                                <input type='text' name="book-start" class="form-control" required/>
+                                                <span class="input-group-addon">
+                                                    <span class="fa fa-calendar"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th style="vertical-align: middle;"><?php echo _("Päättyen"); ?></th>
+                                    <td>
+                                        <div class="form-group">
+                                            <div class='input-group date' id='datetimepicker2'>
+                                                <input type='text' name="book-end" class="form-control" required/>
+                                                <span class="input-group-addon">
+                                                    <span class="fa fa-calendar"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th style="vertical-align: middle;"><?php echo _("Kommentti"); ?></th>
+                                    <td><input maxlength="150" class="form-control" type="text"
+                                               name="book-comment"/></span></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default"
+                                    data-dismiss="modal"><?php echo _("Sulje"); ?></button>
+                            <button type="submit" name="book-submit"
+                                    class="btn btn-primary"><?php echo _("Tallenna"); ?></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <script type="text/javascript">
+            var startTime = $('#datetimepicker1');
+            var endTime = $('#datetimepicker2');
+
+            startTime.datetimepicker({
+                locale: '<?php echo $shortLang; ?>',
+                format: 'L',
+                useCurrent: false,
+                disabledDates: [
+                    <?php
+                    $sql = $conn->pdo->query("select v.* from booking b join
+                        (select adddate('1970-01-01',t4.i*10000 + t3.i*1000 + t2.i*100 + t1.i*10 + t0.i) selected_date from
+                        (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t0,
+                        (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t1,
+                        (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t2,
+                        (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t3,
+                        (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t4) v
+                        on v.selected_date between b.start_date and b.end_date group by selected_date");
+
+                    $i = 0;
+                    while ($row = $sql->fetch()) {
+                        echo ($i > 0 ? ", " : "") . "moment('" . $row['selected_date'] . "')";
+                        $i++;
+                    }
+                    ?>
+                ]
+            });
+            endTime.datetimepicker({
+                locale: '<?php echo $shortLang; ?>',
+                format: 'L',
+                useCurrent: false,
+                disabledDates: [
+                    <?php
+                    $sql = $conn->pdo->query("select v.* from booking b join
+                        (select adddate('1970-01-01',t4.i*10000 + t3.i*1000 + t2.i*100 + t1.i*10 + t0.i) selected_date from
+                        (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t0,
+                        (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t1,
+                        (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t2,
+                        (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t3,
+                        (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t4) v
+                        on v.selected_date between b.start_date and b.end_date group by selected_date");
+
+                    $i = 0;
+                    while ($row = $sql->fetch()) {
+                        echo ($i > 0 ? ", " : "") . "moment('" . $row['selected_date'] . "')";
+                        $i++;
+                    }
+                    ?>
+                ]
+            });
+            startTime.on("dp.change", function (e) {
+                endTime.data("DateTimePicker").minDate(e.date);
+            });
+            endTime.on("dp.change", function (e) {
+                startTime.data("DateTimePicker").maxDate(e.date);
+            });
+        </script>
+
+    <?php } else {
         $msg->add(_("<strong>Virhe!</strong> Laitetta tai ohjelmistoa ei löydy."), 'error', 'index.php?page=infra');
     }
 } else {

@@ -27,6 +27,13 @@ class Infra implements DatabaseItem
         if ($sql->rowCount() > 0) {
             $this->data = $sql->fetch();
         }
+
+        if ($this->exists()) {
+            if (isset($_GET['book']) && isset($_POST['book-submit'])) {
+                $this->book(filter_var($_POST['book-start']), filter_var($_POST['book-end']),
+                    filter_var($_POST['book-user']), filter_var($_POST['book-comment']));
+            }
+        }
     }
 
     public function exists()
@@ -62,6 +69,14 @@ class Infra implements DatabaseItem
                 $value = ($this->data[$column] == null ? '&ndash;' : $this->data[$column]);
                 break;
 
+            case "bookings":
+                $sql = $this->conn->pdo->prepare("SELECT * FROM booking WHERE item = :id ORDER BY start_date");
+                $sql->bindValue(':id', $this->id);
+                $sql->execute();
+
+                $value = $sql->fetchAll();
+                break;
+
             default:
                 if (!empty($this->data) && key_exists($column, $this->data)) {
                     $value = ($clear ? $this->data[$column] : ($this->data[$column] == '' ? '&ndash;' : $this->data[$column]));
@@ -72,6 +87,27 @@ class Infra implements DatabaseItem
         }
 
         return $value;
+    }
+
+    public function book($start, $end, $user, $comment)
+    {
+        $start = date('Y-m-d', strtotime($start));
+        $end = date('Y-m-d', strtotime($end));
+
+        try {
+            $sql = $this->conn->pdo->prepare("INSERT INTO booking (item, start_date, end_date, user, comment) VALUES (:item, :startDate, :endDate, :user, :comment)");
+            $sql->bindValue(':item', $this->id);
+            $sql->bindValue(':startDate', $start);
+            $sql->bindValue(':endDate', $end);
+            $sql->bindValue(':user', $user);
+            $sql->bindValue(':comment', $comment);
+            $sql->execute();
+
+            $this->msg->add(_("Varaus tallennettu."), "success", "index.php?page=infra&id=" . $this->id);
+        } catch (\Exception $e) {
+            $this->msg->add("<strong>" . _("Virhe!") . "</strong> " . $e, "error");
+            return;
+        }
     }
 
     public function create()

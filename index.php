@@ -41,6 +41,7 @@ define('BASE_PATH', realpath(dirname(__FILE__)));
 
 // I18N support information here
 $lang = (isset($_COOKIE['lang']) ? $_COOKIE['lang'] : 'fi_FI');
+$shortLang = (isset($_COOKIE['lang']) ? substr($_COOKIE['lang'], 0, 2) : 'fi');
 putenv("LANG=" . $lang);
 setlocale(LC_ALL, $lang);
 
