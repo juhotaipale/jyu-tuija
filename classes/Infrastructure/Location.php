@@ -33,6 +33,24 @@ class Location implements DatabaseItem
 
     public function get($column, $clear = false)
     {
-        return $this->data[$column];
+        switch ($column) {
+            case "devices":
+                $sql = $this->conn->pdo->prepare("SELECT * FROM devices WHERE location = :id ORDER BY name");
+                $sql->bindValue(':id', $this->id);
+                $sql->execute();
+
+                $value = $sql->fetchAll();
+                break;
+
+            default:
+                if (!empty($this->data) && key_exists($column, $this->data)) {
+                    $value = ($clear ? $this->data[$column] : ($this->data[$column] == '' ? '&ndash;' : $this->data[$column]));
+                } else {
+                    $value = ($clear ? '' : '&ndash;');
+                }
+                break;
+        }
+
+        return $value;
     }
 }

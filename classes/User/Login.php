@@ -91,7 +91,7 @@ class Login
 
             $user = new \User\User($this->conn, $id);
 
-            $mail = new PHPMailer((DEVELOPMENT ? true : false));
+            $mail = new PHPMailer(DEVELOPMENT);
             include BASE_PATH . "/classes/PHPMailer/PHPMailerConfig.php";
 
             $mail->setFrom(EMAIL_FROM, _("Jyväskylän yliopisto"));
