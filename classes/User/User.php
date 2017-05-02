@@ -6,6 +6,7 @@ namespace User;
 
 use Core\Message;
 use Database\DatabaseItem;
+use PHPMailer\PHPMailer;
 
 class User implements DatabaseItem
 {
@@ -19,7 +20,8 @@ class User implements DatabaseItem
         $this->conn = $conn;
         $this->id = (is_null($id) ? $_SESSION['user_id'] : $id);
 
-        $sql = $this->conn->pdo->prepare("SELECT u.*, r.name AS role_name, r.is_admin FROM users u JOIN role r ON (u.role = r.id) WHERE u.id = :id");
+        $sql = $this->conn->pdo->prepare("SELECT u.*, r.name_" . (isset($_COOKIE['lang']) ? substr($_COOKIE['lang'], 0,
+                2) : 'fi') . " AS role_name, r.is_admin FROM users u LEFT JOIN role r ON (u.role = r.id) WHERE u.id = :id");
         $sql->bindValue(':id', $this->id);
         $sql->execute();
 
@@ -51,7 +53,7 @@ class User implements DatabaseItem
 
         $result = $sql->fetch();
 
-        return (key_exists($rank, $result) ? $result[$rank] : false);
+        return ($sql->rowCount() > 0 && key_exists($rank, $result) ? $result[$rank] : false);
     }
 
     public function get($column, $clear = false)
@@ -122,15 +124,35 @@ class User implements DatabaseItem
         return $pass;
     }
 
+    public function adminChangePassword()
+    {
+        $mail = new PHPMailer(DEVELOPMENT);
+        include BASE_PATH . "/classes/PHPMailer/PHPMailerConfig.php";
+
+        $mail->setFrom(EMAIL_FROM, _("Jyväskylän yliopisto"));
+        $mail->addAddress($this->get('email'));
+
+        $mail->Subject = _("Salasanasi on vaihdettu");
+        $mail->msgHTML(sprintf(_("Uusi salasanasi on: %s"), $this->changePassword()));
+
+        if (!$mail->send()) {
+            $this->msg->add("Mailer Error: " . $mail->ErrorInfo, "error");
+        } else {
+            $this->msg->add(_("<strong>Uusi salasana lähetetty!</strong> Salasana on lähetetty käyttäjän sähköpostiin."),
+                'success', "index.php?page=profile&id=" . $this->id);
+        }
+    }
+
     public function edit()
     {
         $editor = new User($this->conn);
 
         try {
-            $sql = $this->conn->pdo->prepare("UPDATE users SET firstname = :firstname, lastname = :lastname, email = :email, phone = :phone, location = :location, knowledge = :knowledge, knowledge_shortdesc = :knowledgeShort, edited_on = NOW(), edited_by = :editor WHERE id = :id");
+            $sql = $this->conn->pdo->prepare("UPDATE users SET firstname = :firstname, lastname = :lastname, role = :role, email = :email, phone = :phone, location = :location, knowledge = :knowledge, knowledge_shortdesc = :knowledgeShort, edited_on = NOW(), edited_by = :editor WHERE id = :id");
             $sql->bindValue(':id', $this->id);
             $sql->bindValue(':firstname', filter_var($_POST['firstname']));
             $sql->bindValue(':lastname', filter_var($_POST['lastname']));
+            $sql->bindValue(':role', filter_var($_POST['role']));
             $sql->bindValue(':email', filter_var($_POST['email']), FILTER_VALIDATE_EMAIL);
             $sql->bindValue(':phone', filter_var($_POST['phone']));
             $sql->bindValue(':location', filter_var($_POST['location']));

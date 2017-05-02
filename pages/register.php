@@ -53,9 +53,9 @@ $role = (isset($_POST['role']) ? $_POST['role'] : "");
                     <select class="form-control" id="reg-role" name="role" required>
                         <option value="">--</option>
                         <?php
-                        $sql = $conn->pdo->query("SELECT * FROM role WHERE allow_registration = 1 ORDER BY name");
+                        $sql = $conn->pdo->query("SELECT * FROM role WHERE allow_registration = 1 ORDER BY name_$shortLang");
                         while ($row = $sql->fetch()) {
-                            echo "<option value='" . $row['id'] . "'" . ($role == $row['id'] ? ' selected' : '') . ">" . $row['name'] . "</option>";
+                            echo "<option value='" . $row['id'] . "'" . ($role == $row['id'] ? ' selected' : '') . ">" . $row['name_' . $shortLang] . "</option>";
                         }
                         ?>
                     </select>

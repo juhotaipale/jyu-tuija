@@ -12,6 +12,9 @@ if (!$selectedUser->exists()) {
 
     $edit = (isset($_GET['edit']) && ($selectedUser->get('id') == $user->get('id') or $user->isAdmin()) ? true : false);
 
+    if (isset($user) && $user->isAdmin() && isset($_GET['newPassword'])) {
+        $selectedUser->adminChangePassword();
+    }
     if (isset($_POST['save'])) {
         $selectedUser->edit();
     }
@@ -35,7 +38,7 @@ if (!$selectedUser->exists()) {
                     echo "<button name='save' type='submit' class='btn btn-success'>" . _("Tallenna") . "</button>&ensp;";
                     echo "<a href='index.php?page=profile&id=" . $selectedUser->get('id') . "' class='btn btn-default'>" . _("Palaa takaisin") . "</a>";
                 } else {
-                    echo "<a href='index.php?page=profile&id=" . $selectedUser->get('id') . "&edit' class='btn btn-default'>" . _("Muokkaa") . "</a>";
+                    echo "<a href='index.php?page=profile&id=" . $selectedUser->get('id') . "&edit' class='btn btn-primary'>" . _("Muokkaa") . "</a>";
                 }
                 echo "</span></p>";
 
@@ -44,9 +47,11 @@ if (!$selectedUser->exists()) {
                     echo "<p class='lead'>";
                     if ($edit) {
                         echo "<button name='save' type='submit' class='btn btn-success'>" . _("Tallenna") . "</button>&ensp;";
+                        echo "<a onclick='return confirm(\"" . _("Haluatko varmasti vaihtaa käyttäjän salasanan?") . "\")' href='index.php?page=profile&id=" . $selectedUser->get('id') . "&newPassword' class='btn btn-default'>" . _("Lähetä uusi salasana") . "</a>&ensp;";
                         echo "<a href='index.php?page=profile&id=" . $selectedUser->get('id') . "' class='btn btn-default'>" . _("Palaa takaisin") . "</a>";
                     } else {
-                        echo "<a href='index.php?page=profile&id=" . $selectedUser->get('id') . "&edit' class='btn btn-default'>" . _("Muokkaa") . "</a>";
+                        echo "<a href='index.php?page=profile&id=" . $selectedUser->get('id') . "&edit' class='btn btn-primary'>" . _("Muokkaa") . "</a>&ensp;";
+                        echo "<a onclick='return confirm(\"" . _("Haluatko varmasti vaihtaa käyttäjän salasanan?") . "\")' href='index.php?page=profile&id=" . $selectedUser->get('id') . "&newPassword' class='btn btn-default'>" . _("Lähetä uusi salasana") . "</a>";
                     }
                     echo "</p>";
                 }
@@ -80,6 +85,27 @@ if (!$selectedUser->exists()) {
                                 echo "<input class='form-control' name='firstname' value='" . $firstname . "' required" . ($user->isAdmin() ? '' : ' readonly') . " />";
                             } else {
                                 echo $firstname;
+                            }
+                            ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="vertical-align: middle;"><?php echo _("Käyttäjäryhmä"); ?></th>
+                        <td>
+                            <?php
+                            $role = (isset($_POST['role']) ? $_POST['role'] : $selectedUser->get('role',
+                                true));
+                            if ($edit) {
+                                echo "<input type='hidden' name='role' value='" . $role . "' />";
+                                echo "<select name='role' class='form-control' required" . ($user->isAdmin() ? '' : ' disabled') . ">";
+                                echo "<option value=''>&ndash;</option>";
+                                $sql = $conn->pdo->query("SELECT * FROM role ORDER BY name_$shortLang");
+                                while ($row = $sql->fetch()) {
+                                    echo "<option value='" . $row['id'] . "'" . ($row['id'] == $role ? ' selected' : '') . ">" . $row['name_' . $shortLang] . "</option>";
+                                }
+                                echo "</select>";
+                            } else {
+                                echo $selectedUser->get('role_name');
                             }
                             ?>
                         </td>

@@ -72,7 +72,7 @@ class Login
         }
     }
 
-    private function forgot($email)
+    public function forgot($email)
     {
         $sql = $this->conn->pdo->prepare("SELECT id, approved_on FROM users WHERE email = :email");
         $sql->bindValue(':email', $email);
@@ -89,22 +89,22 @@ class Login
 
             $id = $result['id'];
 
-            $user = new \User\User($this->conn, $id);
+            $selectedUser = new \User\User($this->conn, $id);
 
             $mail = new PHPMailer(DEVELOPMENT);
             include BASE_PATH . "/classes/PHPMailer/PHPMailerConfig.php";
 
             $mail->setFrom(EMAIL_FROM, _("Jyväskylän yliopisto"));
-            $mail->addAddress($user->get('email'));
+            $mail->addAddress($selectedUser->get('email'));
 
             $mail->Subject = _("Salasanasi on vaihdettu");
-            $mail->msgHTML(sprintf(_("Uusi salasanasi on: %s"), $user->changePassword()));
+            $mail->msgHTML(sprintf(_("Uusi salasanasi on: %s"), $selectedUser->changePassword()));
 
             if (!$mail->send()) {
                 $this->msg->add("Mailer Error: " . $mail->ErrorInfo, "error");
             } else {
-                $this->msg->add(sprintf(_("<strong>Uusi salasana lähetetty!</strong> Salasana on lähetetty ilmoittamaasi sähköpostiosoitteeseen."),
-                    $user->get('firstname'), $user->get('lastname')), 'success', "index.php?page=login");
+                $this->msg->add(_("<strong>Uusi salasana lähetetty!</strong> Salasana on lähetetty sähköpostiin."),
+                    'success', "index.php?page=login");
             }
         } else {
             $this->msg->add(_("<strong>Virhe!</strong> Tarkista sähköpostiosoite."), "error");

@@ -23,6 +23,7 @@
                             <a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>" . _("Ylläpitotyökalut") . " <span class='caret'></span></a>
                             <ul class='dropdown-menu'>
                                 <li><a href='index.php?page=admin/users'>" . _("Käyttäjät") . "</a></li>
+                                <li><a href='index.php?page=admin/roles'>" . _("Käyttäjäryhmät") . "</a></li>
                             </ul>
                         </li>";
                 }

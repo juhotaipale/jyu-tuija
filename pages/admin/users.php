@@ -9,7 +9,7 @@ if (!$login->loggedIn() or !$user->isAdmin()) {
         <h1><?php echo _("Käyttäjät"); ?></h1>
         <p class="lead"><?php echo _("Tässä näkymässä voit selata portaalin käyttäjiä tai hyväksyä uusia käyttäjiä."); ?></p>
 
-        <h2><?php echo _("Uudet käyttäjät"); ?></h2>
+        <h3><?php echo _("Uudet käyttäjät"); ?></h3>
         <p><?php echo _("Tarkista rekisteröityneen käyttäjän tiedot ja hyväksy tai hylkää rekisteröityminen. Hyväksymisen jälkeen automaattisesti generoitu salasana lähetetään automaattisesti käyttäjän sähköpostiin. Myös hylätystä rekisteröitymisestä välitetään käyttäjälle tieto."); ?></p>
         <div class="table-responsive">
             <table class="table table-striped">
@@ -17,7 +17,7 @@ if (!$login->loggedIn() or !$user->isAdmin()) {
                 <tr>
                     <th><?php echo _("Nimi"); ?></th>
                     <th><?php echo _("Sähköposti"); ?></th>
-                    <th><?php echo _("Asema"); ?></th>
+                    <th><?php echo _("Käyttäjäryhmä"); ?></th>
                     <th><?php echo _("Rekisteröitynyt"); ?></th>
                     <th><?php echo _("Toiminnot"); ?></th>
                 </tr>
@@ -70,7 +70,7 @@ $totalrecords = $countsql->fetchColumn();
 
 <div class="row">
     <div class="col-md-12">
-        <h2><?php echo _("Kaikki käyttäjät"); ?></h2>
+        <h3><?php echo _("Kaikki käyttäjät"); ?></h3>
         <form id="searchForm" class="form-inline" method="get">
             <input type="hidden" name="page" value="admin/users"/>
             <div class="input-group">
