@@ -24,7 +24,7 @@ $totalrecords = $countsql->fetchColumn();
 <div class="row" style="padding-top: 15px;">
     <div class="col-md-12">
         <div class="table-responsive">
-            <table class="table table-striped table-condensed">
+            <table style="font-size: 90%;" class="table table-striped table-condensed">
                 <thead>
                 <tr>
                     <th style="width: 20%;"><?php echo _("Aikaleima"); ?></th>
