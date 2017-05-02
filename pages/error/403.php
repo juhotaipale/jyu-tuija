@@ -1,4 +1,4 @@
-<?php \Core\Log::add("403 No access (" . $_SERVER['REQUEST_URI'] . ", " . $_SERVER['HTTP_REFERER'] . ") [" . $_SERVER['REMOTE_ADDR'] . "]",
+<?php \Core\Log::add("403 No access (" . $_SERVER['REQUEST_URI'] . ", " . $_SERVER['HTTP_REFERER'] . ") [" . $_SERVER['REMOTE_ADDR'] . "@" . gethostbyaddr($_SERVER['REMOTE_ADDR']) . "]",
     "error"); ?>
 
 <div class="row">

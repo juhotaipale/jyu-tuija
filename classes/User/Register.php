@@ -79,7 +79,8 @@ class Register
         if (!$mail->send()) {
             $this->msg->add("Mailer Error: " . $mail->ErrorInfo, "error");
         } else {
-            Log::add("New registration ($email) [" . $_SERVER['REMOTE_ADDR'] . "]", "info");
+            Log::add("New registration ($email) [" . $_SERVER['REMOTE_ADDR'] . "@" . gethostbyaddr($_SERVER['REMOTE_ADDR']) . "]",
+                "info");
             $this->msg->add(_("<strong>Rekisteröityminen onnistui!</strong> Kun rekisteröitymisesi on hyväksytty, salasana lähetetään automaattisesti antamaasi sähköpostiosoitteeseen."),
                 'success', "index.php?page=home");
         }
