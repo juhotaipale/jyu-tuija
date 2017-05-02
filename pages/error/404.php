@@ -1,4 +1,4 @@
-<?php \Core\Log::add("404 Page not found (" . $_SERVER['REQUEST_URI'] . (key_exists('HTTP_REFERER',
+<?php \Core\Log::add("404 (" . $_SERVER['REQUEST_URI'] . (key_exists('HTTP_REFERER',
         $_SERVER) ? ", " . $_SERVER['HTTP_REFERER'] : "") . ") [" . $_SERVER['REMOTE_ADDR'] . "@" . gethostbyaddr($_SERVER['REMOTE_ADDR']) . "]",
     "error"); ?>
 
