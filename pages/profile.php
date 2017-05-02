@@ -57,7 +57,15 @@ if (!$selectedUser->exists()) {
                 }
             }
             ?>
+        </div>
+    </div>
 
+    <div class="row">
+        <div class="col-md-2">
+            <img style="border: 1px solid #021a40; max-width: 100%;" src="<?php echo($selectedUser->get('profilepic',
+                true) == "" ? "images/profile-placeholder.png" : $selectedUser->get('profilepic', true)); ?>"/>
+        </div>
+        <div class="col-md-10">
             <div class="table-responsive">
                 <table class="table">
                     <tbody>
@@ -68,7 +76,7 @@ if (!$selectedUser->exists()) {
                             $lastname = (isset($_POST['lastname']) ? $_POST['lastname'] : $selectedUser->get('lastname',
                                 true));
                             if ($edit) {
-                                echo "<input class='form-control' name='lastname' value='" . $lastname . "' required" . ($user->isAdmin() ? '' : ' readonly') . " />";
+                                echo "<input class='form-control' type='text' name='lastname' value='" . $lastname . "' required" . ($user->isAdmin() ? '' : ' readonly') . " />";
                             } else {
                                 echo $lastname;
                             }
@@ -82,7 +90,7 @@ if (!$selectedUser->exists()) {
                             $firstname = (isset($_POST['firstname']) ? $_POST['firstname'] : $selectedUser->get('firstname',
                                 true));
                             if ($edit) {
-                                echo "<input class='form-control' name='firstname' value='" . $firstname . "' required" . ($user->isAdmin() ? '' : ' readonly') . " />";
+                                echo "<input class='form-control' type='text' name='firstname' value='" . $firstname . "' required" . ($user->isAdmin() ? '' : ' readonly') . " />";
                             } else {
                                 echo $firstname;
                             }
@@ -110,13 +118,25 @@ if (!$selectedUser->exists()) {
                             ?>
                         </td>
                     </tr>
+                    <?php if ($edit) { ?>
+                        <tr>
+                            <th style="vertical-align: middle;"><?php echo _("Profiilikuvan URL-osoite"); ?></th>
+                            <td>
+                                <?php
+                                $profilepic = (isset($_POST['profilepic']) ? $_POST['profilepic'] : $selectedUser->get('profilepic',
+                                    true));
+                                echo "<input class='form-control' name='profilepic' type='text' value='" . $profilepic . "' />";
+                                ?>
+                            </td>
+                        </tr>
+                    <?php } ?>
                     <tr>
                         <th style="vertical-align: middle;"><?php echo _("Sähköposti"); ?></th>
                         <td>
                             <?php
                             $email = (isset($_POST['email']) ? $_POST['email'] : $selectedUser->get('email', true));
                             if ($edit) {
-                                echo "<input class='form-control' name='email' value='" . $email . "' required" . ($user->isAdmin() ? '' : ' readonly') . " />";
+                                echo "<input class='form-control' name='email' type='email' value='" . $email . "' required" . ($user->isAdmin() ? '' : ' readonly') . " />";
                             } else {
                                 echo $email;
                             }
@@ -129,7 +149,7 @@ if (!$selectedUser->exists()) {
                             <?php
                             $phone = (isset($_POST['phone']) ? $_POST['phone'] : $selectedUser->get('phone', $edit));
                             if ($edit) {
-                                echo "<input class='form-control' name='phone' value='" . $phone . "' />";
+                                echo "<input class='form-control' name='phone' type='text' value='" . $phone . "' />";
                             } else {
                                 echo $phone;
                             }
@@ -143,7 +163,7 @@ if (!$selectedUser->exists()) {
                             $location = (isset($_POST['location']) ? $_POST['location'] : $selectedUser->get('location',
                                 $edit));
                             if ($edit) {
-                                echo "<input class='form-control' name='location' value='" . $location . "' />";
+                                echo "<input class='form-control' type='text' name='location' value='" . $location . "' />";
                             } else {
                                 echo $location;
                             }

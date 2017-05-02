@@ -150,11 +150,12 @@ class User implements DatabaseItem
         $editor = new User($this->conn);
 
         try {
-            $sql = $this->conn->pdo->prepare("UPDATE users SET firstname = :firstname, lastname = :lastname, role = :role, email = :email, phone = :phone, location = :location, knowledge = :knowledge, knowledge_shortdesc = :knowledgeShort, edited_on = NOW(), edited_by = :editor WHERE id = :id");
+            $sql = $this->conn->pdo->prepare("UPDATE users SET firstname = :firstname, lastname = :lastname, role = :role, profilepic = :profilepic, email = :email, phone = :phone, location = :location, knowledge = :knowledge, knowledge_shortdesc = :knowledgeShort, edited_on = NOW(), edited_by = :editor WHERE id = :id");
             $sql->bindValue(':id', $this->id);
             $sql->bindValue(':firstname', filter_var($_POST['firstname']));
             $sql->bindValue(':lastname', filter_var($_POST['lastname']));
             $sql->bindValue(':role', filter_var($_POST['role']));
+            $sql->bindValue(':profilepic', filter_var($_POST['profilepic']));
             $sql->bindValue(':email', filter_var($_POST['email']), FILTER_VALIDATE_EMAIL);
             $sql->bindValue(':phone', filter_var($_POST['phone']));
             $sql->bindValue(':location', filter_var($_POST['location']));
