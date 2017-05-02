@@ -187,11 +187,11 @@ if (!$selectedUser->exists()) {
             <div class="col-md-6">
                 <h3><?php echo _("Vastuulla olevat laitteet ja ohjelmistot"); ?></h3>
                 <?php
-                $devices = $selectedUser->get('devices', true);
-                if (!empty($devices)) {
+                $infra = $selectedUser->get('infra', true);
+                if (!empty($infra)) {
                     echo "<ul>";
-                    foreach ($devices as $device) {
-                        echo "<li><a href='index.php?page=infra&id=" . $device['id'] . "'>" . $device['name'] . "</a></li>";
+                    foreach ($infra as $item) {
+                        echo "<li><a href='index.php?page=infra&id=" . $item['id'] . "'>" . $item['name'] . "</a></li>";
                     }
                     echo "</ul>";
                 } else {

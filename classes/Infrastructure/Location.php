@@ -34,8 +34,8 @@ class Location implements DatabaseItem
     public function get($column, $clear = false)
     {
         switch ($column) {
-            case "devices":
-                $sql = $this->conn->pdo->prepare("SELECT * FROM devices WHERE location = :id ORDER BY name");
+            case "infra":
+                $sql = $this->conn->pdo->prepare("SELECT * FROM infra WHERE location = :id ORDER BY name");
                 $sql->bindValue(':id', $this->id);
                 $sql->execute();
 

@@ -4,6 +4,7 @@
 namespace User;
 
 
+use Core\Log;
 use Core\Message;
 use Database\DatabaseItem;
 use PHPMailer\PHPMailer;
@@ -69,8 +70,8 @@ class User implements DatabaseItem
                 $value = $user->get('name');
                 break;
 
-            case "devices":
-                $sql = $this->conn->pdo->prepare("SELECT * FROM devices WHERE contact = :id ORDER BY name");
+            case "infra":
+                $sql = $this->conn->pdo->prepare("SELECT * FROM infra WHERE contact = :id ORDER BY name");
                 $sql->bindValue(':id', $this->id);
                 $sql->execute();
 
@@ -138,6 +139,7 @@ class User implements DatabaseItem
         if (!$mail->send()) {
             $this->msg->add("Mailer Error: " . $mail->ErrorInfo, "error");
         } else {
+            Log::add("Changed user's password (id: " . $this->id . ")");
             $this->msg->add(_("<strong>Uusi salasana lähetetty!</strong> Salasana on lähetetty käyttäjän sähköpostiin."),
                 'success', "index.php?page=profile&id=" . $this->id);
         }
@@ -171,6 +173,9 @@ class User implements DatabaseItem
             return;
         }
 
+        if ($_SESSION['user_id'] != $this->id) {
+            Log::add("Edited user's profile (id: " . $this->id . ")");
+        }
         $this->msg->add(_("Muutokset tallennettu."), "success", "index.php?page=profile&id=" . $this->id . "&edit");
     }
 }

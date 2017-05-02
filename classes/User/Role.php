@@ -4,6 +4,7 @@
 namespace User;
 
 
+use Core\Log;
 use Core\Message;
 use Database\DatabaseItem;
 
@@ -92,6 +93,7 @@ class Role implements DatabaseItem
             return;
         }
 
+        Log::add("Edited role (id: " . $this->id . ")", "info");
         $this->msg->add(_("Muutokset tallennettu."), "success", "index.php?page=admin/roles&id=" . $this->id . "&edit");
     }
 
@@ -105,6 +107,7 @@ class Role implements DatabaseItem
             $sql->execute();
 
             $lastid = $this->conn->pdo->lastInsertId();
+            Log::add("Created new role (id: " . $lastid . ")", "info");
             header("Location: index.php?page=admin/roles&id=" . $lastid . "&edit");
         } catch (\Exception $e) {
             $this->msg->add("<strong>" . _("Virhe!") . "</strong> " . $e, "error");
@@ -123,6 +126,7 @@ class Role implements DatabaseItem
             return;
         }
 
+        Log::add("Deleted role (id: " . $this->id . ")", "warning");
         $this->msg->add(_("Käyttäjäryhmä poistettu."), "success", "index.php?page=admin/roles");
     }
 }

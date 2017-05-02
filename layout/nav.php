@@ -24,6 +24,8 @@
                             <ul class='dropdown-menu'>
                                 <li><a href='index.php?page=admin/users'>" . _("Käyttäjät") . "</a></li>
                                 <li><a href='index.php?page=admin/roles'>" . _("Käyttäjäryhmät") . "</a></li>
+                                <li class='divider'></li>
+                                <li><a href='index.php?page=admin/logs'>" . _("Lokien selailu") . "</a></li>
                             </ul>
                         </li>";
                 }

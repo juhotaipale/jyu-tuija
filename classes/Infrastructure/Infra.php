@@ -3,6 +3,7 @@
 
 namespace Infrastructure;
 
+use Core\Log;
 use Core\Message;
 use Database\DatabaseItem;
 use User\User;
@@ -20,7 +21,7 @@ class Infra implements DatabaseItem
         $this->id = $id;
         $this->msg = new Message();
 
-        $sql = $conn->pdo->prepare("SELECT * FROM devices WHERE id = :id");
+        $sql = $conn->pdo->prepare("SELECT * FROM infra WHERE id = :id");
         $sql->bindValue(':id', $this->id);
         $sql->execute();
 
@@ -103,6 +104,7 @@ class Infra implements DatabaseItem
             $sql->bindValue(':comment', $comment);
             $sql->execute();
 
+            Log::add("New booking (user: " . $user . ", infra: " . $this->id . ")", "info");
             $this->msg->add(_("Varaus tallennettu."), "success", "index.php?page=infra&id=" . $this->id);
         } catch (\Exception $e) {
             $this->msg->add("<strong>" . _("Virhe!") . "</strong> " . $e, "error");
@@ -115,11 +117,12 @@ class Infra implements DatabaseItem
         $editor = new User($this->conn);
 
         try {
-            $sql = $this->conn->pdo->prepare("INSERT INTO devices (`name`, contact, created_on, created_by, edited_on, edited_by) VALUES ('undefined', :editor, NOW(), :editor, NOW(), :editor)");
+            $sql = $this->conn->pdo->prepare("INSERT INTO infra (`name`, contact, created_on, created_by, edited_on, edited_by) VALUES ('undefined', :editor, NOW(), :editor, NOW(), :editor)");
             $sql->bindValue(':editor', $editor->get('id'));
             $sql->execute();
 
             $lastid = $this->conn->pdo->lastInsertId();
+            Log::add("Created new device/software (id: " . $lastid . ")", "info");
             header("Location: index.php?page=infra&id=" . $lastid . "&edit");
         } catch (\Exception $e) {
             $this->msg->add("<strong>" . _("Virhe!") . "</strong> " . $e, "error");
@@ -132,7 +135,7 @@ class Infra implements DatabaseItem
         $editor = new User($this->conn);
 
         try {
-            $sql = $this->conn->pdo->prepare("UPDATE devices SET `name` = :name, manufactureYear = :manufactureYear, installYear = :installYear, contact = :contact, location = :location, desc_short = :descShort, `desc` = :description, specs = :specs, edited_on = NOW(), edited_by = :editor WHERE id = :id");
+            $sql = $this->conn->pdo->prepare("UPDATE infra SET `name` = :name, manufactureYear = :manufactureYear, installYear = :installYear, contact = :contact, location = :location, desc_short = :descShort, `desc` = :description, specs = :specs, edited_on = NOW(), edited_by = :editor WHERE id = :id");
             $sql->bindValue(':id', $this->id);
             $sql->bindValue(':name', filter_var($_POST['name']));
             $sql->bindValue(':manufactureYear', filter_var($_POST['manufactureYear']));
@@ -149,13 +152,14 @@ class Infra implements DatabaseItem
             return;
         }
 
+        Log::add("Edited device/software (id: " . $this->id . ")", "info");
         $this->msg->add(_("Muutokset tallennettu."), "success", "index.php?page=infra&id=" . $this->id);
     }
 
     public function delete()
     {
         try {
-            $sql = $this->conn->pdo->prepare("DELETE FROM devices WHERE id = :id");
+            $sql = $this->conn->pdo->prepare("DELETE FROM infra WHERE id = :id");
             $sql->bindValue(':id', $this->id);
             $sql->execute();
         } catch (\Exception $e) {
@@ -163,6 +167,7 @@ class Infra implements DatabaseItem
             return;
         }
 
+        Log::add("Deleted device/software (id: " . $this->id . ")", "warning");
         $this->msg->add(_("Laite/ohjelmisto poistettu."), "success", "index.php?page=infra");
     }
 }

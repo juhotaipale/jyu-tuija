@@ -384,7 +384,7 @@ if (isset($_GET['id'])) {
     $pagesize = 20;
     $start = ($pagenumber - 1) * $pagesize;
 
-    $sql = "SELECT SQL_CALC_FOUND_ROWS * FROM devices";
+    $sql = "SELECT SQL_CALC_FOUND_ROWS * FROM infra";
     if ($search) {
         $sql .= " WHERE `name` LIKE :search OR `desc` LIKE :search";
     }

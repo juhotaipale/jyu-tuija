@@ -3,6 +3,7 @@
 
 namespace User;
 
+use Core\Log;
 use PHPMailer\PHPMailer;
 use User\User;
 use Core\Message;
@@ -62,10 +63,12 @@ class Login
                 $_SESSION['user_id'] = $id;
                 $_SESSION['logged_in'] = true;
 
+                Log::add("Logged in from " . $_SERVER['REMOTE_HOST'] . " [" . $_SERVER['REMOTE_ADDR'] . "]");
                 $this->msg->add(_("Olet kirjautunut sisään."), "success", "index.php?page=home");
 
             } else { // Salasana ei täsmää
                 $this->msg->add(_("<strong>Virhe!</strong> Tarkista sähköpostiosoite ja salasana."), "error");
+                Log::add("Wrong password ($email) [" . $_SERVER['REMOTE_ADDR'] . "]", "warning");
             }
         } else {
             $this->msg->add(_("<strong>Virhe!</strong> Tarkista sähköpostiosoite ja salasana."), "error");

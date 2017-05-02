@@ -26,9 +26,9 @@ if (isset($_GET['id'])) {
                         </thead>
                         <tbody>
                         <?php
-                        $devices = $location->get('devices');
-                        if (count($devices) > 0) {
-                            foreach ($devices as $item) {
+                        $infra = $location->get('infra');
+                        if (count($infra) > 0) {
+                            foreach ($infra as $item) {
                                 $id = $item['id'];
                                 $item = new \Infrastructure\Infra($conn, $item['id']);
 

@@ -295,8 +295,9 @@ if (isset($_GET['id'])) {
                 <table class="table table-striped">
                     <thead>
                     <tr>
-                        <th style="width: 60%;"><?php echo _("Nimi"); ?></th>
+                        <th style="width: 40%;"><?php echo _("Nimi"); ?></th>
                         <th><?php echo _("Käyttäjien lkm"); ?></th>
+                        <th><?php echo _("Luotu"); ?></th>
                         <th><?php echo _("Muokattu"); ?></th>
                     </tr>
                     </thead>
@@ -311,6 +312,7 @@ if (isset($_GET['id'])) {
                             echo "<tr>
                                     <td><a href='index.php?page=admin/roles&id=" . $item->get('id') . "'>" . $item->get('name') . "</a></td>
                                     <td>" . count($item->get('users')) . "</td>
+                                    <td>" . convertTimestamp($item->get('created_on')) . " (" . $item->get('created_by') . ")</td>
                                     <td>" . convertTimestamp($item->get('edited_on')) . " (" . $item->get('edited_by') . ")</td>
                                 </tr>";
                         }

@@ -3,11 +3,9 @@
 
 namespace User;
 
-use User\User;
+use Core\Log;
 use PHPMailer\PHPMailer;
 use Core\Message;
-use Monolog\Logger;
-use Monolog\Handler\StreamHandler;
 
 
 /**
@@ -81,16 +79,15 @@ class Register
         if (!$mail->send()) {
             $this->msg->add("Mailer Error: " . $mail->ErrorInfo, "error");
         } else {
+            Log::add("New registration ($email) [" . $_SERVER['REMOTE_ADDR'] . "]", "info");
             $this->msg->add(_("<strong>Rekisteröityminen onnistui!</strong> Kun rekisteröitymisesi on hyväksytty, salasana lähetetään automaattisesti antamaasi sähköpostiosoitteeseen."),
                 'success', "index.php?page=home");
         }
-
-        // $this->log->info("New user registration", array("email" => $email));
     }
 
     public function approve($id)
     {
-        $user = new \User\User($this->conn, $id);
+        $user = new User($this->conn, $id);
 
         $sql = $this->conn->pdo->prepare("UPDATE users SET edited_on = NOW(), edited_by = :approvedBy, approved_on = NOW(), approved_by = :approvedBy WHERE id = :id");
         $sql->bindValue(':id', $id);
@@ -110,6 +107,7 @@ class Register
         if (!$mail->send()) {
             $this->msg->add("Mailer Error: " . $mail->ErrorInfo, "error");
         } else {
+            Log::add("Approved registration (id: " . $id . ")", "info");
             $this->msg->add(sprintf(_("<strong>Käyttäjä %s %s hyväksytty!</strong> Salasana on lähetetty käyttäjän ilmoittamaan sähköpostiosoitteeseen."),
                 $user->get('firstname'), $user->get('lastname')), 'success');
         }
@@ -117,7 +115,7 @@ class Register
 
     public function deny($id)
     {
-        $user = new \User\User($this->conn, $id);
+        $user = new User($this->conn, $id);
 
         $sql = $this->conn->pdo->prepare("DELETE FROM users WHERE id = :id");
         $sql->bindValue(':id', $id);
@@ -136,6 +134,7 @@ class Register
         if (!$mail->send()) {
             $this->msg->add("Mailer Error: " . $mail->ErrorInfo, "error");
         } else {
+            Log::add("Denied registration (id: " . $id . ")", "warning");
             $this->msg->add(sprintf(_("<strong>Käyttäjän %s %s hyväksyntä peruttu.</strong>"),
                 $user->get('firstname'), $user->get('lastname')), 'success');
         }
