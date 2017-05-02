@@ -1,5 +1,5 @@
 <?php \Core\Log::add("401 Unauthorized (" . $_SERVER['REQUEST_URI'] . ", " . (key_exists('HTTP_REFERER',
-        $_SERVER) ? $_SERVER['HTTP_REFERER'] : "&ndash;") . ") [" . $_SERVER['REMOTE_ADDR'] . "@" . gethostbyaddr($_SERVER['REMOTE_ADDR']) . "]",
+        $_SERVER) ? ", " . $_SERVER['HTTP_REFERER'] : "") . ") [" . $_SERVER['REMOTE_ADDR'] . "@" . gethostbyaddr($_SERVER['REMOTE_ADDR']) . "]",
     "error"); ?>
 
 <div class="row">
