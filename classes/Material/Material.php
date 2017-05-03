@@ -130,6 +130,8 @@ class Material implements DatabaseItem
                     $sql = $this->conn->pdo->prepare("UPDATE material SET file = :file");
                     $sql->bindValue(':file', $results['filename']);
                     $sql->execute();
+
+                    Log::add('Added material content (id: ' . $this->id . ', ' . $results['filename'] . ')');
                 }
             }
         } catch (\Exception $e) {
