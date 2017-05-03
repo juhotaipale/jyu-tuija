@@ -118,7 +118,7 @@ class Material implements DatabaseItem
             $sql->execute();
 
             if (!empty($_FILES['pdf'])) {
-                $upload = Upload::factory('downloads/material');
+                $upload = Upload::factory((DEVELOPMENT ? 'jyu-tuija/' : '') . 'downloads/material');
                 $upload->set_allowed_mime_types(array('application/pdf'));
                 $upload->file($_FILES['pdf']);
 
