@@ -12,7 +12,14 @@
         </div>
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="index.php?page=infra"><?php echo _("Infrastruktuuri"); ?></a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false"><?php echo _("Infrastruktuuri"); ?> <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="index.php?page=device"><?php echo _("Laitteet ja ohjelmistot"); ?></a></li>
+                        <li><a href="index.php?page=room"><?php echo _("Tilat"); ?></a></li>
+                    </ul>
+                </li>
                 <li><a href="index.php?page=material"><?php echo _("Aineisto"); ?></a></li>
                 <li><a href="index.php?page=knowledge"><?php echo _("Osaaminen"); ?></a></li>
                 <li><a href="index.php?page=research"><?php echo _("Tutkimukset"); ?></a></li>
@@ -22,9 +29,13 @@
                     echo "<li class='dropdown'>
                             <a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>" . _("Ylläpitotyökalut") . " <span class='caret'></span></a>
                             <ul class='dropdown-menu'>
-                                <li><a href='index.php?page=admin/users'>" . _("Käyttäjät") . "</a></li>
+                                <li class='dropdown-header'>" . _("Käyttäjät") . "</li>
+                                <li><a href='index.php?page=admin/users'>" . _("Käyttäjien selailu") . "</a></li>
                                 <li><a href='index.php?page=admin/roles'>" . _("Käyttäjäryhmät") . "</a></li>
-                                <li class='divider'></li>
+                                <li class='dropdown-header'>" . _("Tilahallinta") . "</li>
+                                <li><a href='index.php?page=admin/buildings'>" . _("Rakennukset") . "</a></li>
+                                <li><a href='index.php?page=admin/areas'>" . _("Alueet") . "</a></li>
+                                <li class='dropdown-header'>" . _("Järjestelmälokit") . "</li>
                                 <li><a href='index.php?page=admin/logs'>" . _("Lokien selailu") . "</a></li>
                             </ul>
                         </li>";

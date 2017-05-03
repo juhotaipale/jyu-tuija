@@ -1,12 +1,12 @@
 <?php
-if (isset($_GET['new']) && (isset($user) && $user->hasRank('allow_add_infra'))) {
-    $new = new \Infrastructure\Infra($conn);
+if (isset($_GET['new']) && (isset($user) && $user->hasRank('allow_add_devices'))) {
+    $new = new \Infrastructure\Device($conn);
     $new->create();
 }
 
 if (isset($_GET['id'])) {
     $id = filter_var($_GET['id']);
-    $item = new \Infrastructure\Infra($conn, $id);
+    $item = new \Infrastructure\Device($conn, $id);
 
     if ($item->exists()) {
         $edit = (isset($_GET['edit']) && ($item->get('contact',
@@ -19,7 +19,7 @@ if (isset($_GET['id'])) {
         }
 
         if ($edit) {
-            echo "<form action='index.php?page=infra&id=" . $id . "&edit' method='post'>";
+            echo "<form action='index.php?page=device&id=" . $id . "&edit' method='post'>";
         }
         ?>
 
@@ -41,10 +41,10 @@ if (isset($_GET['id'])) {
                     echo "<p class='lead'>";
                     if ($edit) {
                         echo "<button name='save' type='submit' class='btn btn-success'>" . _("Tallenna") . "</button>&ensp;";
-                        echo "<a onclick=\"return confirm('" . _("Haluatko varmasti poistaa?") . "')\" class='btn btn-danger' href='index.php?page=infra&id=" . $item->get('id') . "&delete'>" . _("Poista") . "</a>&ensp;";
-                        echo "<a href='index.php?page=infra&id=" . $item->get('id') . "' class='btn btn-default'>" . _("Peruuta") . "</a>";
+                        echo "<a onclick=\"return confirm('" . _("Haluatko varmasti poistaa?") . "')\" class='btn btn-danger' href='index.php?page=device&id=" . $item->get('id') . "&delete'>" . _("Poista") . "</a>&ensp;";
+                        echo "<a href='index.php?page=device&id=" . $item->get('id') . "' class='btn btn-default'>" . _("Peruuta") . "</a>";
                     } else {
-                        echo "<a href='index.php?page=infra&id=" . $item->get('id') . "&edit' class='btn btn-default'>" . _("Muokkaa") . "</a>";
+                        echo "<a href='index.php?page=device&id=" . $item->get('id') . "&edit' class='btn btn-default'>" . _("Muokkaa") . "</a>";
                     }
                     echo "</p>";
                 }
@@ -98,20 +98,20 @@ if (isset($_GET['id'])) {
                             <th style="vertical-align: middle;"><?php echo _("Sijainti"); ?></th>
                             <td>
                                 <?php
-                                $location = (isset($_POST['location']) ? $_POST['location'] : $item->get('location',
+                                $room = (isset($_POST['room']) ? $_POST['room'] : $item->get('room',
                                     $edit));
                                 if ($edit) {
-                                    echo "<select class='form-control' name='location'>";
-                                    $sql = $conn->pdo->query("SELECT * FROM location ORDER BY name");
+                                    echo "<select class='form-control' name='room'>";
+                                    $sql = $conn->pdo->query("SELECT * FROM room ORDER BY name");
                                     while ($row = $sql->fetch()) {
-                                        $selectedLocation = new \Infrastructure\Location($conn, $row['id']);
-                                        echo "<option value='" . $selectedLocation->get('id') . "'" . ($selectedLocation->get('id') == $item->get('location',
-                                                true) ? ' selected' : '') . ">" . $selectedLocation->get('name') . "</option>";
+                                        $selectedRoom = new \Infrastructure\Room($conn, $row['id']);
+                                        echo "<option value='" . $selectedRoom->get('id') . "'" . ($selectedRoom->get('id') == $item->get('room',
+                                                true) ? ' selected' : '') . ">" . $selectedRoom->get('name') . "</option>";
                                     }
                                     echo "</select>";
                                 } else {
-                                    echo "<a href='index.php?page=location&id=" . $item->get('location',
-                                            true) . "'>" . $location . "</a>";
+                                    echo "<a href='index.php?page=room&id=" . $item->get('room',
+                                            true) . "'>" . $room . "</a>";
                                 }
                                 ?>
                             </td>
@@ -138,6 +138,19 @@ if (isset($_GET['id'])) {
                                 ?>
                             </td>
                         </tr>
+                        <?php if ($edit) { ?>
+                            <tr>
+                                <th style="width: 30%; vertical-align: middle;"><?php echo _("Salli varaaminen"); ?></th>
+                                <td>
+                                    <?php
+                                    $bookable = (isset($_POST['bookable']) ? $_POST['bookable'] : $item->get('bookable',
+                                        true));
+                                    echo "<label class='radio-inline'><input type='radio' value='1' name='bookable'" . ($bookable == '1' ? ' checked' : '') . ">" . _("Kyllä") . "</label>";
+                                    echo "<label class='radio-inline'><input type='radio' value='0' name='bookable'" . ($bookable == '0' ? ' checked' : '') . ">" . _("Ei") . "</label>";
+                                    ?>
+                                </td>
+                            </tr>
+                        <?php } ?>
                         </tbody>
                     </table>
                 </div>
@@ -188,193 +201,200 @@ if (isset($_GET['id'])) {
             echo "</form>";
         } ?>
 
-        <div class="row">
-            <div class="col-md-12">
-                <h3><?php echo _("Varauskalenteri"); ?></h3>
-                <p><?php echo _("Varauskalenterissa voit tarkastella laitteen varaustilannetta sekä varata laitteen omaan käyttöösi."); ?></p>
+        <?php if ($item->get('bookable')) { ?>
+            <div class="row">
+                <div class="col-md-12">
+                    <h3><?php echo _("Varauskalenteri"); ?></h3>
+                    <p><?php echo _("Varauskalenterissa voit tarkastella laitteen varaustilannetta sekä varata laitteen omaan käyttöösi."); ?></p>
 
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th style="width: 15%;"><?php echo _("Alkaen"); ?></th>
-                            <th style="width: 15%;"><?php echo _("Päättyen"); ?></th>
-                            <th style="width: 25%;"><?php echo _("Varaaja"); ?></th>
-                            <th style="width: 45%;"><?php echo _("Kommentti"); ?></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <?php
-                        $bookings = $item->get('bookings');
-                        if (count($bookings) > 0) {
-                            foreach ($bookings as $booking) {
-                                $result = new \Infrastructure\Booking($conn, $booking['id']);
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th style="width: 15%;"><?php echo _("Alkaen"); ?></th>
+                                <th style="width: 15%;"><?php echo _("Päättyen"); ?></th>
+                                <th style="width: 25%;"><?php echo _("Varaaja"); ?></th>
+                                <th style="width: 45%;"><?php echo _("Kommentti"); ?></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+                            $bookings = $item->get('bookings');
+                            if (count($bookings) > 0) {
+                                foreach ($bookings as $booking) {
+                                    $result = new \Infrastructure\Booking($conn, $booking['id']);
 
-                                echo "<tr>
+                                    echo "<tr>
                                     <td>" . $result->get('start_date') . "</td>
                                     <td>" . $result->get('end_date') . "</td>
                                     <td><a href='index.php?page=profile&id=" . $result->get('user',
-                                        true) . "'>" . $result->get('user') . "</a></td>
+                                            true) . "'>" . $result->get('user') . "</a></td>
                                     <td>" . $result->get('comment') . "</td>
                                 </tr>";
+                                }
+                            } else {
+                                echo "<tr><td colspan='4'>" . _("Ei varauksia.") . "</td></tr>";
                             }
-                        } else {
-                            echo "<tr><td colspan='4'>" . _("Ei varauksia.") . "</td></tr>";
-                        }
-                        ?>
-                        </tbody>
-                    </table>
+                            ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <?php if ($login->loggedIn()) { ?>
+                        <p>
+                            <button type="button" class="btn btn-default" data-toggle="modal"
+                                    data-target="#newBookingModal"><?php echo _("Uusi varaus"); ?></button>
+                        </p>
+                    <?php } ?>
                 </div>
-                <p>
-                    <button type="button" class="btn btn-default" data-toggle="modal"
-                            data-target="#newBookingModal"><?php echo _("Uusi varaus"); ?></button>
-                </p>
             </div>
-        </div>
 
-        <form id="bookingForm" method="post" action="index.php?page=infra&id=<?php echo $item->get('id'); ?>&book">
-            <div class="modal fade" id="newBookingModal" tabindex="-1" role="dialog"
-                 aria-labelledby="newBookingModalLabel">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                        aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="newBookingModalLabel"><?php echo _("Uusi varaus"); ?></h4>
-                        </div>
-                        <div class="modal-body">
-                            <table class="table table-borderless">
-                                <tr>
-                                    <th style="vertical-align: middle;"><?php echo _("Laite / ohjelmisto"); ?></th>
-                                    <td><?php echo $item->get('name'); ?></td>
-                                </tr>
-                                <tr>
-                                    <th style="vertical-align: middle;"><?php echo _("Varauksen tekijä"); ?></th>
-                                    <td>
-                                        <?php
-                                        if ($user->isAdmin()) {
-                                            echo "<select name='book-user' class='form-control' required>";
-                                            $sql = $conn->pdo->query("SELECT id FROM users WHERE approved_on IS NOT NULL ORDER BY lastname");
-                                            while ($row = $sql->fetch()) {
-                                                $selectedUser = new \User\User($conn, $row['id']);
-                                                echo "<option value='" . $selectedUser->get('id') . "'" . ($selectedUser->get('id') == $user->get('id') ? ' selected' : '') . ">" . $selectedUser->get('name') . "</option>";
-                                            }
-                                            echo "</select>";
-                                        } else {
-                                            echo "<input type='hidden' name='book-user' value='" . $user->get('id') . "' />";
-                                            echo $user->get('name');
-                                        }
-                                        ?>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th style="vertical-align: middle;"><?php echo _("Alkaen"); ?></th>
-                                    <td>
-                                        <div class="form-group">
-                                            <div class='input-group date' id='datetimepicker1'>
-                                                <input type='text' name="book-start" class="form-control" required/>
-                                                <span class="input-group-addon">
+            <?php if ($login->loggedIn()) { ?>
+                <form id="bookingForm" method="post"
+                      action="index.php?page=device&id=<?php echo $item->get('id'); ?>&book">
+                    <div class="modal fade" id="newBookingModal" tabindex="-1" role="dialog"
+                         aria-labelledby="newBookingModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                                aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="newBookingModalLabel"><?php echo _("Uusi varaus"); ?></h4>
+                                </div>
+                                <div class="modal-body">
+                                    <table class="table table-borderless">
+                                        <tr>
+                                            <th style="vertical-align: middle;"><?php echo _("Laite / ohjelmisto"); ?></th>
+                                            <td><?php echo $item->get('name'); ?></td>
+                                        </tr>
+                                        <tr>
+                                            <th style="vertical-align: middle;"><?php echo _("Varauksen tekijä"); ?></th>
+                                            <td>
+                                                <?php
+                                                if ($user->isAdmin()) {
+                                                    echo "<select name='book-user' class='form-control' required>";
+                                                    $sql = $conn->pdo->query("SELECT id FROM users WHERE approved_on IS NOT NULL ORDER BY lastname");
+                                                    while ($row = $sql->fetch()) {
+                                                        $selectedUser = new \User\User($conn, $row['id']);
+                                                        echo "<option value='" . $selectedUser->get('id') . "'" . ($selectedUser->get('id') == $user->get('id') ? ' selected' : '') . ">" . $selectedUser->get('name') . "</option>";
+                                                    }
+                                                    echo "</select>";
+                                                } else {
+                                                    echo "<input type='hidden' name='book-user' value='" . $user->get('id') . "' />";
+                                                    echo $user->get('name');
+                                                }
+                                                ?>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th style="vertical-align: middle;"><?php echo _("Alkaen"); ?></th>
+                                            <td>
+                                                <div class="form-group">
+                                                    <div class='input-group date' id='datetimepicker1'>
+                                                        <input type='text' name="book-start" class="form-control" required/>
+                                                        <span class="input-group-addon">
                                                     <span class="fa fa-calendar"></span>
                                                 </span>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th style="vertical-align: middle;"><?php echo _("Päättyen"); ?></th>
-                                    <td>
-                                        <div class="form-group">
-                                            <div class='input-group date' id='datetimepicker2'>
-                                                <input type='text' name="book-end" class="form-control" required/>
-                                                <span class="input-group-addon">
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th style="vertical-align: middle;"><?php echo _("Päättyen"); ?></th>
+                                            <td>
+                                                <div class="form-group">
+                                                    <div class='input-group date' id='datetimepicker2'>
+                                                        <input type='text' name="book-end" class="form-control" required/>
+                                                        <span class="input-group-addon">
                                                     <span class="fa fa-calendar"></span>
                                                 </span>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th style="vertical-align: middle;"><?php echo _("Kommentti"); ?></th>
-                                    <td><input maxlength="150" class="form-control" type="text"
-                                               name="book-comment"/></span></td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default"
-                                    data-dismiss="modal"><?php echo _("Sulje"); ?></button>
-                            <button type="submit" name="book-submit"
-                                    class="btn btn-primary"><?php echo _("Tallenna"); ?></button>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th style="vertical-align: middle;"><?php echo _("Kommentti"); ?></th>
+                                            <td><input maxlength="150" class="form-control" type="text"
+                                                       name="book-comment"/></span></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default"
+                                            data-dismiss="modal"><?php echo _("Sulje"); ?></button>
+                                    <button type="submit" name="book-submit"
+                                            class="btn btn-primary"><?php echo _("Tallenna"); ?></button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </form>
+                </form>
 
-        <script type="text/javascript">
-            var startTime = $('#datetimepicker1');
-            var endTime = $('#datetimepicker2');
+                <script type="text/javascript">
+                    var startTime = $('#datetimepicker1');
+                    var endTime = $('#datetimepicker2');
 
-            startTime.datetimepicker({
-                locale: '<?php echo $shortLang; ?>',
-                format: 'L',
-                useCurrent: false,
-                disabledDates: [
-                    <?php
-                    $sql = $conn->pdo->prepare("select v.* from booking b join
+                    startTime.datetimepicker({
+                        locale: '<?php echo $shortLang; ?>',
+                        format: 'L',
+                        useCurrent: false,
+                        disabledDates: [
+                            <?php
+                            $sql = $conn->pdo->prepare("select v.* from booking b join
                         (select adddate('1970-01-01',t4.i*10000 + t3.i*1000 + t2.i*100 + t1.i*10 + t0.i) selected_date from
                         (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t0,
                         (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t1,
                         (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t2,
                         (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t3,
                         (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t4) v
-                        on v.selected_date between b.start_date and b.end_date where b.item = :item group by selected_date");
-                    $sql->bindValue(':item', $item->get('id'));
-                    $sql->execute();
+                        on v.selected_date between b.start_date and b.end_date where b.item = :item AND b.type = 'device' group by selected_date");
+                            $sql->bindValue(':item', $item->get('id'));
+                            $sql->execute();
 
-                    $i = 0;
-                    while ($row = $sql->fetch()) {
-                        echo ($i > 0 ? ", " : "") . "moment('" . $row['selected_date'] . "')";
-                        $i++;
-                    }
-                    ?>
-                ]
-            });
-            endTime.datetimepicker({
-                locale: '<?php echo $shortLang; ?>',
-                format: 'L',
-                useCurrent: false,
-                disabledDates: [
-                    <?php
-                    $sql = $conn->pdo->prepare("select v.* from booking b join
+                            $i = 0;
+                            while ($row = $sql->fetch()) {
+                                echo ($i > 0 ? ", " : "") . "moment('" . $row['selected_date'] . "')";
+                                $i++;
+                            }
+                            ?>
+                        ]
+                    });
+                    endTime.datetimepicker({
+                        locale: '<?php echo $shortLang; ?>',
+                        format: 'L',
+                        useCurrent: false,
+                        disabledDates: [
+                            <?php
+                            $sql = $conn->pdo->prepare("select v.* from booking b join
                         (select adddate('1970-01-01',t4.i*10000 + t3.i*1000 + t2.i*100 + t1.i*10 + t0.i) selected_date from
                         (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t0,
                         (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t1,
                         (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t2,
                         (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t3,
                         (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t4) v
-                        on v.selected_date between b.start_date and b.end_date where b.item = :item group by selected_date");
-                    $sql->bindValue(':item', $item->get('id'));
-                    $sql->execute();
+                        on v.selected_date between b.start_date and b.end_date where b.item = :item AND b.type = 'device' group by selected_date");
+                            $sql->bindValue(':item', $item->get('id'));
+                            $sql->execute();
 
-                    $i = 0;
-                    while ($row = $sql->fetch()) {
-                        echo ($i > 0 ? ", " : "") . "moment('" . $row['selected_date'] . "')";
-                        $i++;
-                    }
-                    ?>
-                ]
-            });
-            startTime.on("dp.change", function (e) {
-                endTime.data("DateTimePicker").minDate(e.date);
-            });
-            endTime.on("dp.change", function (e) {
-                startTime.data("DateTimePicker").maxDate(e.date);
-            });
-        </script>
+                            $i = 0;
+                            while ($row = $sql->fetch()) {
+                                echo ($i > 0 ? ", " : "") . "moment('" . $row['selected_date'] . "')";
+                                $i++;
+                            }
+                            ?>
+                        ]
+                    });
+                    startTime.on("dp.change", function (e) {
+                        endTime.data("DateTimePicker").minDate(e.date);
+                    });
+                    endTime.on("dp.change", function (e) {
+                        startTime.data("DateTimePicker").maxDate(e.date);
+                    });
+                </script>
+            <?php }
+        } ?>
 
     <?php } else {
-        $msg->add(_("<strong>Virhe!</strong> Laitetta tai ohjelmistoa ei löydy."), 'error', 'index.php?page=infra');
+        $msg->add(_("<strong>Virhe!</strong> Laitetta tai ohjelmistoa ei löydy."), 'error', 'index.php?page=device');
     }
 } else {
 
@@ -384,7 +404,7 @@ if (isset($_GET['id'])) {
     $pagesize = 20;
     $start = ($pagenumber - 1) * $pagesize;
 
-    $sql = "SELECT SQL_CALC_FOUND_ROWS * FROM infra";
+    $sql = "SELECT SQL_CALC_FOUND_ROWS * FROM device";
     if ($search) {
         $sql .= " WHERE `name` LIKE :search OR `desc` LIKE :search";
     }
@@ -402,12 +422,12 @@ if (isset($_GET['id'])) {
 
     <div class="row">
         <div class="col-md-12">
-            <h1><?php echo _("Infrastruktuuri"); ?></h1>
+            <h1><?php echo _("Laitteet ja ohjelmistot"); ?></h1>
             <p class="lead"><?php echo _("Tällä sivulla voit hakea ja selata Jyväskylän yliopiston laite- ja ohjelmistokantaa."); ?></p>
         </div>
         <div class="col-md-12">
             <form id="searchForm" class="form-inline" method="get">
-                <input type="hidden" name="page" value="infra"/>
+                <input type="hidden" name="page" value="device"/>
                 <div class="input-group">
                     <input class="form-control" name="search" value="<?php echo $search; ?>" type="text"/>
                     <div class="input-group-btn">
@@ -416,8 +436,8 @@ if (isset($_GET['id'])) {
                 </div>
                 &emsp;<?php echo sprintf(_("%s hakutulosta."), $totalrecords); ?>
                 <?php
-                if (isset($user) && $user->hasRank('allow_add_infra')) {
-                    echo "<span class=\"pull-right\"><a href=\"index.php?page=infra&new\" class=\"btn btn-default\">" . _("Lisää uusi") . "</a></span>";
+                if (isset($user) && $user->hasRank('allow_add_devices')) {
+                    echo "<span class=\"pull-right\"><a href=\"index.php?page=device&new\" class=\"btn btn-default\">" . _("Lisää uusi") . "</a></span>";
                 }
                 ?>
             </form>
@@ -441,13 +461,13 @@ if (isset($_GET['id'])) {
                     if ($totalrecords > 0) {
                         while ($row = $query->fetch()) {
                             $id = $row['id'];
-                            $item = new \Infrastructure\Infra($conn, $row['id']);
+                            $item = new \Infrastructure\Device($conn, $row['id']);
 
                             echo "<tr id='" . $id . "'>
-                                    <td><a href='index.php?page=infra&id=" . $id . "'>" . $item->get('name') . "</a></td>
+                                    <td><a href='index.php?page=device&id=" . $id . "'>" . $item->get('name') . "</a></td>
                                     <td>" . $item->get('desc_short') . "</td>
-                                    <td><a href='index.php?page=location&id=" . $item->get('location',
-                                    true) . "'>" . $item->get('location') . "</a></td>
+                                    <td><a href='index.php?page=room&id=" . $item->get('room',
+                                    true) . "'>" . $item->get('room') . "</a></td>
                                     <td><a href='index.php?page=profile&id=" . $item->get('contact',
                                     true) . "'>" . $item->get('contact') . "</a></td>
                                 </tr>";
@@ -467,8 +487,8 @@ if (isset($_GET['id'])) {
             $pg->totalrecords = $totalrecords;
             $pg->showfirst = true;
             $pg->showlast = true;
-            $pg->defaultUrl = "index.php?page=infra";
-            $pg->paginationUrl = "index.php?page=infra&search=$search&p=[p]";
+            $pg->defaultUrl = "index.php?page=device";
+            $pg->paginationUrl = "index.php?page=device&search=$search&p=[p]";
             echo $pg->process();
             ?>
         </div>

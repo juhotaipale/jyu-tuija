@@ -160,12 +160,12 @@ if (!$selectedUser->exists()) {
                         <th style="vertical-align: middle;"><?php echo _("Työhuone"); ?></th>
                         <td>
                             <?php
-                            $location = (isset($_POST['location']) ? $_POST['location'] : $selectedUser->get('location',
+                            $room = (isset($_POST['room']) ? $_POST['room'] : $selectedUser->get('room',
                                 $edit));
                             if ($edit) {
-                                echo "<input class='form-control' type='text' name='location' value='" . $location . "' />";
+                                echo "<input class='form-control' type='text' name='room' value='" . $room . "' />";
                             } else {
-                                echo $location;
+                                echo $room;
                             }
                             ?>
                         </td>
@@ -185,7 +185,7 @@ if (!$selectedUser->exists()) {
                 true));
             if ($edit) {
                 echo "<p><label>" . _("Lyhyt kuvaus osaamisesta") . "</label><input maxlength='150' class='form-control' type='text' name='knowledge_shortdesc' value='$short' /></p>";
-                echo "<span class='help-block'>" . _("Lyhyen kuvauksen suurin sallittu pituus on 150 merkkiä.") . "</span>";
+                echo "<span class='help-block'>" . _("Lyhyen kuvauksen suurin sallittu pituus on 150 merkkiä. Lyhyt kuvaus näytetään hakutuloksissa haettaessa osaamista.") . "</span>";
                 echo "<label>" . _("Kuvaus osaamisesta") . "</label><textarea name='knowledge' rows='10' class='form-control'>" . $knowledge . "</textarea>";
                 echo "<span class='help-block'>" . _("Voit käyttää tekstikentässä HTML-koodia.") . "</span>";
             } else {
@@ -207,11 +207,11 @@ if (!$selectedUser->exists()) {
             <div class="col-md-6">
                 <h3><?php echo _("Vastuulla olevat laitteet ja ohjelmistot"); ?></h3>
                 <?php
-                $infra = $selectedUser->get('infra', true);
-                if (!empty($infra)) {
+                $devices = $selectedUser->get('devices', true);
+                if (!empty($devices)) {
                     echo "<ul>";
-                    foreach ($infra as $item) {
-                        echo "<li><a href='index.php?page=infra&id=" . $item['id'] . "'>" . $item['name'] . "</a></li>";
+                    foreach ($devices as $item) {
+                        echo "<li><a href='index.php?page=device&id=" . $item['id'] . "'>" . $item['name'] . "</a></li>";
                     }
                     echo "</ul>";
                 } else {

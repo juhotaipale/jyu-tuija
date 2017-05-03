@@ -5,8 +5,9 @@ namespace Infrastructure;
 
 
 use Database\DatabaseItem;
+use User\User;
 
-class Location implements DatabaseItem
+class Room implements DatabaseItem
 {
     private $conn;
     private $id;
@@ -17,7 +18,7 @@ class Location implements DatabaseItem
         $this->conn = $conn;
         $this->id = $id;
 
-        $sql = $conn->pdo->prepare("SELECT * FROM location WHERE id = :id");
+        $sql = $conn->pdo->prepare("SELECT * FROM room WHERE id = :id");
         $sql->bindValue(':id', $this->id);
         $sql->execute();
 
@@ -34,8 +35,30 @@ class Location implements DatabaseItem
     public function get($column, $clear = false)
     {
         switch ($column) {
-            case "infra":
-                $sql = $this->conn->pdo->prepare("SELECT * FROM infra WHERE location = :id ORDER BY name");
+            case 'contact':
+                if ($this->get('use_building_contact')) {
+                    $building = new Building($this->conn, $this->data['building']);
+                    $contact = $building->get('contact', true);
+                } else {
+                    $contact = $this->data['contact'];
+                }
+
+                if ($clear) {
+                    $value = $contact;
+                } else {
+                    $contactUser = new User($this->conn, $contact);
+                    $value = $contactUser->get('name');
+                }
+                break;
+
+            case 'created_by':
+            case 'edited_by':
+                $contact = new \User\User($this->conn, $this->data[$column]);
+                $value = $contact->get('name');
+                break;
+
+            case "devices":
+                $sql = $this->conn->pdo->prepare("SELECT * FROM device WHERE room = :id ORDER BY name");
                 $sql->bindValue(':id', $this->id);
                 $sql->execute();
 

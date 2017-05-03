@@ -79,8 +79,8 @@ $totalrecords = $countsql->fetchColumn();
         $pg->totalrecords = $totalrecords;
         $pg->showfirst = true;
         $pg->showlast = true;
-        $pg->defaultUrl = "index.php?page=infra";
-        $pg->paginationUrl = "index.php?page=infra&search=$search&p=[p]";
+        $pg->defaultUrl = "index.php?page=knowledge";
+        $pg->paginationUrl = "index.php?page=knowledge&search=$search&p=[p]";
         echo $pg->process();
         ?>
     </div>

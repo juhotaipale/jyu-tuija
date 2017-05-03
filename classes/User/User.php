@@ -70,8 +70,8 @@ class User implements DatabaseItem
                 $value = $user->get('name');
                 break;
 
-            case "infra":
-                $sql = $this->conn->pdo->prepare("SELECT * FROM infra WHERE contact = :id ORDER BY name");
+            case "devices":
+                $sql = $this->conn->pdo->prepare("SELECT * FROM device WHERE contact = :id ORDER BY name");
                 $sql->bindValue(':id', $this->id);
                 $sql->execute();
 
@@ -150,7 +150,7 @@ class User implements DatabaseItem
         $editor = new User($this->conn);
 
         try {
-            $sql = $this->conn->pdo->prepare("UPDATE users SET firstname = :firstname, lastname = :lastname, role = :role, profilepic = :profilepic, email = :email, phone = :phone, location = :location, knowledge = :knowledge, knowledge_shortdesc = :knowledgeShort, edited_on = NOW(), edited_by = :editor WHERE id = :id");
+            $sql = $this->conn->pdo->prepare("UPDATE users SET firstname = :firstname, lastname = :lastname, role = :role, profilepic = :profilepic, email = :email, phone = :phone, room = :room, knowledge = :knowledge, knowledge_shortdesc = :knowledgeShort, edited_on = NOW(), edited_by = :editor WHERE id = :id");
             $sql->bindValue(':id', $this->id);
             $sql->bindValue(':firstname', filter_var($_POST['firstname']));
             $sql->bindValue(':lastname', filter_var($_POST['lastname']));
@@ -158,7 +158,7 @@ class User implements DatabaseItem
             $sql->bindValue(':profilepic', filter_var($_POST['profilepic']));
             $sql->bindValue(':email', filter_var($_POST['email']), FILTER_VALIDATE_EMAIL);
             $sql->bindValue(':phone', filter_var($_POST['phone']));
-            $sql->bindValue(':location', filter_var($_POST['location']));
+            $sql->bindValue(':room', filter_var($_POST['room']));
             $sql->bindValue(':knowledge', filter_var($_POST['knowledge']));
             $sql->bindValue(':knowledgeShort', filter_var($_POST['knowledge_shortdesc']));
             $sql->bindValue(':editor', $editor->get('id', true));

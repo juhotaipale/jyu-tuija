@@ -130,13 +130,13 @@ if (isset($_GET['id'])) {
                             <th style="width: 30%; vertical-align: middle;"><?php echo _("Saako lisätä laitteita/ohjelmistoja?"); ?></th>
                             <td>
                                 <?php
-                                $allow_add_infra = (isset($_POST['allow_add_infra']) ? $_POST['allow_add_infra'] : $selectedRole->get('allow_add_infra',
+                                $allow_add_devices = (isset($_POST['allow_add_devices']) ? $_POST['allow_add_devices'] : $selectedRole->get('allow_add_devices',
                                     true));
                                 if ($edit) {
-                                    echo "<label class='radio-inline'><input type='radio' value='1' name='allow_add_infra'" . ($allow_add_infra == '1' ? ' checked' : '') . ">" . _("Kyllä") . "</label>";
-                                    echo "<label class='radio-inline'><input type='radio' value='0' name='allow_add_infra'" . ($allow_add_infra == '0' ? ' checked' : '') . ">" . _("Ei") . "</label>";
+                                    echo "<label class='radio-inline'><input type='radio' value='1' name='allow_add_devices'" . ($allow_add_devices == '1' ? ' checked' : '') . ">" . _("Kyllä") . "</label>";
+                                    echo "<label class='radio-inline'><input type='radio' value='0' name='allow_add_devices'" . ($allow_add_devices == '0' ? ' checked' : '') . ">" . _("Ei") . "</label>";
                                 } else {
-                                    echo boolean($allow_add_infra);
+                                    echo boolean($allow_add_devices);
                                 }
                                 ?>
                             </td>
@@ -167,6 +167,21 @@ if (isset($_GET['id'])) {
                                     echo "<label class='radio-inline'><input type='radio' value='0' name='allow_add_studies'" . ($allow_add_studies == '0' ? ' checked' : '') . ">" . _("Ei") . "</label>";
                                 } else {
                                     echo boolean($allow_add_studies);
+                                }
+                                ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="width: 30%; vertical-align: middle;"><?php echo _("Saako lisätä tiloja?"); ?></th>
+                            <td>
+                                <?php
+                                $allow_add_rooms = (isset($_POST['allow_add_rooms']) ? $_POST['allow_add_rooms'] : $selectedRole->get('allow_add_rooms',
+                                    true));
+                                if ($edit) {
+                                    echo "<label class='radio-inline'><input type='radio' value='1' name='allow_add_rooms'" . ($allow_add_rooms == '1' ? ' checked' : '') . ">" . _("Kyllä") . "</label>";
+                                    echo "<label class='radio-inline'><input type='radio' value='0' name='allow_add_rooms'" . ($allow_add_rooms == '0' ? ' checked' : '') . ">" . _("Ei") . "</label>";
+                                } else {
+                                    echo boolean($allow_add_rooms);
                                 }
                                 ?>
                             </td>
@@ -210,6 +225,7 @@ if (isset($_GET['id'])) {
                     <p><?php echo _("Alla näet listattuna kaikki käyttäjäryhmään kuuluvat käyttäjät."); ?></p>
                     <form id="searchForm" class="form-inline" method="get">
                         <input type="hidden" name="page" value="admin/roles"/>
+                        <input type="hidden" name="id" value="<?php echo $selectedRole->get('id'); ?>"/>
                         <div class="input-group">
                             <input class="form-control" name="search" value="<?php echo $search; ?>" type="text"/>
                             <div class="input-group-btn">
