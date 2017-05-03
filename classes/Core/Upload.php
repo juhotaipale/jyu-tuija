@@ -175,7 +175,7 @@ class Upload
     public function set_filename($filename)
     {
 
-        $this->filename = $filename;
+        $this->filename = $filename . ".pdf";
 
     }
 
