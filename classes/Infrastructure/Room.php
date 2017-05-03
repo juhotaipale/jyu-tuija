@@ -46,6 +46,15 @@ class Room implements DatabaseItem
     public function get($column, $clear = false)
     {
         switch ($column) {
+            case 'capacity':
+            case 'floor':
+                if ($clear) {
+                    $value = $this->data[$column];
+                } else {
+                    $value = ($this->data[$column] == 0 ? '&ndash;' : $this->data[$column]);
+                }
+                break;
+
             case 'contact':
                 if ($this->get('use_building_contact')) {
                     $building = new Building($this->conn, $this->data['building']);

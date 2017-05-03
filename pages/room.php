@@ -73,7 +73,7 @@ if (isset($_GET['id'])) {
                             <td>
                                 <?php
                                 $capacity = (isset($_POST['capacity']) ? $_POST['capacity'] : $room->get('capacity',
-                                    true));
+                                    $edit));
                                 if ($edit) {
                                     echo "<input class='form-control' name='capacity' type='number' value='" . $capacity . "' />";
                                 } else {
@@ -505,8 +505,10 @@ if (isset($_GET['id'])) {
                     <thead>
                     <tr>
                         <th style="width: 15%;"><?php echo _("Tila"); ?></th>
-                        <th style="width: 40%;"><?php echo _("Sijainti"); ?></th>
-                        <th style="width: 20%;"><?php echo _("Yhteyshenkilö"); ?></th>
+                        <th style="width: 25%;"><?php echo _("Sijainti"); ?></th>
+                        <th style="width: 15%;"><?php echo _("Kapasiteetti"); ?></th>
+                        <th style="width: 15%;"><?php echo _("Varattavissa"); ?></th>
+                        <th style="width: 30%;"><?php echo _("Yhteyshenkilö"); ?></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -519,6 +521,8 @@ if (isset($_GET['id'])) {
                             echo "<tr id='" . $id . "'>
                                     <td><a href='index.php?page=room&id=" . $id . "'>" . $item->get('name') . "</a></td>
                                     <td>" . $item->get('building') . "</td>
+                                    <td>" . $item->get('capacity') . "</td>
+                                    <td>" . boolean($item->get('bookable')) . "</td>
                                     <td><a href='index.php?page=profile&id=" . $item->get('contact',
                                     true) . "'>" . $item->get('contact') . "</a></td>
                                 </tr>";

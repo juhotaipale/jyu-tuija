@@ -160,13 +160,13 @@ if (isset($_GET['id'])) {
                             <th style="width: 30%; vertical-align: middle;"><?php echo _("Saako lisätä tutkimuksia?"); ?></th>
                             <td>
                                 <?php
-                                $allow_add_studies = (isset($_POST['allow_add_studies']) ? $_POST['allow_add_studies'] : $selectedRole->get('allow_add_studies',
+                                $allow_add_research = (isset($_POST['allow_add_research']) ? $_POST['allow_add_research'] : $selectedRole->get('allow_add_research',
                                     true));
                                 if ($edit) {
-                                    echo "<label class='radio-inline'><input type='radio' value='1' name='allow_add_studies'" . ($allow_add_studies == '1' ? ' checked' : '') . ">" . _("Kyllä") . "</label>";
-                                    echo "<label class='radio-inline'><input type='radio' value='0' name='allow_add_studies'" . ($allow_add_studies == '0' ? ' checked' : '') . ">" . _("Ei") . "</label>";
+                                    echo "<label class='radio-inline'><input type='radio' value='1' name='allow_add_research'" . ($allow_add_research == '1' ? ' checked' : '') . ">" . _("Kyllä") . "</label>";
+                                    echo "<label class='radio-inline'><input type='radio' value='0' name='allow_add_research'" . ($allow_add_research == '0' ? ' checked' : '') . ">" . _("Ei") . "</label>";
                                 } else {
-                                    echo boolean($allow_add_studies);
+                                    echo boolean($allow_add_research);
                                 }
                                 ?>
                             </td>
