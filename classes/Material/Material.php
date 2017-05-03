@@ -119,6 +119,7 @@ class Material implements DatabaseItem
 
             if (!empty($_FILES['pdf'])) {
                 $upload = Upload::factory('downloads/material');
+                $upload->set_allowed_mime_types(array('application/pdf'));
                 $upload->file($_FILES['pdf']);
 
                 $results = $upload->upload();
@@ -127,7 +128,7 @@ class Material implements DatabaseItem
 
                 if ($results['status']) {
                     $sql = $this->conn->pdo->prepare("UPDATE material SET file = :file");
-                    $sql->bindValue(':file', $results['name']);
+                    $sql->bindValue(':file', $results['filename']);
                     $sql->execute();
                 }
             }

@@ -75,7 +75,7 @@ class Role implements DatabaseItem
         $editor = new User($this->conn);
 
         try {
-            $sql = $this->conn->pdo->prepare("UPDATE role SET name_fi = :nameFi, name_en = :nameEn, name_sv = :nameSv, allow_registration = :allowReg, is_admin = :isAdmin, allow_add_devices = :allowAddDevices, allow_add_material = :allowAddMaterial, allow_add_research = :allowAddResearch, allow_add_rooms = :allowAddRooms, edited_on = NOW(), edited_by = :editor WHERE id = :id");
+            $sql = $this->conn->pdo->prepare("UPDATE role SET name_fi = :nameFi, name_en = :nameEn, name_sv = :nameSv, allow_registration = :allowReg, is_admin = :isAdmin, allow_add_devices = :allowAddDevices, allow_add_material = :allowAddMaterial, allow_download_material = :allowDownloadMaterial, allow_add_research = :allowAddResearch, allow_add_rooms = :allowAddRooms, edited_on = NOW(), edited_by = :editor WHERE id = :id");
             $sql->bindValue(':id', $this->id);
             $sql->bindValue(':nameFi', filter_var($_POST['name_fi']));
             $sql->bindValue(':nameEn', filter_var($_POST['name_en']));
@@ -84,6 +84,7 @@ class Role implements DatabaseItem
             $sql->bindValue(':allowReg', filter_var($_POST['allow_reg']));
             $sql->bindValue(':allowAddDevices', filter_var($_POST['allow_add_devices']));
             $sql->bindValue(':allowAddMaterial', filter_var($_POST['allow_add_material']));
+            $sql->bindValue(':allowDownloadMaterial', filter_var($_POST['allow_download_material']));
             $sql->bindValue(':allowAddResearch', filter_var($_POST['allow_add_research']));
             $sql->bindValue(':allowAddRooms', filter_var($_POST['allow_add_rooms']));
             $sql->bindValue(':editor', $editor->get('id', true));

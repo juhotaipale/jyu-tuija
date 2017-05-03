@@ -157,6 +157,21 @@ if (isset($_GET['id'])) {
                             </td>
                         </tr>
                         <tr>
+                            <th style="width: 30%; vertical-align: middle;"><?php echo _("Saako ladata materiaaleja?"); ?></th>
+                            <td>
+                                <?php
+                                $allow_download_material = (isset($_POST['allow_download_material']) ? $_POST['allow_download_material'] : $selectedRole->get('allow_download_material',
+                                    true));
+                                if ($edit) {
+                                    echo "<label class='radio-inline'><input type='radio' value='1' name='allow_download_material'" . ($allow_download_material == '1' ? ' checked' : '') . ">" . _("Kyllä") . "</label>";
+                                    echo "<label class='radio-inline'><input type='radio' value='0' name='allow_download_material'" . ($allow_download_material == '0' ? ' checked' : '') . ">" . _("Ei") . "</label>";
+                                } else {
+                                    echo boolean($allow_download_material);
+                                }
+                                ?>
+                            </td>
+                        </tr>
+                        <tr>
                             <th style="width: 30%; vertical-align: middle;"><?php echo _("Saako lisätä tutkimuksia?"); ?></th>
                             <td>
                                 <?php
