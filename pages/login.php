@@ -6,7 +6,7 @@ if (isset($_GET['forgot'])) { ?>
     <div class="row">
         <div class="col-md-12">
             <h1><?php echo _("Unohditko salasanasi?"); ?></h1>
-            <p class="lead"><?php echo _("Pyydä uusi salasana syöttämällä sähköpostisi alla olevaan kenttään."); ?></p>
+            <p class="lead"><?php echo _("Pyydä uusi salasana syöttämälläj sähköpostisi alla olevaan kenttään."); ?></p>
         </div>
     </div>
 
@@ -16,7 +16,7 @@ if (isset($_GET['forgot'])) { ?>
                 <div class="form-group">
                     <label for="forgot-email"><?php echo _("Sähköposti"); ?></label>
                     <input id="forgot-email" name="email" type="email" class="form-control"
-                           value="<?php echo $email; ?>" required/>
+                           value="<?php echo $email; ?>" required autofocus/>
                 </div>
                 <div class="form-group">
                     <button id="forgot-submit" name="forgot-submit" type="submit"
@@ -42,7 +42,7 @@ if (isset($_GET['forgot'])) { ?>
             <div class="form-group">
                 <label for="login-email"><?php echo _("Sähköposti"); ?></label>
                 <input id="login-email" name="email" type="email" class="form-control"
-                       value="<?php echo $email; ?>" required/>
+                       value="<?php echo $email; ?>" required autofocus/>
             </div>
             <div class="form-group">
                 <label for="login-password"><?php echo _("Salasana"); ?></label>

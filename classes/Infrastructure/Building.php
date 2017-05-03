@@ -85,10 +85,11 @@ class Building implements DatabaseItem
         $editor = new User($this->conn);
 
         try {
-            $sql = $this->conn->pdo->prepare("UPDATE building SET name = :name, area = :area, edited_on = NOW(), edited_by = :editor WHERE id = :id");
+            $sql = $this->conn->pdo->prepare("UPDATE building SET name = :name, area = :area, contact = :contact, edited_on = NOW(), edited_by = :editor WHERE id = :id");
             $sql->bindValue(':id', $this->id);
             $sql->bindValue(':name', filter_var($_POST['name']));
             $sql->bindValue(':area', filter_var($_POST['area']));
+            $sql->bindValue(':contact', filter_var($_POST['contact']));
             $sql->bindValue(':editor', $editor->get('id', true));
             $sql->execute();
         } catch (\Exception $e) {

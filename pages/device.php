@@ -106,12 +106,12 @@ if (isset($_GET['id'])) {
                                     while ($row = $sql->fetch()) {
                                         $selectedRoom = new \Infrastructure\Room($conn, $row['id']);
                                         echo "<option value='" . $selectedRoom->get('id') . "'" . ($selectedRoom->get('id') == $item->get('room',
-                                                true) ? ' selected' : '') . ">" . $selectedRoom->get('name') . "</option>";
+                                                true) ? ' selected' : '') . ">" . $selectedRoom->get('name') . ", " . $selectedRoom->get('building') . "</option>";
                                     }
                                     echo "</select>";
                                 } else {
                                     echo "<a href='index.php?page=room&id=" . $item->get('room',
-                                            true) . "'>" . $room . "</a>";
+                                            true) . "'>" . $room . ", " . $item->get('building') . "</a>";
                                 }
                                 ?>
                             </td>

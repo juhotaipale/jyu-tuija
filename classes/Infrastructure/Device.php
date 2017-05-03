@@ -65,13 +65,18 @@ class Device implements DatabaseItem
                 $value = $room->get('name');
                 break;
 
+            case 'building':
+                $room = new \Infrastructure\Room($this->conn, $this->data['room']);
+                $value = $room->get('building');
+                break;
+
             case 'edited_on':
             case 'created_on':
                 $value = ($this->data[$column] == null ? '&ndash;' : $this->data[$column]);
                 break;
 
             case "bookings":
-                $sql = $this->conn->pdo->prepare("SELECT * FROM booking WHERE item = :id ORDER BY start_date");
+                $sql = $this->conn->pdo->prepare("SELECT * FROM booking WHERE item = :id AND type = 'device' ORDER BY start_date");
                 $sql->bindValue(':id', $this->id);
                 $sql->execute();
 

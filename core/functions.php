@@ -8,7 +8,7 @@ function convertTimestamp($timestamp)
 function boolean($value)
 {
     if ($value) {
-        return _("Kyllä");
+        return "<span class='text-success'>" . _("Kyllä") . "</span>";
     }
-    return _("Ei");
+    return "<span class='text-danger'>" . _("Ei") . "</span>";
 }

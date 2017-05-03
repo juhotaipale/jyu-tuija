@@ -30,7 +30,7 @@ $role = (isset($_POST['role']) ? $_POST['role'] : "");
                 <label class="control-label col-sm-3" for="reg-firstname"><?php echo _("Etunimi"); ?></label>
                 <div class="col-sm-9">
                     <input class="form-control" type="text" id="reg-firstname" name="firstname"
-                           value="<?php echo $firstname; ?>" required/>
+                           value="<?php echo $firstname; ?>" required autofocus/>
                 </div>
             </div>
             <div class="form-group">
