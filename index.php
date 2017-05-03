@@ -38,6 +38,7 @@ if (isset($_GET['lang'])) {
 
 // Päähakemisto
 define('BASE_PATH', realpath(dirname(__FILE__)));
+define('BASE_DIR', dirname(__FILE__));
 
 // I18N support information here
 $lang = (isset($_COOKIE['lang']) ? $_COOKIE['lang'] : 'fi_FI');

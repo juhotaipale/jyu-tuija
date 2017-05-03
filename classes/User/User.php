@@ -78,6 +78,15 @@ class User implements DatabaseItem
                 $value = $sql->fetchAll();
                 break;
 
+            case "researches":
+                $sql = $this->conn->pdo->prepare("SELECT * FROM research WHERE contact = :id ORDER BY name");
+                $sql->bindValue(':id', $this->id);
+                $sql->execute();
+
+                $value = $sql->fetchAll();
+                break;
+                break;
+
             default:
                 if (!empty($this->data) && key_exists($column, $this->data)) {
                     $value = ($clear ? $this->data[$column] : ($this->data[$column] == '' ? '&ndash;' : $this->data[$column]));

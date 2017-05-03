@@ -221,7 +221,18 @@ if (!$selectedUser->exists()) {
             </div>
             <div class="col-md-6">
                 <h3><?php echo _("Tutkimukset"); ?></h3>
-                <p><?php echo _("Ei tutkimuksia."); ?></p>
+                <?php
+                $researches = $selectedUser->get('researches', true);
+                if (!empty($researches)) {
+                    echo "<ul>";
+                    foreach ($researches as $item) {
+                        echo "<li><a href='index.php?page=research&id=" . $item['id'] . "'>" . $item['name'] . "</a></li>";
+                    }
+                    echo "</ul>";
+                } else {
+                    echo "<p>" . _("Ei tutkimuksia.") . "</p>";
+                }
+                ?>
             </div>
             <?php
         }

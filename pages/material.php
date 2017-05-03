@@ -19,7 +19,7 @@ if (isset($_GET['id'])) {
         }
 
         if ($edit) {
-            echo "<form action='index.php?page=material&id=" . $id . "&edit' method='post'>";
+            echo "<form action='index.php?page=material&id=" . $id . "&edit' method='post' enctype='multipart/form-data'>";
         }
         ?>
 
@@ -80,13 +80,45 @@ if (isset($_GET['id'])) {
                         </td>
                     </tr>
                     <tr>
+                        <th style="vertical-align: middle;"><?php echo _("Tieteenala/aihealue"); ?></th>
+                        <td>
+                            <?php
+                            $subject = (isset($_POST['subject']) ? $_POST['subject'] : $item->get('subject',
+                                $edit));
+                            if ($edit) {
+                                echo "<input class='form-control' type='text' name='subject' value='" . $subject . "' required />";
+                            } else {
+                                echo $subject;
+                            }
+                            ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="vertical-align: middle;"><?php echo _("Asiasanat"); ?></th>
+                        <td>
+                            <?php
+                            $keywords = (isset($_POST['keywords']) ? $_POST['keywords'] : $item->get('keywords',
+                                $edit));
+                            if ($edit) {
+                                echo "<input class='form-control' type='text' name='keywords' value='" . $keywords . "' required />";
+                            } else {
+                                echo $keywords;
+                            }
+                            ?>
+                        </td>
+                    </tr>
+                    <tr>
                         <th style="vertical-align: middle;"><?php echo _("Tyyppi"); ?></th>
                         <td>
                             <?php
                             $type = (isset($_POST['type']) ? $_POST['type'] : $item->get('type',
                                 $edit));
                             if ($edit) {
-                                echo "<input class='form-control' type='text' name='type' value='" . $type . "' required />";
+                                echo "<select class='form-control' name='type' required>";
+                                echo "<option value=''>&ndash;</option>";
+                                echo "<option value='1'" . ($type == 1 ? ' selected' : '') . ">" . _("kvalitatiivinen") . "</option>";
+                                echo "<option value='2'" . ($type == 2 ? ' selected' : '') . ">" . _("kvantitatiivinen") . "</option>";
+                                echo "</select>";
                             } else {
                                 echo $type;
                             }
@@ -94,15 +126,71 @@ if (isset($_GET['id'])) {
                         </td>
                     </tr>
                     <tr>
-                        <th style="vertical-align: middle;"><?php echo _("Sijainti"); ?></th>
+                        <th style="vertical-align: middle;"><?php echo _("Ajallinen kattavuus"); ?></th>
                         <td>
                             <?php
-                            $location = (isset($_POST['location']) ? $_POST['location'] : $item->get('location',
+                            $coverage_time = (isset($_POST['coverage_time']) ? $_POST['coverage_time'] : $item->get('coverage_time',
                                 $edit));
                             if ($edit) {
-                                echo "<input class='form-control' type='text' name='location' value='" . $location . "' required />";
+                                echo "<input class='form-control' type='text' name='coverage_time' value='" . $coverage_time . "' required />";
                             } else {
-                                echo $location;
+                                echo $coverage_time;
+                            }
+                            ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="vertical-align: middle;"><?php echo _("Aineistonkeruun ajankohta"); ?></th>
+                        <td>
+                            <?php
+                            $collected = (isset($_POST['collected']) ? $_POST['collected'] : $item->get('collected',
+                                $edit));
+                            if ($edit) {
+                                echo "<input class='form-control' type='text' name='collected' value='" . $collected . "' required />";
+                            } else {
+                                echo $collected;
+                            }
+                            ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="vertical-align: middle;"><?php echo _("Kohdealue"); ?></th>
+                        <td>
+                            <?php
+                            $target = (isset($_POST['target']) ? $_POST['target'] : $item->get('target',
+                                $edit));
+                            if ($edit) {
+                                echo "<input class='form-control' type='text' name='target' value='" . $target . "' required />";
+                            } else {
+                                echo $target;
+                            }
+                            ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="vertical-align: middle;"><?php echo _("Perusjoukko/otos"); ?></th>
+                        <td>
+                            <?php
+                            $universe = (isset($_POST['universe']) ? $_POST['universe'] : $item->get('universe',
+                                $edit));
+                            if ($edit) {
+                                echo "<input class='form-control' type='text' name='universe' value='" . $universe . "' required />";
+                            } else {
+                                echo $universe;
+                            }
+                            ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="vertical-align: middle;"><?php echo _("Vastausprosentti"); ?></th>
+                        <td>
+                            <?php
+                            $percent = (isset($_POST['percent']) ? $_POST['percent'] : $item->get('percent',
+                                $edit));
+                            if ($edit) {
+                                echo "<input class='form-control' type='text' name='percent' value='" . $percent . "' required />";
+                            } else {
+                                echo $percent;
                             }
                             ?>
                         </td>
@@ -146,6 +234,15 @@ if (isset($_GET['id'])) {
                             ?>
                         </td>
                     </tr>
+
+                    <?php if ($edit) { ?>
+                        <tr>
+                            <th style="vertical-align: middle;"><?php echo _("Lataa aineisto palveluun"); ?></th>
+                            <td>
+                                <?php echo "<input class='form-control' type='file' name='pdf' />"; ?>
+                            </td>
+                        </tr>
+                    <?php } ?>
                     </tbody>
                 </table>
 
@@ -161,7 +258,7 @@ if (isset($_GET['id'])) {
 
         <div class="row">
             <div class="col-md-12">
-                <h3><?php echo _("Kuvaus aineistosta"); ?></h3>
+                <h3><?php echo _("Kuvaus sisällöstä"); ?></h3>
                 <?php
                 $desc = (isset($_POST['desc']) ? $_POST['desc'] : $item->get('desc', true));
                 $short = (isset($_POST['desc_short']) ? $_POST['desc_short'] : $item->get('desc_short', true));
@@ -198,7 +295,7 @@ if (isset($_GET['id'])) {
 
     $sql = "SELECT SQL_CALC_FOUND_ROWS * FROM material";
     if ($search) {
-        $sql .= " WHERE `name` LIKE :search OR `author` LIKE :search OR type LIKE :search";
+        $sql .= " WHERE `name` LIKE :search OR `author` LIKE :search OR type LIKE :search OR keywords LIKE :search";
     }
     $sql .= " ORDER BY name LIMIT $start, $pagesize";
 
@@ -242,11 +339,10 @@ if (isset($_GET['id'])) {
                 <table class="table table-striped table-condensed">
                     <thead>
                     <tr>
-                        <th style="width: 25%;"><?php echo _("Nimi"); ?></th>
-                        <th style="width: 20%;"><?php echo _("Tekijä"); ?></th>
-                        <th style="width: 20%;"><?php echo _("Tyyppi"); ?></th>
-                        <th style="width: 15%;"><?php echo _("Julkaistu"); ?></th>
-                        <th style="width: 20%;"><?php echo _("Yhteyshenkilö"); ?></th>
+                        <th style="width: 30%;"><?php echo _("Nimi"); ?></th>
+                        <th style="width: 40%;"><?php echo _("Kuvaus"); ?></th>
+                        <th style="width: 15%;"><?php echo _("Tyyppi"); ?></th>
+                        <th style="width: 15%;"><?php echo _("Yhteyshenkilö"); ?></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -258,15 +354,14 @@ if (isset($_GET['id'])) {
 
                             echo "<tr id='" . $id . "'>
                                     <td><a href='index.php?page=material&id=" . $id . "'>" . $item->get('name') . "</a></td>
-                                    <td>" . $item->get('author') . "</td>
+                                    <td>" . $item->get('desc_short') . "</td>
                                     <td>" . $item->get('type') . "</td>
-                                    <td>" . $item->get('published_on') . "</td>
                                     <td><a href='index.php?page=profile&id=" . $item->get('contact',
                                     true) . "'>" . $item->get('contact') . "</a></td>
                                 </tr>";
                         }
                     } else {
-                        echo "<tr><td colspan='5'>" . _("Ei tuloksia.") . "</td></tr>";
+                        echo "<tr><td colspan='4'>" . _("Ei tuloksia.") . "</td></tr>";
                     }
                     ?>
                     </tbody>
