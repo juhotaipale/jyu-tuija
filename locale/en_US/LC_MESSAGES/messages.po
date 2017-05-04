@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2017-04-29 14:50+0300\n"
-"PO-Revision-Date: 2017-04-29 14:53+0300\n"
+"POT-Creation-Date: 2017-05-04 13:39+0300\n"
+"PO-Revision-Date: 2017-05-04 14:53+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -13,6 +13,63 @@ msgstr ""
 "X-Poedit-Basepath: ../../..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: .\n"
+
+#: classes/Infrastructure/Area.php:81 classes/Infrastructure/Area.php:102
+#: classes/Infrastructure/Area.php:114 classes/Infrastructure/Building.php:97
+#: classes/Infrastructure/Building.php:119
+#: classes/Infrastructure/Building.php:131
+#: classes/Infrastructure/Device.php:124 classes/Infrastructure/Device.php:142
+#: classes/Infrastructure/Device.php:166 classes/Infrastructure/Device.php:181
+#: classes/Infrastructure/Room.php:139 classes/Infrastructure/Room.php:163
+#: classes/Infrastructure/Room.php:185 classes/Infrastructure/Room.php:197
+#: classes/Material/Material.php:99 classes/Material/Material.php:146
+#: classes/Material/Material.php:161 classes/Research/Research.php:108
+#: classes/Research/Research.php:112 classes/Research/Research.php:129
+#: classes/Research/Research.php:148 classes/Research/Research.php:163
+#: classes/User/Role.php:94 classes/User/Role.php:115 classes/User/Role.php:127
+#: classes/User/User.php:182
+msgid "Virhe!"
+msgstr "Error!"
+
+#: classes/Infrastructure/Area.php:86 classes/Infrastructure/Building.php:102
+#: classes/Infrastructure/Device.php:171 classes/Infrastructure/Room.php:168
+#: classes/Material/Material.php:151 classes/Research/Research.php:106
+#: classes/Research/Research.php:153 classes/User/Role.php:99
+#: classes/User/User.php:189
+msgid "Muutokset tallennettu."
+msgstr "Changes saved."
+
+#: classes/Infrastructure/Area.php:119
+msgid "Alue poistettu."
+msgstr "Area removed."
+
+#: classes/Infrastructure/Building.php:136 classes/Infrastructure/Room.php:202
+msgid "Rakennus poistettu."
+msgstr "Building removed."
+
+#: classes/Infrastructure/Device.php:122 classes/Infrastructure/Room.php:137
+msgid "Varaus tallennettu."
+msgstr "Booking saved."
+
+#: classes/Infrastructure/Device.php:186
+msgid "Laite/ohjelmisto poistettu."
+msgstr "Device/software removed."
+
+#: classes/Material/Material.php:58 pages/material.php:122
+msgid "kvalitatiivinen"
+msgstr "qualitative"
+
+#: classes/Material/Material.php:58 pages/material.php:123
+msgid "kvantitatiivinen"
+msgstr "quantitative"
+
+#: classes/Material/Material.php:166
+msgid "Materiaali poistettu."
+msgstr "Material removed."
+
+#: classes/Research/Research.php:168
+msgid "Tutkimus poistettu."
+msgstr "Research removed."
 
 #: classes/UI/BootPagination.php:57 classes/UI/BootPagination.php:70
 #: classes/UI/BootPagination.php:137 classes/UI/BootPagination.php:157
@@ -29,7 +86,7 @@ msgstr "Previous"
 msgid "Seuraava"
 msgstr "Next"
 
-#: classes/User/Login.php:45
+#: classes/User/Login.php:52 classes/User/Login.php:89
 msgid ""
 "<strong>Tunnuksesi odottaa hyväksyntää.</strong> Salasana lähetetään "
 "automaattisesti sähköpostiisi, kun tunnuksesi on hyväksytty."
@@ -37,32 +94,52 @@ msgstr ""
 "<strong>Your account is pending approval.</strong> Password will be sent "
 "automatically to your email when your account has been approved."
 
-#: classes/User/Login.php:59
+#: classes/User/Login.php:67
 msgid "Olet kirjautunut sisään."
 msgstr "You are logged in."
 
-#: classes/User/Login.php:62 classes/User/Login.php:65
+#: classes/User/Login.php:70 classes/User/Login.php:75
 msgid "<strong>Virhe!</strong> Tarkista sähköpostiosoite ja salasana."
 msgstr "<strong>Error!</strong> Check the email address and password."
 
-#: classes/User/Login.php:80
-msgid "Uloskirjautuminen onnistui."
-msgstr "Log out successful."
-
-#: classes/User/Register.php:59
-msgid "<strong>Virhe!</strong> Sähköpostiosoite on jo rekisteröity."
-msgstr "<strong>Error!</strong> E-mail address is already registered."
-
-#: classes/User/Register.php:74 classes/User/Register.php:103
-#: classes/User/Register.php:129
+#: classes/User/Login.php:101 classes/User/Register.php:72
+#: classes/User/Register.php:101 classes/User/Register.php:128
+#: classes/User/User.php:142
 msgid "Jyväskylän yliopisto"
 msgstr "University of Jyväskylä"
 
-#: classes/User/Register.php:77
+#: classes/User/Login.php:104 classes/User/User.php:145
+msgid "Salasanasi on vaihdettu"
+msgstr "Your password has been changed"
+
+#: classes/User/Login.php:105 classes/User/User.php:146
+#, php-format
+msgid "Uusi salasanasi on: %s"
+msgstr "Your new password is: %s"
+
+#: classes/User/Login.php:110
+msgid ""
+"<strong>Uusi salasana lähetetty!</strong> Salasana on lähetetty sähköpostiin."
+msgstr ""
+"<strong>The new password is sent!</strong> The password is sent to the email."
+
+#: classes/User/Login.php:114
+msgid "<strong>Virhe!</strong> Tarkista sähköpostiosoite."
+msgstr "<strong>Error!</strong> Check the email address."
+
+#: classes/User/Login.php:129
+msgid "Uloskirjautuminen onnistui."
+msgstr "Log out successful."
+
+#: classes/User/Register.php:57
+msgid "<strong>Virhe!</strong> Sähköpostiosoite on jo rekisteröity."
+msgstr "<strong>Error!</strong> E-mail address is already registered."
+
+#: classes/User/Register.php:75
 msgid "Rekisteröityminen TuIjA-portaaliin"
 msgstr "Registration to TuIjA portal"
 
-#: classes/User/Register.php:78
+#: classes/User/Register.php:76
 #, php-format
 msgid ""
 "Hei %s %s,<br /><br />Rekisteröidyit Jyväskylän yliopiston tarjoamaan TuIjA-"
@@ -83,11 +160,11 @@ msgstr ""
 "been approved, your password will be automatically sent to your email "
 "address."
 
-#: classes/User/Register.php:106
+#: classes/User/Register.php:104
 msgid "Rekisteröitymisesi on hyväksytty"
 msgstr "Your registration has been approved"
 
-#: classes/User/Register.php:107
+#: classes/User/Register.php:105
 #, php-format
 msgid ""
 "Hei %s %s,<br /><br />Rekisteröitymisesi Jyväskylän yliopiston TuIjA-"
@@ -97,7 +174,7 @@ msgstr ""
 "University of Jyväskylä has been approved.<br />Use this password to login: "
 "%s"
 
-#: classes/User/Register.php:113
+#: classes/User/Register.php:112
 #, php-format
 msgid ""
 "<strong>Käyttäjä %s %s hyväksytty!</strong> Salasana on lähetetty käyttäjän "
@@ -106,11 +183,11 @@ msgstr ""
 "<strong>The user %s %s accepted!</strong> The password is sent to the user's "
 "e-mail address."
 
-#: classes/User/Register.php:132
+#: classes/User/Register.php:131
 msgid "Rekisteröitymisesi on hylätty"
 msgstr "Your registration is rejected"
 
-#: classes/User/Register.php:133
+#: classes/User/Register.php:132
 #, php-format
 msgid ""
 "Hei %s %s,<br /><br />Rekisteröitymisesi Jyväskylän yliopiston TuIjA-"
@@ -122,72 +199,421 @@ msgstr ""
 #: classes/User/Register.php:139
 #, php-format
 msgid "<strong>Käyttäjän %s %s hyväksyntä peruttu.</strong>"
-msgstr "<strong>The user %s %s's approval withdrawn.</strong>"
+msgstr "<strong>The user %s %s's registration rejected.</strong>"
 
-#: classes/User/User.php:108
-msgid "Virhe!"
-msgstr "Error!"
+#: classes/User/Role.php:132
+msgid "Käyttäjäryhmä poistettu."
+msgstr "User group deleted."
 
-#: classes/User/User.php:112
-msgid "Muutokset tallennettu."
-msgstr "Changes saved."
+#: classes/User/User.php:121
+msgid "Salasana vaihdettu."
+msgstr "Password changed."
 
-#: layout/header.php:52
+#: classes/User/User.php:123
+msgid "<strong>Virhe!</strong> Salasanan on oltava vähintään 8 merkkiä pitkä."
+msgstr ""
+"<strong>An error occurred!</strong> The password must be at least 8 "
+"characters long."
+
+#: classes/User/User.php:127
+msgid "<strong>Virhe!</strong> Uudet salasanat eivät täsmää."
+msgstr ""
+"<strong>An error occurred!</strong> The new passwords you typed do not match."
+
+#: classes/User/User.php:130
+msgid "<strong>Virhe!</strong> Tarkista vanha salasana."
+msgstr "<strong>An error occurred!</strong> Check the old password."
+
+#: classes/User/User.php:152
+msgid ""
+"<strong>Uusi salasana lähetetty!</strong> Salasana on lähetetty käyttäjän "
+"sähköpostiin."
+msgstr ""
+"<strong>New password sent!</strong> The password is sent to the user's email."
+
+#: core/functions.php:11 pages/admin/roles.php:106 pages/admin/roles.php:121
+#: pages/admin/roles.php:136 pages/admin/roles.php:151
+#: pages/admin/roles.php:166 pages/admin/roles.php:181
+#: pages/admin/roles.php:196 pages/device.php:148 pages/room.php:127
+#: pages/room.php:142
+msgid "Kyllä"
+msgstr "Yes"
+
+#: core/functions.php:13 pages/admin/roles.php:107 pages/admin/roles.php:122
+#: pages/admin/roles.php:137 pages/admin/roles.php:152
+#: pages/admin/roles.php:167 pages/admin/roles.php:182
+#: pages/admin/roles.php:197 pages/device.php:149 pages/room.php:128
+#: pages/room.php:143
+msgid "Ei"
+msgstr "No"
+
+#: layout/header.php:56
 msgid ""
 "Tämä sivu käyttää evästeitä parhaan käyttökokemuksen saavuttamiseksi. "
 "Jatkamalla sivuston käyttöä hyväksyt evästeiden käytön."
 msgstr ""
-"This page uses cookies in order to ensure the best user experience. By "
-"continuing to use the site, you agree to the use of cookies."
+"This page uses cookies in order to achieve the best user experience. Your "
+"continued use of the site, you consent to our use of cookies."
 
-#: layout/header.php:53
+#: layout/header.php:57
 msgid "Selvä"
 msgstr "OK"
 
-#: layout/nav.php:15 pages/infra.php:48
+#: layout/nav.php:17
 msgid "Infrastruktuuri"
 msgstr "Infrastructure"
 
-#: layout/nav.php:16 pages/material.php:3
+#: layout/nav.php:19 pages/device.php:444
+msgid "Laitteet ja ohjelmistot"
+msgstr "Equipment and software"
+
+#: layout/nav.php:20 pages/room.php:479
+msgid "Tilat"
+msgstr "Rooms"
+
+#: layout/nav.php:23 pages/material.php:336
 msgid "Aineisto"
 msgstr "Material"
 
-#: layout/nav.php:17 pages/knowledge.php:26 pages/knowledge.php:51
-#: pages/profile.php:138
+#: layout/nav.php:24 pages/knowledge.php:26 pages/knowledge.php:51
+#: pages/profile.php:181
 msgid "Osaaminen"
 msgstr "Knowledge"
 
-#: layout/nav.php:18 pages/profile.php:177
+#: layout/nav.php:25 pages/profile.php:223 pages/research.php:288
 msgid "Tutkimukset"
-msgstr "Studies"
+msgstr "Researchs"
 
-#: layout/nav.php:23
+#: layout/nav.php:30
 msgid "Ylläpitotyökalut"
 msgstr "Admin tools"
 
-#: layout/nav.php:25 pages/admin/users.php:9
+#: layout/nav.php:32 pages/admin/users.php:9
 msgid "Käyttäjät"
 msgstr "Users"
 
-#: layout/nav.php:37
+#: layout/nav.php:33
+msgid "Käyttäjien selailu"
+msgstr "Browse users"
+
+#: layout/nav.php:34 pages/admin/roles.php:317
+msgid "Käyttäjäryhmät"
+msgstr "User groups"
+
+#: layout/nav.php:35
+msgid "Tilahallinta"
+msgstr "Room management"
+
+#: layout/nav.php:36 pages/admin/buildings.php:226
+msgid "Rakennukset"
+msgstr "Buildings"
+
+#: layout/nav.php:37 pages/admin/areas.php:184
+msgid "Alueet"
+msgstr "Areas"
+
+#: layout/nav.php:38
+msgid "Järjestelmälokit"
+msgstr "System logs"
+
+#: layout/nav.php:39 pages/admin/logs.php:7
+msgid "Lokien selailu"
+msgstr "Browse logs"
+
+#: layout/nav.php:51
 msgid "Omat tiedot"
 msgstr "My account"
 
-#: layout/nav.php:39
+#: layout/nav.php:53
 msgid "Kirjaudu ulos"
 msgstr "Sign out"
 
-#: layout/nav.php:43 pages/login.php:7 pages/login.php:27
+#: layout/nav.php:57 pages/login.php:34 pages/login.php:54
 msgid "Kirjaudu sisään"
 msgstr "Login"
 
-#: layout/nav.php:44 pages/register.php:10 pages/register.php:67
+#: layout/nav.php:58 pages/register.php:10 pages/register.php:67
 msgid "Rekisteröidy"
 msgstr "Register"
 
-#: layout/nav.php:49
+#: layout/nav.php:63
 msgid "Kieli"
 msgstr "Language"
+
+#: layout/nav.php:74
+msgid "Ohje"
+msgstr "Help"
+
+#: pages/admin/areas.php:32 pages/admin/buildings.php:32
+#: pages/admin/roles.php:32 pages/device.php:29 pages/material.php:29
+#: pages/research.php:29 pages/room.php:31
+#, php-format
+msgid "Luotu %s (%s), viimeksi muokattu %s (%s)"
+msgstr "Created on %s (%s), last modified on %s (%s)"
+
+#: pages/admin/areas.php:39 pages/admin/buildings.php:39
+#: pages/admin/roles.php:39 pages/device.php:43 pages/device.php:344
+#: pages/material.php:43 pages/profile.php:38 pages/profile.php:49
+#: pages/research.php:43 pages/research.php:204 pages/research.php:250
+#: pages/room.php:44 pages/room.php:380
+msgid "Tallenna"
+msgstr "Save"
+
+#: pages/admin/areas.php:40 pages/admin/buildings.php:40
+#: pages/admin/roles.php:40 pages/device.php:44 pages/material.php:44
+#: pages/research.php:44 pages/room.php:45
+msgid "Haluatko varmasti poistaa?"
+msgstr "Are you sure you want to delete?"
+
+#: pages/admin/areas.php:40 pages/admin/buildings.php:40
+#: pages/admin/roles.php:40 pages/device.php:44 pages/material.php:44
+#: pages/research.php:44 pages/room.php:45
+msgid "Poista"
+msgstr "Delete"
+
+#: pages/admin/areas.php:41 pages/admin/areas.php:44
+#: pages/admin/buildings.php:41 pages/admin/buildings.php:44
+#: pages/admin/roles.php:41 pages/admin/roles.php:44 pages/login.php:24
+#: pages/profile.php:39 pages/profile.php:51
+msgid "Palaa takaisin"
+msgstr "Return back"
+
+#: pages/admin/areas.php:43 pages/admin/buildings.php:43
+#: pages/admin/roles.php:43 pages/device.php:47 pages/material.php:50
+#: pages/profile.php:41 pages/profile.php:53 pages/research.php:47
+#: pages/room.php:48
+msgid "Muokkaa"
+msgstr "Edit"
+
+#: pages/admin/areas.php:58 pages/admin/areas.php:128 pages/admin/areas.php:196
+#: pages/admin/buildings.php:58 pages/admin/buildings.php:170
+#: pages/admin/buildings.php:239 pages/admin/roles.php:261
+#: pages/admin/roles.php:329 pages/admin/users.php:18 pages/admin/users.php:93
+#: pages/knowledge.php:49 pages/material.php:59 pages/material.php:364
+#: pages/research.php:56 pages/research.php:316 pages/room.php:59
+msgid "Nimi"
+msgstr "Name"
+
+#: pages/admin/areas.php:106
+msgid "Alueeseen kuuluvat rakennukset"
+msgstr "Buildings belonging to the area"
+
+#: pages/admin/areas.php:107
+msgid "Alla näet listattuna kaikki alueeseen kuuluvat rakennukset."
+msgstr "Below you can see all the buildings belonging this area."
+
+#: pages/admin/areas.php:114 pages/admin/buildings.php:156
+#: pages/admin/roles.php:247 pages/admin/users.php:79 pages/device.php:453
+#: pages/knowledge.php:35 pages/material.php:345 pages/research.php:297
+#: pages/room.php:488
+msgid "Hae"
+msgstr "Search"
+
+#: pages/admin/areas.php:117 pages/admin/buildings.php:159
+#: pages/admin/roles.php:250 pages/admin/users.php:82 pages/device.php:456
+#: pages/knowledge.php:38 pages/material.php:348 pages/research.php:300
+#: pages/room.php:491
+#, php-format
+msgid "%s hakutulosta."
+msgstr "%s search results."
+
+#: pages/admin/areas.php:129 pages/admin/buildings.php:92
+#: pages/admin/buildings.php:171
+msgid "Tilavastaava"
+msgstr "Room responsible"
+
+#: pages/admin/areas.php:130
+msgid "Huoneiden lkm"
+msgstr "Room count"
+
+#: pages/admin/areas.php:131 pages/admin/areas.php:198
+#: pages/admin/buildings.php:173 pages/admin/buildings.php:242
+#: pages/admin/roles.php:331
+msgid "Luotu"
+msgstr "Created"
+
+#: pages/admin/areas.php:132 pages/admin/areas.php:199
+#: pages/admin/buildings.php:174 pages/admin/buildings.php:243
+#: pages/admin/roles.php:332
+msgid "Muokattu"
+msgstr "Modified"
+
+#: pages/admin/areas.php:154 pages/admin/buildings.php:264
+msgid "Ei rakennuksia."
+msgstr "No buildings."
+
+#: pages/admin/areas.php:177
+msgid "Aluetta ei löydy."
+msgstr "The area could not be found."
+
+#: pages/admin/areas.php:185
+msgid ""
+"Tällä sivulla voit hallita järjestelmään syötettyjä Jyväskylän yliopiston "
+"alueita."
+msgstr "On this page you can manage the areas of University of Jyväskylä."
+
+#: pages/admin/areas.php:186 pages/admin/buildings.php:228
+#: pages/admin/roles.php:319 pages/device.php:459 pages/material.php:351
+#: pages/research.php:303 pages/room.php:494
+msgid "Lisää uusi"
+msgstr "Add new"
+
+#: pages/admin/areas.php:197
+msgid "Rakennusten lkm"
+msgstr "Building count"
+
+#: pages/admin/areas.php:220
+msgid "Ei alueita."
+msgstr "No areas."
+
+#: pages/admin/buildings.php:72 pages/admin/buildings.php:240
+msgid "Alue"
+msgstr "Area"
+
+#: pages/admin/buildings.php:148
+msgid "Rakennukseen kuuluvat tilat"
+msgstr "Rooms belonging to the building"
+
+#: pages/admin/buildings.php:149
+msgid "Alla näet listattuna kaikki rakennukseen kuuluvat tilat."
+msgstr "Below you can see all the rooms belonging this building."
+
+#: pages/admin/buildings.php:172
+msgid "Laitteiden lkm"
+msgstr "Device count"
+
+#: pages/admin/buildings.php:196
+msgid "Ei tiloja."
+msgstr "No rooms."
+
+#: pages/admin/buildings.php:219
+msgid "Rakennusta ei löydy."
+msgstr "The building could not be found."
+
+#: pages/admin/buildings.php:227
+msgid ""
+"Tällä sivulla voit hallita järjestelmään syötettyjä Jyväskylän yliopiston "
+"rakennuksia."
+msgstr "On this page you can manage the buildings of University of Jyväskylä."
+
+#: pages/admin/buildings.php:241
+msgid "Tilojen lkm"
+msgstr "Room count"
+
+#: pages/admin/logs.php:8
+msgid ""
+"Tällä sivulla voit selailla järjestelmän muodostamia lokitietoja "
+"aikajärjestyksessä."
+msgstr ""
+"On this page you can browse the system-generated log information in "
+"chronological order."
+
+#: pages/admin/logs.php:30
+msgid "Aikaleima"
+msgstr "Timestamp"
+
+#: pages/admin/logs.php:31 pages/material.php:114 pages/material.php:366
+msgid "Tyyppi"
+msgstr "Type"
+
+#: pages/admin/logs.php:32
+msgid "Käyttäjä"
+msgstr "User"
+
+#: pages/admin/logs.php:33 pages/device.php:236 pages/device.php:334
+#: pages/room.php:269 pages/room.php:370
+msgid "Kommentti"
+msgstr "Comment"
+
+#: pages/admin/logs.php:51
+msgid "Ei lokeja."
+msgstr "No logs."
+
+#: pages/admin/roles.php:58
+msgid "Nimi suomeksi"
+msgstr "Name in Finnish"
+
+#: pages/admin/roles.php:72
+msgid "Nimi englanniksi"
+msgstr "Name in English"
+
+#: pages/admin/roles.php:86
+msgid "Nimi ruotsiksi"
+msgstr "Name in Swedish"
+
+#: pages/admin/roles.php:100
+msgid "Onko ylläpitäjä?"
+msgstr "Is admin?"
+
+#: pages/admin/roles.php:115
+msgid "Sallitaanko rekisteröityminen?"
+msgstr "Allow registration?"
+
+#: pages/admin/roles.php:130
+msgid "Saako lisätä laitteita/ohjelmistoja?"
+msgstr "Allow adding equipment/software?"
+
+#: pages/admin/roles.php:145
+msgid "Saako lisätä materiaaleja?"
+msgstr "Allow adding materials?"
+
+#: pages/admin/roles.php:160
+msgid "Saako ladata materiaaleja?"
+msgstr "Allow downloading materials?"
+
+#: pages/admin/roles.php:175
+msgid "Saako lisätä tutkimuksia?"
+msgstr "Allow adding researchs?"
+
+#: pages/admin/roles.php:190
+msgid "Saako lisätä tiloja?"
+msgstr "Allow adding rooms?"
+
+#: pages/admin/roles.php:239
+msgid "Ryhmään kuuluvat käyttäjät"
+msgstr "Users in the group"
+
+#: pages/admin/roles.php:240
+msgid "Alla näet listattuna kaikki käyttäjäryhmään kuuluvat käyttäjät."
+msgstr "Please find below a list of all user group members."
+
+#: pages/admin/roles.php:262 pages/admin/users.php:19 pages/admin/users.php:94
+#: pages/knowledge.php:50 pages/login.php:17 pages/login.php:43
+#: pages/profile.php:134 pages/register.php:44
+msgid "Sähköposti"
+msgstr "Email"
+
+#: pages/admin/roles.php:263 pages/admin/users.php:96
+msgid "Viim. kirjautuminen"
+msgstr "Last login"
+
+#: pages/admin/roles.php:264 pages/admin/users.php:21 pages/admin/users.php:97
+msgid "Rekisteröitynyt"
+msgstr "Registrated"
+
+#: pages/admin/roles.php:265 pages/admin/users.php:98
+msgid "Hyväksytty"
+msgstr "Approved"
+
+#: pages/admin/roles.php:283 pages/admin/users.php:117
+msgid "Avaa"
+msgstr "Open"
+
+#: pages/admin/roles.php:287 pages/admin/users.php:41 pages/admin/users.php:121
+msgid "Ei käyttäjiä."
+msgstr "No users."
+
+#: pages/admin/roles.php:310
+msgid "Käyttäjäryhmää ei löydy."
+msgstr "User group cannot be found."
+
+#: pages/admin/roles.php:318
+msgid "Tällä sivulla voit hallita järjestelmän käyttäjäryhmiä."
+msgstr "On this page you can manage the user groups."
+
+#: pages/admin/roles.php:330
+msgid "Käyttäjien lkm"
+msgstr "User count"
 
 #: pages/admin/users.php:10
 msgid ""
@@ -210,22 +636,9 @@ msgstr ""
 "user's e-mail. Also, the information about rejected registration is "
 "transmitted to the user."
 
-#: pages/admin/users.php:18 pages/admin/users.php:93 pages/knowledge.php:49
-msgid "Nimi"
-msgstr "Name"
-
-#: pages/admin/users.php:19 pages/admin/users.php:94 pages/knowledge.php:50
-#: pages/login.php:16 pages/profile.php:91 pages/register.php:44
-msgid "Sähköposti"
-msgstr "Email"
-
-#: pages/admin/users.php:20 pages/admin/users.php:95 pages/register.php:51
-msgid "Asema"
-msgstr "Position"
-
-#: pages/admin/users.php:21 pages/admin/users.php:97
-msgid "Rekisteröitynyt"
-msgstr "Registrated on"
+#: pages/admin/users.php:20 pages/profile.php:101
+msgid "Käyttäjäryhmä"
+msgstr "User group"
 
 #: pages/admin/users.php:22
 msgid "Toiminnot"
@@ -237,46 +650,177 @@ msgstr "Approve"
 
 #: pages/admin/users.php:37
 msgid "Hylkää"
-msgstr "Deny"
-
-#: pages/admin/users.php:41 pages/admin/users.php:121
-msgid "Ei käyttäjiä."
-msgstr "No users."
+msgstr "Reject"
 
 #: pages/admin/users.php:73
 msgid "Kaikki käyttäjät"
 msgstr "All users"
 
-#: pages/admin/users.php:79 pages/infra.php:57 pages/knowledge.php:35
-msgid "Hae"
-msgstr "Search"
+#: pages/admin/users.php:95 pages/register.php:51
+msgid "Asema"
+msgstr "User group"
 
-#: pages/admin/users.php:82 pages/infra.php:60 pages/knowledge.php:38
-#, php-format
-msgid "%s hakutulosta."
-msgstr "%s search results."
+#: pages/device.php:45 pages/material.php:45 pages/research.php:45
+#: pages/room.php:46
+msgid "Peruuta"
+msgstr "Cancel"
 
-#: pages/admin/users.php:96
-msgid "Viim. kirjautuminen"
-msgstr "Last login on"
+#: pages/device.php:57
+msgid "Nimi ja malli"
+msgstr "Name and model"
 
-#: pages/admin/users.php:98
-msgid "Hyväksytty"
-msgstr "Approved on"
+#: pages/device.php:70
+msgid "Valmistusvuosi"
+msgstr "Manufacture year"
 
-#: pages/admin/users.php:117
-msgid "Avaa"
-msgstr "Open"
+#: pages/device.php:84
+msgid "Käyttöönottovuosi"
+msgstr "Installation year"
 
-#: pages/error/403.php:4
-msgid "Ei käyttöoikeutta."
-msgstr "No access."
+#: pages/device.php:98 pages/device.php:474 pages/room.php:508
+msgid "Sijainti"
+msgstr "Location"
 
-#: pages/error/403.php:5 pages/error/404.php:5
+#: pages/device.php:120 pages/room.php:151
+msgid "Vastuuhenkilö"
+msgstr "Responsible"
+
+#: pages/device.php:143
+msgid "Salli varaaminen"
+msgstr "Allow booking"
+
+#: pages/device.php:162
+msgid "Yleiskuvaus laitteesta/ohjelmistosta"
+msgstr "General description of the equipment/software"
+
+#: pages/device.php:167 pages/material.php:269 pages/research.php:103
+msgid "Lyhyt kuvaus"
+msgstr "Brief description"
+
+#: pages/device.php:168 pages/material.php:270 pages/research.php:104
+msgid "Lyhyen kuvauksen suurin sallittu pituus on 150 merkkiä."
+msgstr "The maximum length of the short description is 150 characters."
+
+#: pages/device.php:169 pages/material.php:271 pages/research.php:105
+msgid "Pitkä kuvaus"
+msgstr "Long description"
+
+#: pages/device.php:170 pages/device.php:187 pages/material.php:272
+#: pages/profile.php:190 pages/research.php:106 pages/room.php:206
+msgid "Voit käyttää tekstikentässä HTML-koodia."
+msgstr "HTML code is allowed in the text field."
+
+#: pages/device.php:173 pages/device.php:190 pages/material.php:275
+#: pages/profile.php:193 pages/research.php:109 pages/room.php:209
+msgid "Ei tekstisisältöä."
+msgstr "No text content."
+
+#: pages/device.php:182
+msgid "Tärkeimmät ominaisuudet"
+msgstr "Main features"
+
+#: pages/device.php:186
+msgid "Kuvaus laitteen tärkeimmistä ominaisuuksista"
+msgstr "Description of the main features of the equipment/software"
+
+#: pages/device.php:201
+msgid "Tutkimukset, joissa laitetta on käytetty"
+msgstr "Researchs in which the device is used"
+
+#: pages/device.php:212 pages/material.php:297 pages/profile.php:233
+msgid "Ei tutkimuksia."
+msgstr "No researchs."
+
+#: pages/device.php:226 pages/room.php:259
+msgid "Varauskalenteri"
+msgstr "Booking calendar"
+
+#: pages/device.php:227 pages/room.php:260
+msgid ""
+"Varauskalenterissa voit tarkastella laitteen varaustilannetta sekä varata "
+"laitteen omaan käyttöösi."
+msgstr ""
+"In booking calendar, you can view the situation of the equipment/software "
+"and book it for your personal use."
+
+#: pages/device.php:233 pages/device.php:308 pages/room.php:266
+#: pages/room.php:342
+msgid "Alkaen"
+msgstr "Starting"
+
+#: pages/device.php:234 pages/device.php:321 pages/room.php:267
+#: pages/room.php:356
+msgid "Päättyen"
+msgstr "Ending"
+
+#: pages/device.php:235 pages/room.php:268
+msgid "Varaaja"
+msgstr "Booker"
+
+#: pages/device.php:255 pages/room.php:288
+msgid "Ei varauksia."
+msgstr "No bookings."
+
+#: pages/device.php:264 pages/device.php:280 pages/room.php:297
+#: pages/room.php:314
+msgid "Uusi varaus"
+msgstr "New booking"
+
+#: pages/device.php:285 pages/device.php:472 pages/room.php:226
+#: pages/room.php:319
+msgid "Laite / ohjelmisto"
+msgstr "Equipment / software"
+
+#: pages/device.php:289 pages/room.php:323
+msgid "Varauksen tekijä"
+msgstr "Booker"
+
+#: pages/device.php:342 pages/research.php:202 pages/research.php:248
+#: pages/room.php:378
+msgid "Sulje"
+msgstr "Close"
+
+#: pages/device.php:416
+msgid "<strong>Virhe!</strong> Laitetta tai ohjelmistoa ei löydy."
+msgstr ""
+"<strong>An error occurred!</strong> The equipment or software is not found."
+
+#: pages/device.php:445
+msgid ""
+"Tällä sivulla voit hakea ja selata Jyväskylän yliopiston laite- ja "
+"ohjelmistokantaa."
+msgstr ""
+"On this page you can search for and browse through research equipment and "
+"software that is available in the University of Jyväskylä."
+
+#: pages/device.php:473 pages/material.php:365 pages/room.php:227
+msgid "Kuvaus"
+msgstr "Description"
+
+#: pages/device.php:475 pages/material.php:219 pages/material.php:367
+#: pages/research.php:69 pages/research.php:317 pages/room.php:228
+#: pages/room.php:511
+msgid "Yhteyshenkilö"
+msgstr "Contact person"
+
+#: pages/device.php:495 pages/knowledge.php:68 pages/material.php:386
+#: pages/research.php:334 pages/room.php:531
+msgid "Ei tuloksia."
+msgstr "No results."
+
+#: pages/error/401.php:8
+msgid "Sisäänkirjautuminen vaaditaan."
+msgstr "Authorization required."
+
+#: pages/error/401.php:9 pages/error/403.php:9 pages/error/404.php:9
 msgid "Palaa takaisin edelliselle sivulle."
 msgstr "Go back to the previous page."
 
-#: pages/error/404.php:4
+#: pages/error/403.php:8
+msgid "Ei käyttöoikeutta."
+msgstr "No access."
+
+#: pages/error/404.php:8
 msgid "Sivua ei löydy."
 msgstr "Page not found."
 
@@ -348,43 +892,6 @@ msgstr "News"
 msgid "Jyväskylän yliopiston verkkosivujen tiedottesyöte."
 msgstr "News feed from the website of University of Jyväskylä."
 
-#: pages/infra.php:11
-#, php-format
-msgid "Luotu %s (%s), viimeksi muokattu %s (%s)"
-msgstr "Created on %s (%s), last modified on %s (%s)"
-
-#: pages/infra.php:20 pages/location.php:19
-msgid "<strong>Virhe!</strong> Laitetta tai ohjelmistoa ei löydy."
-msgstr "<strong>Error!</strong> Device or software not found."
-
-#: pages/infra.php:49
-msgid ""
-"Tällä sivulla voit hakea ja selata Jyväskylän yliopiston laite- ja "
-"ohjelmistokantaa."
-msgstr ""
-"On this page you can search for and browse through hardware and software "
-"that is available in the University of Jyväskylä."
-
-#: pages/infra.php:71
-msgid "Laite / ohjelmisto"
-msgstr "Device / software"
-
-#: pages/infra.php:72
-msgid "Kuvaus"
-msgstr "Description"
-
-#: pages/infra.php:73
-msgid "Sijainti"
-msgstr "Location"
-
-#: pages/infra.php:74
-msgid "Yhteyshenkilö"
-msgstr "Contact person"
-
-#: pages/infra.php:94 pages/knowledge.php:68
-msgid "Ei tuloksia."
-msgstr "No results."
-
 #: pages/knowledge.php:27
 msgid ""
 "Tällä sivulla voit hakea ja selata TuIjA-portaaliin ilmoitettua osaamista."
@@ -392,23 +899,92 @@ msgstr ""
 "On this page you can search and browse the knowledge provided on TuIjA "
 "portal."
 
-#: pages/location.php:11
-#, php-format
-msgid "Perustettu %s (%s), viimeksi muokattu %s (%s)"
-msgstr "Created on %s (%s), last modified on %s (%s)"
+#: pages/login.php:8 pages/login.php:55
+msgid "Unohditko salasanasi?"
+msgstr "Lost your password?"
 
-#: pages/login.php:8
+#: pages/login.php:9
+msgid "Pyydä uusi salasana syöttämälläj sähköpostisi alla olevaan kenttään."
+msgstr "Request new password by entering your email in the box below."
+
+#: pages/login.php:23 pages/profile.php:50 pages/profile.php:54
+msgid "Lähetä uusi salasana"
+msgstr "Send new password"
+
+#: pages/login.php:35
 msgid ""
 "Kirjaudu sisään palveluun syöttämällä sähköpostiosoitteesi sekä salasanasi."
 msgstr "Login by entering your email and password."
 
-#: pages/login.php:21
+#: pages/login.php:48
 msgid "Salasana"
 msgstr "Password"
 
-#: pages/login.php:33
+#: pages/login.php:60
 msgid "Kirjaudu HAKA-tunnistautumisen avulla"
 msgstr "Login by using the HAKA authentication"
+
+#: pages/material.php:48
+msgid "Lataa aineisto"
+msgstr "Download material"
+
+#: pages/material.php:72
+msgid "Tekijä"
+msgstr "Author"
+
+#: pages/material.php:86
+msgid "Tieteenala/aihealue"
+msgstr "Discipline/subject area"
+
+#: pages/material.php:100
+msgid "Asiasanat"
+msgstr "Keywords"
+
+#: pages/material.php:132
+msgid "Ajallinen kattavuus"
+msgstr "Time-related coverage"
+
+#: pages/material.php:146
+msgid "Aineistonkeruun ajankohta"
+msgstr "Time of collecting"
+
+#: pages/material.php:160
+msgid "Kohdealue"
+msgstr "Target zone"
+
+#: pages/material.php:174
+msgid "Perusjoukko/otos"
+msgstr "Population/sample"
+
+#: pages/material.php:188
+msgid "Vastausprosentti"
+msgstr "Response rate"
+
+#: pages/material.php:202
+msgid "Julkaistu"
+msgstr "Published"
+
+#: pages/material.php:243
+msgid "Lataa aineisto palveluun"
+msgstr "Upload material"
+
+#: pages/material.php:264
+msgid "Kuvaus sisällöstä"
+msgstr "Description of the content"
+
+#: pages/material.php:286
+msgid "Tutkimukset, joissa aineistoa on käytetty"
+msgstr "Researchs in which the material is used"
+
+#: pages/material.php:308
+msgid "<strong>Virhe!</strong> Materiaalia ei löydy."
+msgstr "<strong>An error occurred!</strong> The material could not be found."
+
+#: pages/material.php:337
+msgid ""
+"Tällä sivulla voit selata ja hakea järjestelmään rekisteröityä "
+"tutkimusaineistoa."
+msgstr "On this page you can browse through research materials."
 
 #: pages/profile.php:10
 msgid "Käyttäjää ei löydy."
@@ -427,63 +1003,65 @@ msgstr ""
 "On this page you can view and edit information about yourself saved into the "
 "portal."
 
-#: pages/profile.php:38 pages/profile.php:49
-msgid "Tallenna"
-msgstr "Save"
+#: pages/profile.php:50 pages/profile.php:54
+msgid "Haluatko varmasti vaihtaa käyttäjän salasanan?"
+msgstr "Are you sure you want to change a user's password?"
 
-#: pages/profile.php:39 pages/profile.php:50
-msgid "Peruuta"
-msgstr "Cancel"
-
-#: pages/profile.php:41 pages/profile.php:52
-msgid "Muokkaa"
-msgstr "Edit"
-
-#: pages/profile.php:63 pages/register.php:37
+#: pages/profile.php:73 pages/register.php:37
 msgid "Sukunimi"
 msgstr "Last name"
 
-#: pages/profile.php:77 pages/register.php:30
+#: pages/profile.php:87 pages/register.php:30
 msgid "Etunimi"
 msgstr "First name"
 
-#: pages/profile.php:104
+#: pages/profile.php:123
+msgid "Profiilikuvan URL-osoite"
+msgstr "Profile image URL"
+
+#: pages/profile.php:147
 msgid "Puhelinnumero"
 msgstr "Phone number"
 
-#: pages/profile.php:117
+#: pages/profile.php:160
 msgid "Työhuone"
 msgstr "Office"
 
-#: pages/profile.php:143
+#: pages/profile.php:187
 msgid "Lyhyt kuvaus osaamisesta"
-msgstr "A brief description of the knowledge"
+msgstr "Brief description of the knowledge"
 
-#: pages/profile.php:144
-msgid "Lyhyen kuvauksen suurin sallittu pituus on 150 merkkiä."
-msgstr "The maximum length of the short description is 150 characters."
+#: pages/profile.php:188
+msgid ""
+"Lyhyen kuvauksen suurin sallittu pituus on 150 merkkiä. Lyhyt kuvaus "
+"näytetään hakutuloksissa haettaessa osaamista."
+msgstr ""
+"A short description of a maximum length of 150 characters. A short "
+"description will be shown in the knowledge search."
 
-#: pages/profile.php:145
+#: pages/profile.php:189
 msgid "Kuvaus osaamisesta"
-msgstr "A description of the knowledge"
+msgstr "Description of the knowledge"
 
-#: pages/profile.php:146
-msgid "Voit käyttää tekstikentässä HTML-koodia."
-msgstr "HTML code is allowed in the text field."
-
-#: pages/profile.php:149
-msgid "Ei tekstisisältöä."
-msgstr "No text content."
-
-#: pages/profile.php:162
+#: pages/profile.php:208
 msgid "Vastuulla olevat laitteet ja ohjelmistot"
-msgstr "The responsibility of hardware and software"
+msgstr "The responsibility of equipment and software"
 
-#: pages/profile.php:172
-#, fuzzy
-#| msgid "Vastuulla olevat laitteet ja ohjelmistot"
-msgid "<p>Ei vastuulla olevia laitteita tai ohjelmistoja.</p>"
-msgstr "The responsibility of hardware and software"
+#: pages/profile.php:218
+msgid "Ei vastuulla olevia laitteita tai ohjelmistoja."
+msgstr "No equipment or software."
+
+#: pages/profile.php:245
+msgid "Vaihda salasana"
+msgstr "Change password"
+
+#: pages/profile.php:250
+msgid "Vanha salasana"
+msgstr "Old password"
+
+#: pages/profile.php:254 pages/profile.php:258
+msgid "Uusi salasana"
+msgstr "New password"
 
 #: pages/register.php:16
 msgid ""
@@ -498,8 +1076,8 @@ msgid ""
 msgstr ""
 "<p>You have the right to register user account to TuIjA portal if you are</"
 "p><ul><li>teacher,</li><li>master's thesis or doctoral candidate,</"
-"li><li>researcher,</li><li>visiting researcher or</li><li>an external "
-"research partner.</li></ul>"
+"li><li>researcher,</li><li>visiting researcher or</li><li>external research "
+"partner.</li></ul>"
 
 #: pages/register.php:24
 msgid ""
@@ -509,3 +1087,117 @@ msgid ""
 msgstr ""
 "If you meet the above conditions, you can enter your registration "
 "information. After registering your account is transferred for approval."
+
+#: pages/research.php:98
+msgid "Kuvaus tutkimuksesta"
+msgstr "Description of the research"
+
+#: pages/research.php:125
+msgid "Tutkimukseen liittyvät laitteet"
+msgstr "Research-related equipment and software"
+
+#: pages/research.php:128
+msgid "Liitä uusi laite"
+msgstr "New device"
+
+#: pages/research.php:140
+msgid "Ei laitteita."
+msgstr "No equipment."
+
+#: pages/research.php:145
+msgid "Tutkimukseen liittyvät aineistot"
+msgstr "Research-related materials"
+
+#: pages/research.php:148
+msgid "Liitä uusi aineisto"
+msgstr "New material"
+
+#: pages/research.php:159
+msgid "Ei aineistoja."
+msgstr "No material."
+
+#: pages/research.php:175
+msgid "Liitä laite"
+msgstr "Attach new equipment or software"
+
+#: pages/research.php:180 pages/research.php:226
+msgid "Tutkimus"
+msgstr "Research"
+
+#: pages/research.php:184
+msgid "Liitettävä laite"
+msgstr "Equipment / software"
+
+#: pages/research.php:221
+msgid "Liitä aineisto"
+msgstr "Attach new material"
+
+#: pages/research.php:230
+msgid "Liitettävä aineisto"
+msgstr "Material"
+
+#: pages/research.php:260
+msgid "<strong>Virhe!</strong> Tutkimusta ei löydy."
+msgstr "<strong>An error occurred!</strong> The research could not be found."
+
+#: pages/research.php:289
+msgid "Tällä sivulla voit selata järjestelmään rekisteröityjä tutkimuksia."
+msgstr "On this page you can browse researchs entered in the system."
+
+#: pages/room.php:72 pages/room.php:509
+msgid "Kapasiteetti"
+msgstr "Capacity"
+
+#: pages/room.php:86
+msgid "Rakennus"
+msgstr "Building"
+
+#: pages/room.php:108
+msgid "Kerros"
+msgstr "Floor"
+
+#: pages/room.php:121
+msgid "Pääseekö hissillä?"
+msgstr "Elevator?"
+
+#: pages/room.php:136
+msgid "Voiko tilan varata?"
+msgstr "Bookable?"
+
+#: pages/room.php:158
+msgid "Sama kuin rakennuksen vastuuhenkilö"
+msgstr "The same as the responsible person of the building"
+
+#: pages/room.php:200
+msgid "Tilan varustelu"
+msgstr "Equipment"
+
+#: pages/room.php:205
+msgid "Kuvaus tilan varustelusta"
+msgstr "Description of the equipment of the room"
+
+#: pages/room.php:220
+msgid "Tilasta löytyvät laitteet ja ohjelmistot"
+msgstr "Equipment and software in the room"
+
+#: pages/room.php:247
+msgid "Tilassa ei ole laitteita tai ohjelmistoja."
+msgstr "No equipment or software."
+
+#: pages/room.php:452
+msgid "<strong>Virhe!</strong> Tilaa ei löydy."
+msgstr "<strong>An error occurred!</strong> Room could not be found."
+
+#: pages/room.php:480
+msgid "Tällä sivulla voit hakea ja selata Jyväskylän yliopiston tiloja."
+msgstr ""
+"On this page you can search for and browse through the rooms of the "
+"University of Jyväskylä."
+
+#: pages/room.php:507
+msgid "Tila"
+msgstr "Room"
+
+#: pages/room.php:510
+msgid "Varattavissa"
+msgstr "Bookable"
