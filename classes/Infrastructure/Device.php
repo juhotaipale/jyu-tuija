@@ -76,7 +76,15 @@ class Device implements DatabaseItem
                 break;
 
             case "bookings":
-                $sql = $this->conn->pdo->prepare("SELECT * FROM booking WHERE item = :id AND type = 'device' ORDER BY start_date");
+                $sql = $this->conn->pdo->prepare("SELECT * FROM booking WHERE item = :id AND type = 'device' AND end_date >= DATE(NOW()) ORDER BY start_date");
+                $sql->bindValue(':id', $this->id);
+                $sql->execute();
+
+                $value = $sql->fetchAll();
+                break;
+
+            case 'researchs':
+                $sql = $this->conn->pdo->prepare("SELECT research FROM research_item WHERE item = :id AND type = 'device'");
                 $sql->bindValue(':id', $this->id);
                 $sql->execute();
 

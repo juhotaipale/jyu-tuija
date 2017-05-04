@@ -28,6 +28,12 @@ class Research implements DatabaseItem
         if ($sql->rowCount() > 0) {
             $this->data = $sql->fetch();
         }
+
+        if ($this->exists()) {
+            if (isset($_GET['add']) && isset($_POST['add-submit'])) {
+                $this->add($_GET['add'], $_POST['add-item']);
+            }
+        }
     }
 
     public function exists()
@@ -53,6 +59,22 @@ class Research implements DatabaseItem
                 $value = $contact->get('name');
                 break;
 
+            case 'devices':
+                $sql = $this->conn->pdo->prepare("SELECT item as 'id' FROM research_item WHERE research = :id AND type = 'device'");
+                $sql->bindValue(':id', $this->id);
+                $sql->execute();
+
+                $value = $sql->fetchAll();
+                break;
+
+            case 'materials':
+                $sql = $this->conn->pdo->prepare("SELECT item as 'id' FROM research_item WHERE research = :id AND type = 'material'");
+                $sql->bindValue(':id', $this->id);
+                $sql->execute();
+
+                $value = $sql->fetchAll();
+                break;
+
             case 'edited_on':
             case 'created_on':
                 $value = ($this->data[$column] == null ? '&ndash;' : $this->data[$column]);
@@ -68,6 +90,27 @@ class Research implements DatabaseItem
         }
 
         return $value;
+    }
+
+    public function add($type, $item)
+    {
+        if (in_array($type, array('device', 'material'))) {
+            try {
+                $sql = $this->conn->pdo->prepare("INSERT INTO research_item (item, research, type) VALUES (:item, :research, :type)");
+                $sql->bindValue(':item', filter_var($item));
+                $sql->bindValue(':research', $this->id);
+                $sql->bindValue(':type', filter_var($type));
+                $sql->execute();
+
+                Log::add("Added $type to research (id: " . $this->id . ")", "info");
+                $this->msg->add(_("Muutokset tallennettu."), "success", "index.php?page=research&id=" . $this->id);
+            } catch (\Exception $e) {
+                $this->msg->add("<strong>" . _("Virhe!") . "</strong> " . $e, "error");
+                return;
+            }
+        } else {
+            $this->msg->add("<strong>" . _("Virhe!") . "</strong>", "error");
+        }
     }
 
     public function create()

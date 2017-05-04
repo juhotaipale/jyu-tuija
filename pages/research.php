@@ -118,6 +118,143 @@ if (isset($_GET['id'])) {
         <?php
         if ($edit) {
             echo "</form>";
+        } ?>
+
+        <div class="row">
+            <div class="col-md-6">
+                <h3><?php echo _("Tutkimukseen liittyvät laitteet"); ?></h3>
+                <?php
+                if (isset($user) && ($user->get('id') == $item->get('contact', true) or $user->isAdmin())) {
+                    echo "<p><button class='btn btn-default' data-target='#addDeviceModal' data-toggle='modal'>" . _("Liitä uusi laite") . "</button></p>";
+                }
+
+                $devices = $item->get('devices');
+                if (!empty($devices)) {
+                    echo "<ul>";
+                    foreach ($devices as $device) {
+                        $row = new \Infrastructure\Device($conn, $device['id']);
+                        echo "<li><a href='index.php?page=device&id=" . $row->get('id') . "'>" . $row->get('name') . "</a></li>";
+                    }
+                    echo "</ul>";
+                } else {
+                    echo "<p>" . _("Ei laitteita.") . "</p>";
+                }
+                ?>
+            </div>
+            <div class="col-md-6">
+                <h3><?php echo _("Tutkimukseen liittyvät aineistot"); ?></h3>
+                <?php
+                if (isset($user) && ($user->get('id') == $item->get('contact', true) or $user->isAdmin())) {
+                    echo "<p><button class='btn btn-default' data-target='#addMaterialModal' data-toggle='modal'>" . _("Liitä uusi aineisto") . "</button></p>";
+                }
+                $materials = $item->get('materials');
+                if (!empty($materials)) {
+                    echo "<ul>";
+                    foreach ($materials as $material) {
+                        $row = new \Material\Material($conn, $material['id']);
+                        echo "<li><a href='index.php?page=material&id=" . $row->get('id') . "'>" . $row->get('name') . "</a></li>";
+                    }
+                    echo "</ul>";
+                } else {
+                    echo "<p>" . _("Ei aineistoja.") . "</p>";
+                }
+                ?>
+            </div>
+        </div>
+
+        <?php if (isset($user) && ($user->get('id') == $item->get('contact', true) or $user->isAdmin())) { ?>
+            <form id="addDeviceForm" method="post"
+                  action="index.php?page=research&id=<?php echo $item->get('id'); ?>&add=device">
+                <div class="modal fade" id="addDeviceModal" tabindex="-1" role="dialog"
+                     aria-labelledby="addDeviceModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                            aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="addDeviceModalLabel"><?php echo _("Liitä laite"); ?></h4>
+                            </div>
+                            <div class="modal-body">
+                                <table class="table table-borderless">
+                                    <tr>
+                                        <th style="width: 30%; vertical-align: middle;"><?php echo _("Tutkimus"); ?></th>
+                                        <td><?php echo $item->get('name'); ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="vertical-align: middle;"><?php echo _("Liitettävä laite"); ?></th>
+                                        <td>
+                                            <?php
+                                            echo "<select name='add-item' class='form-control' required>";
+                                            echo "<option value=''>&ndash;</option>";
+                                            $sql = $conn->pdo->query("SELECT id FROM device WHERE id NOT IN (SELECT item FROM research_item WHERE type = 'device' AND research = '" . $item->get('id') . "') ORDER BY name");
+                                            while ($row = $sql->fetch()) {
+                                                $selectedDevice = new \Infrastructure\Device($conn, $row['id']);
+                                                echo "<option value='" . $selectedDevice->get('id') . "'>" . $selectedDevice->get('name') . " (" . $selectedDevice->get('room') . ")</option>";
+                                            }
+                                            echo "</select>";
+                                            ?>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default"
+                                        data-dismiss="modal"><?php echo _("Sulje"); ?></button>
+                                <button type="submit" name="add-submit"
+                                        class="btn btn-primary"><?php echo _("Tallenna"); ?></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <form id="addMaterialForm" method="post"
+                  action="index.php?page=research&id=<?php echo $item->get('id'); ?>&add=material">
+                <div class="modal fade" id="addMaterialModal" tabindex="-1" role="dialog"
+                     aria-labelledby="addMaterialModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                            aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title"
+                                    id="addMaterialModalLabel"><?php echo _("Liitä aineisto"); ?></h4>
+                            </div>
+                            <div class="modal-body">
+                                <table class="table table-borderless">
+                                    <tr>
+                                        <th style="width: 30%; vertical-align: middle;"><?php echo _("Tutkimus"); ?></th>
+                                        <td><?php echo $item->get('name'); ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="vertical-align: middle;"><?php echo _("Liitettävä aineisto"); ?></th>
+                                        <td>
+                                            <?php
+                                            echo "<select name='add-item' class='form-control' required>";
+                                            echo "<option value=''>&ndash;</option>";
+                                            $sql = $conn->pdo->query("SELECT id FROM material WHERE id NOT IN (SELECT item FROM research_item WHERE type = 'material' AND research = '" . $item->get('id') . "') ORDER BY name");
+                                            while ($row = $sql->fetch()) {
+                                                $selectedMaterial = new \Material\Material($conn, $row['id']);
+                                                echo "<option value='" . $selectedMaterial->get('id') . "'>" . $selectedMaterial->get('name') . "</option>";
+                                            }
+                                            echo "</select>";
+                                            ?>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default"
+                                        data-dismiss="modal"><?php echo _("Sulje"); ?></button>
+                                <button type="submit" name="add-submit"
+                                        class="btn btn-primary"><?php echo _("Tallenna"); ?></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <?php
         }
     } else {
         $msg->add(_("<strong>Virhe!</strong> Tutkimusta ei löydy."), 'error', 'index.php?page=research');

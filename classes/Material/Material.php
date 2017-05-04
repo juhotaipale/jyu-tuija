@@ -58,6 +58,14 @@ class Material implements DatabaseItem
                 $value = ($this->data[$column] == 1 ? _("kvalitatiivinen") : ($this->data[$column] == 2 ? _("kvantitatiivinen") : ''));
                 break;
 
+            case 'researchs':
+                $sql = $this->conn->pdo->prepare("SELECT research FROM research_item WHERE item = :id AND type = 'material'");
+                $sql->bindValue(':id', $this->id);
+                $sql->execute();
+
+                $value = $sql->fetchAll();
+                break;
+
             case 'edited_on':
             case 'created_on':
                 $value = ($this->data[$column] == null ? '&ndash;' : $this->data[$column]);

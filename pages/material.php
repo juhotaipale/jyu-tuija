@@ -281,6 +281,25 @@ if (isset($_GET['id'])) {
             </div>
         </div>
 
+        <div class="row">
+            <div class="col-md-12">
+                <h3><?php echo _("Tutkimukset, joissa aineistoa on käytetty"); ?></h3>
+                <?php
+                $researchs = $item->get('researchs');
+                if (!empty($researchs)) {
+                    echo "<ul>";
+                    foreach ($researchs as $research) {
+                        $row = new \Research\Research($conn, $research['research']);
+                        echo "<li><a href='index.php?page=research&id=" . $row->get('id') . "'>" . $row->get('name') . "</a></li>";
+                    }
+                    echo "</ul>";
+                } else {
+                    echo "<p>" . _("Ei tutkimuksia.") . "</p>";
+                }
+                ?>
+            </div>
+        </div>
+
         <?php
         if ($edit) {
             echo "</form>";
