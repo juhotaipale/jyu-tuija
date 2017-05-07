@@ -44,6 +44,9 @@ if (isset($_GET['id'])) {
                         echo "<a onclick=\"return confirm('" . _("Haluatko varmasti poistaa?") . "')\" class='btn btn-danger' href='index.php?page=research&id=" . $item->get('id') . "&delete'>" . _("Poista") . "</a>&ensp;";
                         echo "<a href='index.php?page=research&id=" . $item->get('id') . "' class='btn btn-default'>" . _("Peruuta") . "</a>";
                     } else {
+                        if ($user->hasRank('allow_download_material') && $item->get('file', true) != '') {
+                            echo "<a href='downloads/research/" . $item->get('file') . "' class='btn btn-primary'>" . _("Lataa tutkimus") . "</a>&ensp;";
+                        }
                         echo "<a href='index.php?page=research&id=" . $item->get('id') . "&edit' class='btn btn-default'>" . _("Muokkaa") . "</a>";
                     }
                     echo "</p>";
@@ -61,6 +64,65 @@ if (isset($_GET['id'])) {
                                 echo "<input class='form-control' type='text' name='name' value='" . $name . "' required />";
                             } else {
                                 echo $name;
+                            }
+                            ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="vertical-align: middle;"><?php echo _("Tekijä"); ?></th>
+                        <td>
+                            <?php
+                            $author = (isset($_POST['author']) ? $_POST['author'] : $item->get('author',
+                                $edit));
+                            if ($edit) {
+                                echo "<input class='form-control' type='text' name='author' value='" . $author . "' required />";
+                            } else {
+                                echo $author;
+                            }
+                            ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="vertical-align: middle;"><?php echo _("Tieteenala/aihealue"); ?></th>
+                        <td>
+                            <?php
+                            $subject = (isset($_POST['subject']) ? $_POST['subject'] : $item->get('subject',
+                                $edit));
+                            if ($edit) {
+                                echo "<input class='form-control' type='text' name='subject' value='" . $subject . "' required />";
+                            } else {
+                                echo $subject;
+                            }
+                            ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="vertical-align: middle;"><?php echo _("Asiasanat"); ?></th>
+                        <td>
+                            <?php
+                            $keywords = (isset($_POST['keywords']) ? $_POST['keywords'] : $item->get('keywords',
+                                $edit));
+                            if ($edit) {
+                                echo "<input class='form-control' type='text' name='keywords' value='" . $keywords . "' required />";
+                            } else {
+                                echo $keywords;
+                            }
+                            ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="vertical-align: middle;"><?php echo _("Julkaistu"); ?></th>
+                        <td>
+                            <?php
+                            $published_on = (isset($_POST['published_on']) ? $_POST['published_on'] : $item->get('published_on',
+                                $edit));
+                            if ($edit) {
+                                echo "<div class='input-group date' id='datetimepicker1'>";
+                                echo "<input class='form-control' name='published_on' value='" . $published_on . "' required />";
+                                echo "<span class='input-group-addon'><i class='fa fa-calendar'></i></span>";
+                                echo "</div>";
+                            } else {
+                                echo $published_on;
                             }
                             ?>
                         </td>
@@ -87,8 +149,23 @@ if (isset($_GET['id'])) {
                             ?>
                         </td>
                     </tr>
+                    <?php if ($edit) { ?>
+                        <tr>
+                            <th style="vertical-align: middle;"><?php echo _("Lataa tutkimus palveluun"); ?></th>
+                            <td>
+                                <?php echo "<input class='form-control' type='file' name='pdf' />"; ?>
+                            </td>
+                        </tr>
+                    <?php } ?>
                     </tbody>
                 </table>
+
+                <script type="text/javascript">
+                    $('#datetimepicker1').datetimepicker({
+                        locale: '<?php echo $shortLang; ?>',
+                        format: 'YYYY-MM-DD'
+                    });
+                </script>
 
             </div>
         </div>

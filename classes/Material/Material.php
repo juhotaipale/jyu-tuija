@@ -135,7 +135,8 @@ class Material implements DatabaseItem
                 print_r($results);
 
                 if ($results['status']) {
-                    $sql = $this->conn->pdo->prepare("UPDATE material SET file = :file");
+                    $sql = $this->conn->pdo->prepare("UPDATE material SET file = :file WHERE id = :id");
+                    $sql->bindValue(':id', $this->id);
                     $sql->bindValue(':file', $results['filename']);
                     $sql->execute();
 

@@ -44,7 +44,7 @@ if (isset($_GET['id'])) {
                         echo "<a onclick=\"return confirm('" . _("Haluatko varmasti poistaa?") . "')\" class='btn btn-danger' href='index.php?page=material&id=" . $item->get('id') . "&delete'>" . _("Poista") . "</a>&ensp;";
                         echo "<a href='index.php?page=material&id=" . $item->get('id') . "' class='btn btn-default'>" . _("Peruuta") . "</a>";
                     } else {
-                        if ($user->hasRank('allow_download_material') && $item->get('file') != '') {
+                        if ($user->hasRank('allow_download_material') && $item->get('file', true) != '') {
                             echo "<a href='downloads/material/" . $item->get('file') . "' class='btn btn-primary'>" . _("Lataa aineisto") . "</a>&ensp;";
                         }
                         echo "<a href='index.php?page=material&id=" . $item->get('id') . "&edit' class='btn btn-default'>" . _("Muokkaa") . "</a>";

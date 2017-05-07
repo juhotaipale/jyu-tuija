@@ -5,6 +5,7 @@ namespace Research;
 
 use Core\Log;
 use Core\Message;
+use Core\Upload;
 use Database\DatabaseItem;
 use User\User;
 
@@ -136,14 +137,37 @@ class Research implements DatabaseItem
         $editor = new User($this->conn);
 
         try {
-            $sql = $this->conn->pdo->prepare("UPDATE research SET `name` = :name, contact = :contact, desc_short = :descShort, `desc` = :description, edited_on = NOW(), edited_by = :editor WHERE id = :id");
+            $sql = $this->conn->pdo->prepare("UPDATE research SET `name` = :name, author = :author, keywords = :keywords, subject = :subject, published_on = :publishedOn, contact = :contact, desc_short = :descShort, `desc` = :description, edited_on = NOW(), edited_by = :editor WHERE id = :id");
             $sql->bindValue(':id', $this->id);
             $sql->bindValue(':name', filter_var($_POST['name']));
+            $sql->bindValue(':author', filter_var($_POST['author']));
+            $sql->bindValue(':publishedOn', filter_var($_POST['published_on']));
+            $sql->bindValue(':subject', filter_var($_POST['subject']));
+            $sql->bindValue(':keywords', filter_var($_POST['keywords']));
             $sql->bindValue(':contact', filter_var($_POST['contact']));
             $sql->bindValue(':descShort', filter_var($_POST['desc_short']));
             $sql->bindValue(':description', filter_var($_POST['desc']));
             $sql->bindValue(':editor', $editor->get('id', true));
             $sql->execute();
+
+            if (!empty($_FILES['pdf'])) {
+                $upload = Upload::factory((DEVELOPMENT ? 'jyu-tuija/' : '') . 'downloads/research');
+                $upload->set_allowed_mime_types(array('application/pdf'));
+                $upload->file($_FILES['pdf']);
+
+                $results = $upload->upload();
+
+                print_r($results);
+
+                if ($results['status']) {
+                    $sql = $this->conn->pdo->prepare("UPDATE research SET file = :file WHERE id = :id");
+                    $sql->bindValue(':id', $this->id);
+                    $sql->bindValue(':file', $results['filename']);
+                    $sql->execute();
+
+                    Log::add('Added research content (id: ' . $this->id . ', ' . $results['filename'] . ')');
+                }
+            }
         } catch (\Exception $e) {
             $this->msg->add("<strong>" . _("Virhe!") . "</strong> " . $e, "error");
             return;
