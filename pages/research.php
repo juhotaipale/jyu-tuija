@@ -19,7 +19,7 @@ if (isset($_GET['id'])) {
         }
 
         if ($edit) {
-            echo "<form action='index.php?page=research&id=" . $id . "&edit' method='post'>";
+            echo "<form action='index.php?page=research&id=" . $id . "&edit' method='post' enctype='multipart/form-data'>";
         }
         ?>
 
